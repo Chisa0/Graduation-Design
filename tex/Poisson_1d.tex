@@ -1,0 +1,119 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{}
+\title{一维二阶Poisson求解}
+\date{\today}
+\begin{document}
+\maketitle	
+\section{数值算例}
+\subsection{Poisson方程}
+$
+\begin{cases}
+Lu = -u''(x) = f(x) \quad x \in G, \\
+u(0)=u(\pi)=0
+\end{cases}
+$ \\
+\par
+其中f(x) = sin(x), G = [0, $\pi$], 真解为u(x) = sin(x)。
+\subsection{变分}
+
+令$v \in C_0^\infty $, 以 v 乘以方程两端得：
+$$
+\int_0^\pi (Lu - f) v dx = \int_0^\pi (- \frac{\partial^2 u}{\partial x^2} - sin(x)) v dx = 0
+$$
+\par
+有分步积分法得：
+$$
+\int_0^\pi \frac{\partial u}{\partial x} \frac{\partial v}{\partial x} dx = \int_0^\pi v sin(x) dx
+$$
+\par 
+令a(u,v) = $\int_0^\pi \frac{\partial u}{\partial x} \frac{\partial v}{\partial x} dx$,得原方程变分形式：
+$$
+a(u,v) = (f,v)
+$$
+
+\subsection{剖分}
+
+将区间 G 分成 n 等分， 分点为
+$$
+x_i = ih \quad i = 0,1,...,n,
+$$
+\par 
+其中 h = $\frac{\pi}{n}$ 
+
+\subsection{构造基函数}
+
+基函数选取山形函数
+$$
+\begin{cases}
+	\phi_0(x) = \begin{cases}
+					1 - \frac{x - x_0}{h_1}, \quad x_0 \le x \le x_1, \\
+					0, 						 \quad \mbox{其他}.
+				\end{cases} \\
+	\phi_i(x) = \begin{cases}
+					1 + \frac{x - x_i}{h_i},     \quad x_{i-1} \le x \le x_i,    \\
+					1 - \frac{x - x_i}{h_{i+1}}, \quad x_i     \le x \le x_{i+1} \\
+					0,                           \quad \mbox{其他},	
+				\end{cases} \\
+	\phi_n(x) = \begin{cases}
+					1 + \frac{x - x_n}{h_n}, \quad x_{n-1} \le x \le x_n, \\
+					0,						 \quad \mbox{其他}
+				\end{cases}
+\end{cases}
+$$
+\par 
+借助仿射变换，及[0,1]上的标准山形函数
+$$
+\varepsilon = F_i(x) = \frac{x - x_{i-1}}{h_i}, \quad \quad
+N_0(\varepsilon) = 1 - \varepsilon, N_1(\varepsilon) = \varepsilon, 
+$$
+\par 
+则对基函数 i = 1,2,...,n-1,基函数可写成:
+
+$$
+\phi_i(x) = 
+\begin{cases}
+	N_0(\varepsilon), \quad \varepsilon = \frac{x - x_i}{h_{i+1}}, \quad x_i     \le x \le x_{i+1} \\
+	N_1(\varepsilon), \quad \varepsilon = \frac{x - x_{i-1}}{h_i}, \quad x_{i-1} \le x \le x_i \\
+	0, \quad \quad                                                 \quad \mbox{其他},
+\end{cases}
+$$
+\par 
+而
+$$
+\phi_0(x) = \begin{cases}
+				N_0(\varepsilon), \quad \varepsilon = \frac{x - x_0}{h_1}, \quad x_0 \le x \le x_1, \\
+				0, \quad \quad                                       \quad \mbox{其他}
+			\end{cases}\\
+$$
+\par
+$$
+\phi_n(x) = 
+\begin{cases}
+	N_1(\varepsilon), \quad \varepsilon = \frac{x - x_{n-1}}{h_n}, \quad x_{n-1} \le x \le x_n, \\
+	0, \quad \quad          									   \quad \mbox{其他}. 
+\end{cases}
+$$
+
+\subsection{形成有限元方程}
+
+设数值解$u_h = \sum_{i=0}^n c_i \phi_i $, 由边值条件得$c_0 = c_n = 0$.
+带入变分形式得有限元方程:
+$$
+\sum_{j=1}^{n-1} a(\phi_j, \phi_i) c_j = (f, \phi_i), \quad i = 1, 2, ... , n-1
+$$
+\par 
+其矩阵形式为
+$$ K \bar{c} = \bar{b} $$
+其中
+$$
+K = \begin{bmatrix}
+		a(\phi_1,\phi_1) & a(\phi_1,\phi_2) & ... & a(\phi_1,\phi_{n-1}) \\
+		a(\phi_2,\phi_1) & a(\phi_2,\phi_2) & ... & a(\phi_2,\phi_{n-1}) \\
+		\vdots           & \vdots           &     & \vdots  			 \\
+		a(\phi_{n-1},\phi_1) & a(\phi_{n-1},\phi_2) & ... & a(\phi_{n-1},\phi_{n-1})
+	\end{bmatrix}, \quad
+\bar{c} = (c_1, c_2, ... , c_{n-1})^T 
+$$
+
+\end{document}
