@@ -1,10 +1,18 @@
-\documentclass[UTF8]{ctexart}
+\documentclass[UTF8,titlepage,twocolumn]{ctexart}
 \usepackage{amsmath}
-\usepackage{}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{graphicx}
+\pagestyle{plain}
 \title{一维二阶Poisson求解}
 \date{\today}
 \begin{document}
 \maketitle	
+
+\lstset{language=Python}
+
+
+
 \section{数值算例}
 \subsection{Poisson方程}
 $
@@ -107,13 +115,47 @@ $$
 $$ K \bar{c} = \bar{b} $$
 其中
 $$
+\begin{matrix}
 K = \begin{bmatrix}
 		a(\phi_1,\phi_1) & a(\phi_1,\phi_2) & ... & a(\phi_1,\phi_{n-1}) \\
 		a(\phi_2,\phi_1) & a(\phi_2,\phi_2) & ... & a(\phi_2,\phi_{n-1}) \\
 		\vdots           & \vdots           &     & \vdots  			 \\
 		a(\phi_{n-1},\phi_1) & a(\phi_{n-1},\phi_2) & ... & a(\phi_{n-1},\phi_{n-1})
-	\end{bmatrix}, \quad
-\bar{c} = (c_1, c_2, ... , c_{n-1})^T 
+	\end{bmatrix}, \\ \\
+\bar{c} = (c_1, c_2, ... , c_{n-1})^T \\ \\
+\bar{b} = ((f,\phi_1), (f,\phi_2), ... , (f,\phi_{n-1}))^T.
+\end{matrix}
 $$
+
+\subsection{算法流程}
+
+\begin{lstlisting}
+	import numpy as np
+\end{lstlisting}
+
+\subsection{实验结果}
+
+当剖分次数n=5时,得到数值解与真解如下图
+\begin{figure}[hb]
+	\centering
+	\includegraphics[height=5cm,width=7cm]{../image/Poisson1d.png}
+	\caption{}
+	\label{SampleOfDatasets}
+\end{figure}
+\\ \\ 
+改变剖分次数得到其与误差二范数的关系如下表
+
+\begin{table}[!ht]
+	\centering
+	\caption{}%剖分次数-误差二范数
+	\begin{tabular}{|c|c|} \hline
+		剖分次数n & 误差 \\ \hline
+		1 & 1.2246e-16 \\ \hline
+		2 & 7.1814e-10 \\ \hline
+		3 & 4.4012e-12 \\ \hline
+		4 & 2.1145e-14 \\ \hline
+		5 & 1.3313e-14 \\ \hline
+	\end{tabular}
+\end{table}
 
 \end{document}
