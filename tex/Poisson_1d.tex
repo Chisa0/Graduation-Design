@@ -30,7 +30,7 @@ $$
 \int_0^\pi (Lu - f) v dx = \int_0^\pi (- \frac{\partial^2 u}{\partial x^2} - sin(x)) v dx = 0
 $$
 \par
-有分步积分法得：
+由分步积分法得：
 $$
 \int_0^\pi \frac{\partial u}{\partial x} \frac{\partial v}{\partial x} dx = \int_0^\pi v sin(x) dx
 $$
@@ -47,7 +47,7 @@ $$
 x_i = ih \quad i = 0,1,...,n,
 $$
 \par 
-其中 h = $\frac{\pi}{n}$ 
+其中 h = $\frac{\pi}{n}$ , 剖分单元$I_i = [x_{x-1}, x_i] $.
 
 \subsection{构造基函数}
 
@@ -105,7 +105,7 @@ $$
 
 \subsection{形成有限元方程}
 
-设数值解$u_h = \sum_{i=0}^n c_i \phi_i $, 由边值条件得$c_0 = c_n = 0$.
+设数值解$u_h = \sum_{i=0}^n c_i \phi_i $, 由边值条件得$c_0 = c_n = 0, \mbox{且}c_i = u_i, i=1,...,n-1$.
 带入变分形式得有限元方程:
 $$
 \sum_{j=1}^{n-1} a(\phi_j, \phi_i) c_j = (f, \phi_i), \quad i = 1, 2, ... , n-1
@@ -127,11 +127,56 @@ K = \begin{bmatrix}
 \end{matrix}
 $$
 
-\subsection{算法流程}
+\subsection{从单元刚度矩阵组装总刚度矩阵}
+令$ v_h = \sum_{i=0}^{n} v_i \phi_i $,双线性泛函 $a(u_h,v_h)$ 在剖分单元$ I_i = [x_{i-1},x_i] $ 上的限制为
 
-\begin{lstlisting}
-	import numpy as np
-\end{lstlisting}
+$$
+	a(u_h,v_h) = (v_{i-1},v_i) K^{I_i} 
+	\begin{pmatrix}
+		u_{i-1} \\
+		u_i
+	\end{pmatrix}
+$$
+
+其中
+$$
+K^{I_i}:= \begin{bmatrix}
+		  		a_{i-1,i-1}^{I_i} & a_{i-1,i}^{I_i} \\
+		  		a_{i,i-1}^{I_i}   & a_{i,i}^{I_i}
+		  \end{bmatrix} =
+	  \begin{bmatrix}
+	  	a(N_0,N_0)_{I_i} & a(N_0,N_1)_{I_i} \\
+	  	a(N_1,N_0)_{I_i} & a(N_1,N_1)_{I_i}
+	  \end{bmatrix}
+$$
+为单元刚度矩阵
+\\ \par
+泛函$(f,v_h)$在剖分单元$I_i$上的限制为
+$$
+	(f,v_h)_{I_i} = (v_{i-1},v_i) b^{I_i}
+$$
+
+其中
+$$
+	b^{I_i} = \begin{pmatrix}
+				b_{i-1}^{I_i} \\
+				b_i^{I_i}
+			  \end{pmatrix} ==
+		      \begin{pmatrix}
+		      	(f,N_0)_{I_i} \\
+		      	(f,N_1)_{I_i}
+		      \end{pmatrix}
+$$
+为单元载荷向量。
+\\ \par 
+将$K^{I_i}$扩展成n $\times$ n 矩阵，第i-1行和第i行和第i-1列和第i列就是$K^{I_i}$的四个元素，其余全为零，则总刚度矩阵 
+$$ 
+	K = \sum_{i=1}^{n-1} K^{I_i}
+$$
+以同样的方式得到总载荷向量
+$$
+	\bar{b} = \sum_{i=1}^{n-1} b^{I_i}
+$$
 
 \subsection{实验结果}
 
@@ -142,20 +187,26 @@ $$
 	\caption{}
 	\label{SampleOfDatasets}
 \end{figure}
-\\ \\ 
-改变剖分次数得到其与误差二范数的关系如下表
+\\ \\ \\ \\ \\ \\
+改变剖分步长h得到其与误差二范数e的关系如下表
 
 \begin{table}[!ht]
 	\centering
 	\caption{}%剖分次数-误差二范数
 	\begin{tabular}{|c|c|} \hline
-		剖分次数n & 误差 \\ \hline
-		1 & 1.2246e-16 \\ \hline
-		2 & 7.1814e-10 \\ \hline
-		3 & 4.4012e-12 \\ \hline
-		4 & 2.1145e-14 \\ \hline
-		5 & 1.3313e-14 \\ \hline
+		h & e \\ \hline
+		1.57 & 1.63e-07 \\ \hline
+		0.78 & 8.29e-10 \\ \hline
+		0.39 & 4.48e-12 \\ \hline
+		0.19 & 2.11e-14 \\ \hline
+		0.09 & 1.33e-14 \\ \hline
 	\end{tabular}
 \end{table}
+
+\begin{figure}[hb]
+	\centering
+	\includegraphics[height=5cm,width=7cm]{../image/Poisson1d_误差_步长.png}
+	\caption{}
+\end{figure}
 
 \end{document}
