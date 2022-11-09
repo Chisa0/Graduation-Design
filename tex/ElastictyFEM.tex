@@ -37,13 +37,12 @@ $$
 $$
 \begin{matrix}
 	-div \sigma(u) = f \quad \in \Omega  \\
-	u |_{\Gamma} = 0
-	%u |_{\Gamma_1} = g \\
+	u |_{\Gamma_1} = 0
 	%(\sigma(u) \nu) |_{\Gamma2} = t
 \end{matrix}
 $$ 
 \par
-其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,1] \times [0,1] $
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,1] \times [0,1] $，$\Gamma_1 = [x,0]$
 $$
 \begin{matrix}
 	f_1 = -((12 x^2 - 12 x + 2) (4 y^3 - 6 y^2 
@@ -66,11 +65,8 @@ $$
 其中
 $$
 	\begin{matrix}
-		a(u,\nu) := \int_{\Omega} (2 \mu \epsilon(u) : \epsilon(\nu) + \lambda div u div \nu) dx \\
-		= \mu \int_{\Omega} \frac{\partial u_1}{\partial x} \frac{\partial \nu_1}{\partial x} + \frac{\partial u_1}{\partial y} \frac{\partial \nu_1}{\partial y} + \frac{\partial u_2}{\partial x} \frac{\partial \nu_2}{\partial x} + \frac{\partial u_2}{\partial y} \frac{\partial \nu_2}{\partial y} dx
+		a(u,\nu) := \int_{\Omega} (2 \mu \epsilon(u) : \epsilon(\nu) + \lambda div u div \nu) dx 
 		\\  
-		+ (\mu + \lambda) \int_{\Omega} (\frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial y}) (\frac{\partial \nu_1}{\partial x} \frac{\partial \nu_2}{\partial y}) dx
-		\\
 		V := \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma_1} = 0 \}
 	\end{matrix}
 $$
@@ -151,11 +147,11 @@ $$
 \par
 从公式可知$L_i$即为对应节点的基函数在单元$ \bigtriangleup(0,1,2) $上的限制。
 
-\section{刚度矩阵}
+\section{形成线性方程组}
 
 \subsection{剖分}
 
-对区间 $\Omega$ 按图2方式剖分，并对节点和区间进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n
+对区间 $\Omega$ 按图2方式剖分，并对节点(node)和单元(cell)进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n
 
 \begin{figure}[hb]
 	\centering
@@ -175,6 +171,42 @@ $$
 	\sum\limits_{j=0}^n a(\phi_j, \phi_i) u_i = (f,\phi_i) \quad i=0, ... ,n
 $$
 
+矩阵形式为
+$$
+\begin{matrix}
+	A u = F \\
+	A = (a(\phi_i, \phi_j))_{n \times n} \\
+	F = ((f,\phi_i))_{n \times 1} \\
+	u = (u_i)_{n \times 1}
+\end{matrix}
+$$
+
 \subsection{单元刚度矩阵}
+
+在第m个单元cell=$\bigtriangleup(i,j,k)$上，单元刚度矩阵和单元载荷向量为
+$$
+\begin{matrix}
+	A^{(m)} = (\int_{cell} (2 \mu \epsilon(\phi_{i_1}) : \epsilon(\phi_{j_1}) + \lambda div \phi_{i_1} div \phi_{j_1}))_{3 \times 3} \\
+	F^{(m)} = (\int_{cell} f \cdot \phi_{i_1})_{3 \times 1} \\
+	i_1, j_1 = i, j, k
+\end{matrix} 
+$$
+
+将$A^{(m)}$扩展成$n \times n$矩阵，行列为i，j，k的九个元素即为$A^{(m)}$的九个元素，并以同样的方式将$F^{(m)}$扩展成$n \times 1$向量，则
+$$
+\begin{matrix} 
+	A = \sum\limits_{m=0}^n A^{(m)} \\
+	F = \sum\limits_{m=0}^n F^{(m)}
+\end{matrix}
+$$
+
+\subsection{边界条件}
+
+模型为齐次边界条件，若$(x_i,y_i)$为边界点，则 A 第 i 行只有第 i 列元素为1，其他元素及  F(i) 都为0。
+
+%\vfill \newpage
+
+%\bibliographystyle{unsrt}
+%\bibliography{interface_problem}
 
 \end{document}
