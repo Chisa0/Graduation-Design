@@ -63,6 +63,38 @@ $$
 
 \section{变分}
 
+设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
+$$
+-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
+$$
+
+由
+$$
+\begin{matrix}
+	f div a = div(fa) - a : grad f \\
+	\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
+\end{matrix}
+$$
+
+得
+\par \quad \quad
+$-\int_{\Omega} div \sigma(u) \nu dxdy$
+$$ 
+\quad \quad
+\begin{matrix}
+	\begin{aligned}
+		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= \int_{\Omega} \sigma(u) : grad \nu dxdy 
+	\end{aligned}
+\end{matrix}
+$$
+
+所以
+$$
+\int_{\Omega} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
+$$
+
 该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
 $$
 	a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
@@ -79,67 +111,37 @@ $$
 	\end{matrix}
 $$
 
-证其与原问题的等价性
+%证其与原问题的等价性
 
-\begin{enumerate}
-	\item 若 u 为原问题的解 \\
-	设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
-	$$
-		-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
-	$$
-	
-	由
-	$$
-		\begin{matrix}
-			f div a = div(fa) - a : grad f \\
-			\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
-		\end{matrix}
-	$$
-	
-	得
-	\par \quad \quad
-	$-\int_{\Omega} div \sigma(u) \nu dxdy$
-	$$ 
-	\quad \quad
-	\begin{matrix}
-		\begin{aligned}
-		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= \int_{\Omega} \sigma(u) : grad \nu dxdy 
-		\end{aligned}
-	\end{matrix}
-	$$
-	
-	所以
-	$$
-		\int_{\Omega} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
-	$$
-	
-	\item 若 u 为变分问题的解 \\
-	由
-	\par \quad \quad
-	$\int_{\Omega} \sigma(u) : grad \nu dxdy$
-	$$
-	\quad \quad
-	\begin{matrix}
-		\begin{aligned}
-			&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-			&= -\int_{\Omega} div \sigma(u) \nu dxdy
-		\end{aligned}
-	\end{matrix} 
-	$$
+%\begin{enumerate}
+%	\item 若 u 为原问题的解 \\
 
-	得
-	$$
-		-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
-	$$
 	
-	由变分法基本引理得
-	$$
-		-div \sigma(u) = f
-	$$
-	
-\end{enumerate}
+%	\item 若 u 为变分问题的解 \\
+%	由
+%	\par \quad \quad
+%	$\int_{\Omega} \sigma(u) : grad \nu dxdy$
+%	$$
+%	\quad \quad
+%	\begin{matrix}
+%		\begin{aligned}
+%			&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad %\nu dxdy \\
+%			&= -\int_{\Omega} div \sigma(u) \nu dxdy
+%		\end{aligned}
+%	\end{matrix} 
+%	$$
+%
+%	得
+%	$$
+%		-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
+%	$$
+%	
+%	由变分法基本引理得
+%	$$
+%		-div \sigma(u) = f
+%	$$
+%	
+%\end{enumerate}
 
 \section{剖分与基函数}
 
@@ -147,7 +149,7 @@ $$
 
 对区间 $\Omega$ 按图1方式剖分，并对节点和单元进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n，
 
-\begin{figure}[hb]
+\begin{figure}[hbt]
 	\centering
 	\includegraphics[height=4cm,width=4cm]{../image/subdivsion.png}
 	\caption{}
@@ -246,7 +248,7 @@ $$
 
 \section{形成线性方程组}
 
-\subsection{总刚度矩阵}
+\subsection{刚度矩阵}
 
 设 $\varphi_{xi} = (\varphi_i, 0)^t, \varphi_{yi} = (0,\varphi_i)^t$，i = 0, ... , n 为试探函数空间$U_h$的基函数，则任一 $u_h \in U_h$ 可表成
 $$
