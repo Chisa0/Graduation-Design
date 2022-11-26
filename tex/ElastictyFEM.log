@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  20 NOV 2022 11:24
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  24 NOV 2022 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -415,28 +415,49 @@ LaTeX Warning: No \author given.
 
 [1
 
+
 ]
 
 LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 (Font)              size <10.95> substituted on input line 15.
 
-[1]
-Overfull \hbox (0.30585pt too wide) in paragraph at lines 140--141
-[]\TU/FandolSong-Regular(0)/m/n/10.53937 设 $\OMS/cmsy/m/n/10.53937 4\OT1/cmr/m/
-n/10.53937 (\OML/cmm/m/it/10.53937 i; j; k\OT1/cmr/m/n/10.53937 )$ \TU/FandolSo
-ng-Regular(0)/m/n/10.53937 是 以 \TU/lmr/m/n/10.53937 i,j,k \TU/FandolSong-Regula
-r(0)/m/n/10.53937 为 定 点 的 任 意 三 角 型 元，|  面 积 为 \TU/lmr/m/n/10.53937 S\TU/Fandol
-Song-Regular(0)/m/n/10.53937 。|  在 $\OMS/cmsy/m/n/10.53937 4\OT1/cmr/m/n/10.539
-37 (\OML/cmm/m/it/10.53937 p[]; p[]; p[]\OT1/cmr/m/n/10.53937 )$
+
+Overfull \hbox (27.75249pt too wide) detected at line 111
+   [] 
  []
 
-[2]
-File: ../image/TriangleElement.png Graphic file (type bmp)
-<../image/TriangleElement.png>
- [3]
+
+Overfull \hbox (4.18793pt too wide) detected at line 130
+   [] 
+ []
+
+[1
+
+]
 File: ../image/subdivsion.png Graphic file (type bmp)
 <../image/subdivsion.png>
- [4] [5] (./ElastictyFEM.aux)
+
+Overfull \hbox (7.61754pt too wide) detected at line 159
+\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 '[]; \OT1/cmr/m/n/10.53937 0)[]\O
+ML/cmm/m/it/10.53937 ; \OT1/cmr/m/n/10.53937 (0\OML/cmm/m/it/10.53937 ; '[]\OT1
+/cmr/m/n/10.53937 )[]\OML/cmm/m/it/10.53937 ; \OT1/cmr/m/n/10.53937 (\OML/cmm/m
+/it/10.53937 '[]; \OT1/cmr/m/n/10.53937 0)[]\OML/cmm/m/it/10.53937 ; \OT1/cmr/m
+/n/10.53937 (0\OML/cmm/m/it/10.53937 ; '[]\OT1/cmr/m/n/10.53937 )[]\OML/cmm/m/i
+t/10.53937 ; :::; \OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 '[]; \OT1/cmr/m
+/n/10.53937 0)[]\OML/cmm/m/it/10.53937 ; \OT1/cmr/m/n/10.53937 (0\OML/cmm/m/it/
+10.53937 ; '[]\OT1/cmr/m/n/10.53937 )[]
+ []
+
+File: ../image/TriangleElement.png Graphic file (type bmp)
+<../image/TriangleElement.png>
+
+Overfull \hbox (16.43831pt too wide) detected at line 221
+[]
+ []
+
+[2] [3
+
+] (./ElastictyFEM.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
@@ -445,10 +466,10 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  9080 strings out of 476179
  241879 string characters out of 5809545
- 569035 words of memory out of 5000000
+ 574090 words of memory out of 5000000
  29737 multiletter control sequences out of 15000+600000
  476097 words of font info for 72 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,13n,97p,396b,350s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,13n,97p,396b,344s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on ElastictyFEM.pdf (6 pages).
+Output written on ElastictyFEM.pdf (4 pages).
