@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {1}引言}{2}{}%
+\contentsline {section}{\numberline {2}有限元近似和闭锁}{2}{}%
+\contentsline {subsection}{\numberline {2.1}误差估计}{2}{}%
+\contentsline {subsection}{\numberline {2.2}闭锁现象}{3}{}%
+\contentsline {section}{\numberline {3}算例}{5}{}%
+\contentsline {subsection}{\numberline {3.1}模型}{5}{}%
+\contentsline {subsection}{\numberline {3.2}变分}{6}{}%
+\contentsline {subsection}{\numberline {3.3}剖分与基函数}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}剖分}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}线性元}{7}{}%
+\contentsline {subsection}{\numberline {3.4}形成线性方程组}{8}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}刚度矩阵}{8}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}边界条件}{8}{}%
+\contentsline {subsection}{\numberline {3.5}实验结果}{8}{}%

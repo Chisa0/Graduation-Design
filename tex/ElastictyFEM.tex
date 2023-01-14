@@ -1,15 +1,262 @@
-\documentclass[UTF8,titlepage,twocolumn]{ctexart}
+\documentclass[a4paper,UTF8,titlepage]{ctexart}
 \CTEXsetup[format={\Large\bfseries}]{section}
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{graphicx}
+\usepackage{float}
+%\usepackage{epsfig}
+%\usepackage{subfig}
+\usepackage{subfigure}
+%\usepackage{subcaption}
+\usepackage{diagbox}
 \pagestyle{plain}
-\title{弹性问题}
-\date{\today}
+
 \begin{document}
+\title{带间断系数的弹性问题}
+\date{\today}
 \maketitle
 
-\section{模型}
+%\renewcommand{\abstractname}{\vspace{-2em}\large\bf 摘要}
+%\begin{abstract}
+%	摘要 \\
+%	\noindent{关键字：\textbf{弹性问题}}
+%\end{abstract}
+%\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+\section{引言}
+
+具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
+
+平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题 \cite{王兆清2018不可压缩平面问题的位移}。
+
+对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象，使用非协调有限元可克服闭锁现象\cite{陈绍春2007平面弹性的一个新的}。
+
+本文将通过数值实验的方法，考察对于具有间断系数的平面弹性问题，使用C-R元是否仍可以解除闭锁现象。
+
+\section{有限元近似和闭锁}
+
+\subsection{误差估计}
+
+假设$\Omega$是一个凸多边形区域，并且$\Gamma_1$ or $\Gamma_2$中任意一个为空。对于纯位移问题($\Gamma_2=\emptyset$)，我们只需考虑齐次边界条件。
+\par
+令$\emph{T}^h$ 是$\Omega$ 三角划分的一个非退化族。对于纯位移问题($\Gamma_2=\emptyset$),我们使用有限元空间
+% \begin{equation}\label{equ1} （\ref{newton}）引用
+	%	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \}
+	% \end{equation}
+\\ \\
+(1.3.1)
+$
+\quad \quad \quad
+V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
+$ 
+\\ \\
+并且对于纯牵引力问题($\Gamma_1 = \emptyset$)，我们使用
+% \begin{equation}\label{equ2}
+	%	V_h :=
+	%\end{equation}
+	\\ \\
+	(1.3.2)
+	$
+	\quad \quad \quad
+	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
+	$
+%	\\ \\
+%	根据第二章和第四章的理论我们得到以下定理。
+	\\ \\
+	\textbf{(1.3.3) Theorem\cite{brenner2008mathematical}.} 令 $u \in H^2(\Omega) \cap H^1(\Omega)$ 满足纯位移问题，并且$u_h \in V_h$ 满足
+	$$
+	a(u_h, \nu) = \int_{\Omega} f \cdot \nu dx \quad \forall \nu \in V_h.
+	$$
+	\\
+	则存在一个正常数$C_{(\mu, \lambda)}$ 使得
+	\\ \\
+	(1.3.4)
+	$
+	\quad \quad \quad
+	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
+	$
+	\\ \\
+	\textbf{(1.3.5) Theorem.} 令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
+	$$
+	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma} t \cdot \nu ds \quad \forall \nu \in V_h.
+	$$ 
+	\\
+	则存在一个正常数$C_{(\mu, \lambda)}$ 使得
+	$$
+	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
+	$$
+%	对于一般情况 $ \emptyset \ne \Gamma_1 \ne \partial \Omega $ 下的收敛定理，查看练习 11.x.25. 
+%	\\
+
+\subsection{闭锁现象}
+
+	对于固定的 $\mu$ 和 $\lambda$，定理 1.3.3 和 1.3.5 给出了弹性问题令人满意近似的有限元近似。但是这些有限元方法的性能随着 $\lambda$ 趋向于 $\infty$ 而变差。这就是所谓的锁定现象。
+	\par 
+	令 $\Omega = (0,1) \times (0,1)$. 我们考虑 $\mu = 1$ 时的纯位移边值问题:
+	\\ \\
+	(1.3.6)
+	$
+	\quad \quad \quad
+	\begin{matrix}
+		div \{ 2 \epsilon (u^{\lambda}) + \lambda tr (\epsilon (u^{\lambda})) \delta \} = f \quad in \quad \Omega \\ \quad \quad \quad \quad \quad 
+		u^{\lambda}|_{\partial \Omega} =  0.
+	\end{matrix}
+	$
+	\\
+	注意给定的 f ，当 $\lambda \to \infty$，(1.2.33)说明 $\| div u^{\lambda} \|_{H^1(\Omega)} \to 0$.换句话说，我们正在处理一种几乎不可能压缩的弹性材料。为了强调对 $\lambda$ 的依赖，我们将应力张量(1.1.3) $\sigma_{\lambda}(\nu)$ 和 变分形式(1.2.2) $a_{\lambda}(\nu,\omega)$ 表示为
+	$$
+	\begin{matrix}
+		\sigma_{\lambda}(\nu) = 2 \epsilon(\nu) + \lambda tr (\epsilon(\nu)) \delta \\
+		a_{\lambda}(\nu,\omega) = \int_{\Omega} \{ 2 \epsilon(\nu) : \epsilon(\omega) + \lambda div \nu div \omega \} dx.
+	\end{matrix}
+	$$
+	
+	令 $\emph{T}^h$ 为 $\Omega $ (cf.图 1) 的一个规则三角剖分，并且 $V_h$ 被定义为 (1.3.1)。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
+	$$
+	a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
+	[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h.
+	$$
+	
+	\begin{figure}[hb]
+		\centering
+		\includegraphics{../image/Fig.11.1.png}
+		\caption{单位正方形的规则三角剖分}
+	\end{figure}
+	
+	定义 $L_{\lambda,h}$ 为
+	$$
+	L_{\lambda,h} := sup \{ \frac{|u-u_h^{\lambda}|_{H^1(\Omega)}}{\| div \sigma_{\lambda}(u) \|_{L^2(\Omega)}} : 0 \ne u \in H^2(\Omega) \cap H^1(\Omega) \}.
+	$$
+	\\ 
+	我们要证明存在一个与 h 无关的正常数 C 使得
+	\\ \\
+	(1.3.7)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad
+	\lim\limits_{\lambda \to \infty} \inf L_{\lambda,h} \ge C.
+	$
+	\\ \\
+	式 (1.3.7) 意味着：无论 h 取多小，只要 $\lambda$ 足够大，我们都能找到 $u \in H^2(\Omega) \cap H^1(\Omega)$ 使得相对误差$ |u-u_h|_{H^1(\Omega)} / \| div \sigma_{\lambda}(u) \|_{L^2(\Omega)} $ 以一个与 h 无关的常数为下界。换句话说，有限元方法的性能将会随着 $\lambda$ 变大而变坏。
+	\par
+	为证明式 (1.3.7)，我们首先观察到
+	\\ \\
+	(1.3.8)
+	$
+	\quad \quad \quad \quad \quad \quad \quad
+	\{ \nu \in V_h : div \nu = 0 \} = \{ 0 \}
+	$
+	\\ \\
+	(cf.exercise 11.x.14). 因此，映射 $\nu \to div \nu$ 是有限维空间 $V_h$ 到 $L^2(\Omega)$ 的一个一对一映射，并且存在一个正常数 $C_1(h)$ 使得
+	\\ \\
+	(1.3.9)
+	$
+	\quad \quad \quad \quad \quad
+	\| \nu \|_{H^1(\Omega)} \le C_1(h) \| div \nu \|_{L^2(\Omega)} \quad \forall \nu \in V_h.
+	$
+	\\ \par 
+	令 $\psi$ 是 $\overline{\Omega}$ 上的无穷次可微函数,使得在 $\Omega$ 的边界上 $curl \psi = 0$ 且 $\| \epsilon(curl \psi) \|_{L^2(\Omega)} = 1$。令 $u := curl \psi$。则 $u \in H^2(\Omega) \cap H^1(\Omega)$，并有
+	\\ \\
+	(1.3.10)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad
+	div u = 0,
+	$
+	\\
+	(1.3.11)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad
+	\| \epsilon(u) \|_{L^2(\Omega)} = 1,
+	$
+	\\
+	(1.3.12)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad 
+	\sigma_{\lambda}(u) = 2 \epsilon(u).
+	$
+	\\ \par 
+	根据 (1.3.10)，(1.3.11) 和 1.2 节开始的分步积分得
+	\\ \\
+	(1.3.13)
+	$
+	\quad \quad \quad \quad
+	- \int_{\Omega} div \epsilon(u) \cdot u dx = \int_{\Omega} \epsilon(u) : \epsilon(u) dx = 1.
+	$
+	\\ \\
+	根据 (1.3.12)，(1.3.13) 推断
+	\\ \\
+	(1.3.14)
+	$
+	\quad \quad \quad \quad \quad \quad \quad
+	\lim\limits_{\lambda \to \infty} div \sigma_{\lambda}(u) = 2 div \epsilon(u) \ne 0. 
+	$
+	\\ \\
+	由 (2.5.10) 得,
+	\\ \\
+	(1.3.15)
+	$
+	\quad \quad \quad 
+	a_{\lambda}(u-u_h^{\lambda}, u-u_h^{\lambda}) = \min\limits_{\nu \in V_h} a_{\lambda}(u-\nu,u-\nu) \le a_{\lambda}(u,u).
+	$
+	\\ \\
+	由 (1.3.10) 和 (1.3.11)，我们得到
+	\\ \\
+	(1.3.16)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad \quad
+	a_{\lambda}(u,u) = 2.
+	$
+	\\ \\
+	因此，对于 $\lambda$ 足够大时有
+	\\ \\
+	(1.3.17)
+	$
+	\quad \quad \quad \quad \quad \quad \quad 
+	a_{\lambda} (u-u_h^{\lambda}, u-u_h^{\lambda}) \le 2.
+	$
+	\\ \\ 
+	由 (1.3.10) 和 (1.3.17) 得
+	\\
+	$$
+	\begin{matrix}
+		\sqrt{\lambda} \| div u_h^{\lambda} \|_{L^2(\Omega)} = \sqrt{\lambda} \| div(u-u_h^{\lambda}) \|_{L^2(\Omega)} \\ 
+		\quad \quad \quad \quad \quad \quad \quad
+		\le \sqrt{a_{\lambda}(u-u_h^{\lambda}, u-u_h^{\lambda})} \\
+		\le \sqrt{2}	
+	\end{matrix}
+	$$
+	\\
+	对足够大的 $\lambda$ 有
+	$$
+	\lim\limits_{\lambda \to \infty} \| div u_h^{\lambda} \|_{L^2(\Omega)} = 0.
+	$$
+	\\
+	由式 (1.3.9) 有
+	\\ \\
+	(1.3.18)
+	$
+	\quad \quad \quad \quad \quad \quad \quad \quad 
+	\lim\limits_{\lambda \to \infty} \| u_h^{\lambda} \|_{H^1(\Omega)} = 0.
+	$
+	\\ \\
+	最后，我们得到 %(cf.exercise 11.x.16)
+	\\ \\
+	(1.3.19) 
+	$
+	\quad \quad \quad \quad \quad 
+	\begin{matrix}
+		\lim\limits_{\lambda \to \infty}\inf L_{\lambda,h} \ge \lim\limits_{\lambda \to \infty}\inf \frac{|u-u_h^{\lambda}|_{H^1(\Omega)}}{\| div \sigma_{\lambda}(u) \|_{L^2(\Omega)}} \\
+		\quad \quad \quad \quad
+		= \frac{|u|_{H^1(\Omega)}}{\| div \sigma(u) \|_{L^2(\Omega)}} > 0.
+	\end{matrix}
+	$
+
+\section{算例}
+
+\subsection{模型}
 
 令
 $$
@@ -61,7 +308,7 @@ $$
 \end{matrix}
 $$
 
-\section{变分}
+\subsection{变分}
 
 设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
 $$
@@ -143,9 +390,9 @@ $$
 %	
 %\end{enumerate}
 
-\section{剖分与基函数}
+\subsection{剖分与基函数}
 
-\subsection{剖分}
+\subsubsection{剖分}
 
 对区间 $\Omega$ 按图1方式剖分，并对节点和单元进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n，
 
@@ -162,7 +409,7 @@ $$
 
 $\varphi_i$ 为线性元，以下得到其在各单元上表达式。 
 
-\subsection{线性元}
+\subsubsection{线性元}
 
 如图2，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点$p_3$，坐标为$(x,y)$。过$p_3$点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p_3), \bigtriangleup(p_0,p_3,p_2), \bigtriangleup(p_0,p_1,p_3) $，其面积分别为$S_0,S_1,S_2$
 
@@ -246,9 +493,9 @@ $$
 
 所以在此区间上 $\varphi_i = L_i$。
 
-\section{形成线性方程组}
+\subsection{形成线性方程组}
 
-\subsection{刚度矩阵}
+\subsubsection{刚度矩阵}
 
 设 $\varphi_{xi} = (\varphi_i, 0)^t, \varphi_{yi} = (0,\varphi_i)^t$，i = 0, ... , n 为试探函数空间$U_h$的基函数，则任一 $u_h \in U_h$ 可表成
 $$
@@ -290,7 +537,7 @@ $$
 %\end{matrix}
 %$$
 
-\subsection{边界条件}
+\subsubsection{边界条件}
 
 模型为齐次边界条件，若$(x_i,y_i)$为边界点，则 A 第 2i 行第 2i 列，第 2i+1 行第 2i+1 列元素为1，其他元素及  F(2i)，F(2i+1) 都为0。
 
@@ -298,5 +545,50 @@ $$
 
 %\bibliographystyle{unsrt}
 %\bibliography{interface_problem}
+
+\subsection{实验结果}
+
+\begin{table}[ht]
+	\caption{线性元误差}
+	\begin{tabular}{|c|c|c|c|c|c|c|} \hline
+		\diagbox{$\lambda$}{h} &3.125e-2 &7.812e-3 &1.953e-3 &4.882e-4 &1.220e-4 &3.051e-5 \\ \hline
+		1 &3.1007e-3 &6.6322e-4 &1.4833e-4 &4.3538e-5 &1.6079e-5 &6.2883e-6 \\ \hline
+		10 &3.4359e-3 &1.3916e-3 &4.5128e-4 &1.2428e-4 &3.2305e-5 &8.1245e-6 \\ \hline
+		100 &3.3958e-3 &9.0716e-3 &3.6454e-3 &1.0038e-3 &2.6076e-4 &6.5941e-5 \\ \hline
+		1e3 &3.4040e-3 &8.5781e-2 &3.5580e-2 &9.8154e-3 &2.5446e-3 &6.4444e-4 \\ \hline
+		1e4 &3.4050e-3 &8.5287e-1 &3.5492e-1 &9.7931e-2 &2.5383e-2 &6.4295e-3 \\ \hline
+		1e5 &3.4051e-3 &8.5237 &3.5484 &9.7909e-1 &2.5377e-1 &6.4280e-2 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+	\centering
+	\subfigure[$\lambda$=1]{
+		\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_1.png}
+		\label{1}}	
+	\subfigure[$\lambda$=10]{
+		\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_10.png}
+		\label{10}}
+	\subfigure[$\lambda$=100]{
+	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_100.png}
+	\label{100}}
+
+ 	\subfigure[$\lambda$=1000]{
+	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_1000.png}
+	\label{1000}}
+	\subfigure[$\lambda$=10000]{
+	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_10000.png}
+	\label{10000}}
+	\subfigure[$\lambda$=100000]{
+	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_100000.png}
+	\label{100000}}
+	\caption{线性元误差}
+\end{figure}
+
+\newpage
+\vfill
+
+\bibliographystyle{unsrt}
+\bibliography{interface_problem}
 
 \end{document}
