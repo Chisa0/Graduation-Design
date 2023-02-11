@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
+邵文婷.
+\newblock 求解一类交界面问题的模态基函数谱元法数值实验.
+\newblock {\em 上海第二工业大学学报}, 34(4):283--290, 2017.
+
 \bibitem{王兆清2018不可压缩平面问题的位移}
 王兆清, 徐子康, and 李金.
 \newblock 不可压缩平面问题的位移-压力混合重心插值配点法.
@@ -10,10 +15,33 @@
 \newblock 平面弹性的一个新的 locking-free 非协调有限元.
 \newblock {\em 应用数学}, 20(4):739--747, 2007.
 
-\bibitem{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
-邵文婷.
-\newblock 求解一类交界面问题的模态基函数谱元法数值实验.
-\newblock {\em 上海第二工业大学学报}, 34(4):283--290, 2017.
+\bibitem{peet2014legendre}
+YT~Peet and PF~Fischer.
+\newblock Legendre spectral element method with nearly incompressible
+  materials.
+\newblock {\em European Journal of Mechanics-A/Solids}, 44:91--103, 2014.
+
+\bibitem{masud2011variational}
+Arif Masud, Timothy~J Truster, and Lawrence~A Bergman.
+\newblock A variational multiscale a posteriori error estimation method for
+  mixed form of nearly incompressible elasticity.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  200(47-48):3453--3481, 2011.
+
+\bibitem{auricchio2005analysis}
+Ferdinando Auricchio, L~Beira͂o Da~Veiga, Carlo Lovadina, and Alessandro
+  Reali.
+\newblock An analysis of some mixed-enhanced finite element for plane linear
+  elasticity.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  194(27-29):2947--2968, 2005.
+
+\bibitem{hansbo2003discontinuous}
+Peter Hansbo and Mats~G Larson.
+\newblock Discontinuous galerkin and the crouzeix--raviart element: application
+  to elasticity.
+\newblock {\em ESAIM: Mathematical Modelling and Numerical Analysis},
+  37(1):63--72, 2003.
 
 \bibitem{brenner2008mathematical}
 Susanne~C Brenner, L~Ridgway Scott, and L~Ridgway Scott.

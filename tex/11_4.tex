@@ -1,0 +1,30 @@
+\documentclass[a4paper,UTF8,titlepage]{ctexart}
+\CTEXsetup[format={\Large\bfseries}]{section}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float}
+%\usepackage{epsfig}
+%\usepackage{subfig}
+\usepackage{subfigure}
+%\usepackage{subcaption}
+\usepackage{diagbox}
+\pagestyle{plain}
+
+\begin{document}
+\title{CR有限元}
+\date{\today}
+\maketitle
+
+令$T^h$是$\Omega$的一个非退化的三角型划分，并且令$V_h^* := V_h \times V_h$,
+
+$$
+	\quad \quad \quad
+	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
+$$
+$$	
+	V_h^* := \{ \nu : \nu \in L^2(\Omega), \par
+	\quad \nu|_T \mbox{是线性的} \quad \forall T \in T^h, \quad \nu \mbox{在所有单元边界的中点是连续的，并且在} \Omega \mbox{边界的中点上} \quad \nu = 0  \}
+$$
+
+\end{document}

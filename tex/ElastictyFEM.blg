@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ElastictyFEM.aux
 The style file: unsrt.bst
 Database file #1: interface_problem.bib
-You've used 4 entries,
+You've used 8 entries,
             1791 wiz_defined-function locations,
-            472 strings with 4209 characters,
-and the built_in function-call counts, 923 in all, are:
-= -- 85
-> -- 34
+            503 strings with 5064 characters,
+and the built_in function-call counts, 1926 in all, are:
+= -- 182
+> -- 75
 < -- 1
-+ -- 13
-- -- 9
-* -- 71
-:= -- 150
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 3
++ -- 28
+- -- 20
+* -- 153
+:= -- 308
+add.period$ -- 24
+call.type$ -- 8
+change.case$ -- 7
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 37
-empty$ -- 92
-format.name$ -- 9
-if$ -- 198
+cite$ -- 8
+duplicate$ -- 73
+empty$ -- 188
+format.name$ -- 20
+if$ -- 413
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 5
-newline$ -- 23
-num.names$ -- 4
-pop$ -- 9
+int.to.str$ -- 8
+missing$ -- 9
+newline$ -- 43
+num.names$ -- 8
+pop$ -- 13
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 13
+skip$ -- 27
 stack$ -- 0
-substring$ -- 75
-swap$ -- 5
+substring$ -- 178
+swap$ -- 9
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 10
-width$ -- 5
-write$ -- 46
+while$ -- 22
+width$ -- 9
+write$ -- 90

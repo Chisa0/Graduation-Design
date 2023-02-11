@@ -29,11 +29,22 @@
 
 \section{引言}
 
+\subsection{研究背景}
+
 具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
 
 平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题 \cite{王兆清2018不可压缩平面问题的位移}。
 
-对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象，使用非协调有限元可克服闭锁现象\cite{陈绍春2007平面弹性的一个新的}。
+对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象\cite{陈绍春2007平面弹性的一个新的}。
+
+为了消除（近）不可压缩弹性问题中遇到的锁定现象，国内外研究学者提出了多种有效的数值分析方法。根据型函数建立过程中是否需要网格剖分，这些数值方法可以分为两类：一类是有网格方法，这其中包括
+高阶有限元法\cite{peet2014legendre}、
+混合有限元法\cite{masud2011variational}、
+增强有限元法\cite{auricchio2005analysis}和
+不连续Galerkin法\cite{hansbo2003discontinuous}等；
+另一类是无网格方法，无网格方法又可分为弱形式无网格法和强形式的无网格方法\cite{王兆清2018不可压缩平面问题的位移}。
+
+\subsection{主要研究内容}
 
 本文将通过数值实验的方法，考察对于具有间断系数的平面弹性问题，使用C-R元是否仍可以解除闭锁现象。
 
@@ -115,13 +126,13 @@ $
 	\end{matrix}
 	$$
 	
-	令 $\emph{T}^h$ 为 $\Omega $ (cf.图 1) 的一个规则三角剖分，并且 $V_h$ 被定义为 (1.3.1)。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
+	令 $\emph{T}^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分，并且 $V_h$ 被定义为 (1.3.1)。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
 	$$
 	a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
 	[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h.
 	$$
 	
-	\begin{figure}[hb]
+	\begin{figure}[hbt]
 		\centering
 		\includegraphics{../image/Fig.11.1.png}
 		\caption{单位正方形的规则三角剖分}
@@ -254,9 +265,115 @@ $
 	\end{matrix}
 	$
 
+\subsection{剖分与基函数}
+
+\subsubsection{剖分}
+
+对区间 $\Omega$ 按图1方式剖分，并对节点和单元进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n，
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[height=4cm,width=4cm]{../image/subdivsion.png}
+	\caption{}
+\end{figure}
+
+设基函数为 
+$$ 
+(\varphi_0,0)^t, (0,\varphi_0)^t, (\varphi_1,0)^t, (0,\varphi_1)^t, ... , (\varphi_n,0)^t, (0,\varphi_n)^t 
+$$
+
+$\varphi_i$ 为线性元，以下得到其在各单元上表达式。 
+
+\subsubsection{线性元}
+
+如图2，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点$p_3$，坐标为$(x,y)$。过$p_3$点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p_3), \bigtriangleup(p_0,p_3,p_2), \bigtriangleup(p_0,p_1,p_3) $，其面积分别为$S_0,S_1,S_2$
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[height=3cm,width=4cm]{../image/TriangleElement.png}
+	\caption{}
+	\label{SampleOfDatasets}
+\end{figure}
+
+显然$S_0 + S_1 + S_2 = S$，令
+$$
+L_0 = \frac{S_0}{S}, \quad L_1 = \frac{S_1}{S}, \quad L_2 = \frac{S_2}{S}
+$$
+\par
+%称$(L_0,L_1,L_2)$位$P_3$的面积坐标，其中
+%$$
+%	\begin{cases}
+	%		2S = \left| \begin{matrix}
+		%				1 & x_0 & y_0 \\
+		%				1 & x_1 & y_1 \\
+		%				1 & x_2 & y_2
+		%			 \end{matrix} \right| ,
+	%		 \quad
+	%		 2S_0 = \left| \begin{matrix}
+		%		 			1 & x   & y   \\
+		%		 			1 & x_1 & y_1 \\
+		%		 			1 & x_2 & y_2
+		%		 \end{matrix} \right| 
+	%		 \\
+	%		2S_1 = \left| \begin{matrix}
+		%					1 & x_0 & y_0 \\
+		%					1 & x   & y   \\
+		%					1 & x_2 & y_2
+		%			   \end{matrix} \right|,
+	%		\quad
+	%		2S_2 = \left| \begin{matrix}
+		%					1 & x_0 & y_0 \\
+		%					1 & x_1 & y_1 \\
+		%					1 & x   & y
+		%			   \end{matrix} \right|
+	%	\end{cases}
+%$$
+
+%由此可得面积坐标和直角坐标的转化关系
+%$$
+%\begin{cases}
+%	x = x_0 L_0 + x_1 L_1 + x_2 L_2 \\
+%	y = y_0 L_0 + y_1 L_1 + x_2 L_2
+%\end{cases}
+%$$
+$$
+\begin{cases}
+	L_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
+	L_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
+	L_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
+\end{cases} 
+$$
+
+因为
+
+$$
+\begin{cases}
+	L_0 = \begin{cases}
+		1, \quad x = x_0, y = y_0 \\
+		0, \quad x = x_1, y = y_1 \\
+		0, \quad x = x_2, y = y_2
+	\end{cases} \\
+	L_1 = \begin{cases}
+		0, \quad x = x_0, y = y_0 \\
+		1, \quad x = x_1, y = y_1 \\
+		0, \quad x = x_2, y = y_2
+	\end{cases} \\
+	L_2 = \begin{cases}
+		0, \quad x = x_0, y = y_0 \\
+		0, \quad x = x_1, y = y_1 \\
+		1, \quad x = x_2, y = y_2
+	\end{cases} \\
+\end{cases}
+$$
+
+所以在此区间上 $\varphi_i = L_i$。
+
+
 \section{算例}
 
-\subsection{模型}
+\subsection{弹性问题}
+
+\subsubsection{模型}
 
 令
 $$
@@ -308,7 +425,7 @@ $$
 \end{matrix}
 $$
 
-\subsection{变分}
+\subsubsection{变分}
 
 设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
 $$
@@ -390,111 +507,6 @@ $$
 %	
 %\end{enumerate}
 
-\subsection{剖分与基函数}
-
-\subsubsection{剖分}
-
-对区间 $\Omega$ 按图1方式剖分，并对节点和单元进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n，
-
-\begin{figure}[hbt]
-	\centering
-	\includegraphics[height=4cm,width=4cm]{../image/subdivsion.png}
-	\caption{}
-\end{figure}
-
-设基函数为 
-$$ 
-(\varphi_0,0)^t, (0,\varphi_0)^t, (\varphi_1,0)^t, (0,\varphi_1)^t, ... , (\varphi_n,0)^t, (0,\varphi_n)^t 
-$$
-
-$\varphi_i$ 为线性元，以下得到其在各单元上表达式。 
-
-\subsubsection{线性元}
-
-如图2，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点$p_3$，坐标为$(x,y)$。过$p_3$点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p_3), \bigtriangleup(p_0,p_3,p_2), \bigtriangleup(p_0,p_1,p_3) $，其面积分别为$S_0,S_1,S_2$
-
-\begin{figure}[hbt]
-	\centering
-	\includegraphics[height=3cm,width=4cm]{../image/TriangleElement.png}
-	\caption{}
-	\label{SampleOfDatasets}
-\end{figure}
-
-显然$S_0 + S_1 + S_2 = S$，令
-$$
-	L_0 = \frac{S_0}{S}, \quad L_1 = \frac{S_1}{S}, \quad L_2 = \frac{S_2}{S}
-$$
-\par
-%称$(L_0,L_1,L_2)$位$P_3$的面积坐标，其中
-%$$
-%	\begin{cases}
-%		2S = \left| \begin{matrix}
-%				1 & x_0 & y_0 \\
-%				1 & x_1 & y_1 \\
-%				1 & x_2 & y_2
-%			 \end{matrix} \right| ,
-%		 \quad
-%		 2S_0 = \left| \begin{matrix}
-%		 			1 & x   & y   \\
-%		 			1 & x_1 & y_1 \\
-%		 			1 & x_2 & y_2
-%		 \end{matrix} \right| 
-%		 \\
-%		2S_1 = \left| \begin{matrix}
-%					1 & x_0 & y_0 \\
-%					1 & x   & y   \\
-%					1 & x_2 & y_2
-%			   \end{matrix} \right|,
-%		\quad
-%		2S_2 = \left| \begin{matrix}
-%					1 & x_0 & y_0 \\
-%					1 & x_1 & y_1 \\
-%					1 & x   & y
-%			   \end{matrix} \right|
-%	\end{cases}
-%$$
-
-%由此可得面积坐标和直角坐标的转化关系
-%$$
-%\begin{cases}
-%	x = x_0 L_0 + x_1 L_1 + x_2 L_2 \\
-%	y = y_0 L_0 + y_1 L_1 + x_2 L_2
-%\end{cases}
-%$$
-$$
-	\begin{cases}
-		L_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
-		L_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
-		L_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
-	\end{cases} 
-$$
-
-因为
-
-$$
-\begin{cases}
-	L_0 = \begin{cases}
-			 1, \quad x = x_0, y = y_0 \\
-			 0, \quad x = x_1, y = y_1 \\
-			 0, \quad x = x_2, y = y_2
-		  \end{cases} \\
-	L_1 = \begin{cases}
-			 0, \quad x = x_0, y = y_0 \\
-			 1, \quad x = x_1, y = y_1 \\
-			 0, \quad x = x_2, y = y_2
-		  \end{cases} \\
-	L_2 = \begin{cases}
-			 0, \quad x = x_0, y = y_0 \\
-			 0, \quad x = x_1, y = y_1 \\
-			 1, \quad x = x_2, y = y_2
-		  \end{cases} \\
-\end{cases}
-$$
-
-所以在此区间上 $\varphi_i = L_i$。
-
-\subsection{形成线性方程组}
-
 \subsubsection{刚度矩阵}
 
 设 $\varphi_{xi} = (\varphi_i, 0)^t, \varphi_{yi} = (0,\varphi_i)^t$，i = 0, ... , n 为试探函数空间$U_h$的基函数，则任一 $u_h \in U_h$ 可表成
@@ -546,7 +558,7 @@ $$
 %\bibliographystyle{unsrt}
 %\bibliography{interface_problem}
 
-\subsection{实验结果}
+\subsubsection{实验结果}
 
 \begin{table}[ht]
 	\caption{线性元误差}
@@ -584,6 +596,104 @@ $$
 	\label{100000}}
 	\caption{线性元误差}
 \end{figure}
+
+\subsection{弹性界面问题}
+
+\subsubsection{模型}
+
+考察模型
+$$
+\begin{matrix}
+	-div \sigma(u) = f \quad \in \Omega  \\
+	u |_{\Gamma} = 0
+	%(\sigma(u) \nu) |_{\Gamma2} = t
+\end{matrix}
+$$ 
+\par
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,2] \times [0,1] $
+
+当$(x,y) \in [0,1] \times [0,1]$时，$\mu = \lambda = 1$
+$$
+\begin{matrix}
+	u_1 = (x - 1)(y - 1) y sin(x) 
+	\\
+	u_2 = (x - 1)(y - 1) x sin(y) 
+\end{matrix}
+$$
+
+当$(x,y) \in [1,2] \times [0,1]$时， $\mu = \lambda = 2$
+
+$$
+\begin{matrix}
+	u_1 = (x - 1)(y - 1) y sin(x) 
+	\\
+	u_2 = (x - 1)(y - 1) x sin(y) 
+\end{matrix}
+$$
+
+右端向量
+
+$$
+\begin{matrix}
+	f_1 = -((2 \mu + \lambda) y (y - 1) (2 cos(x) - (x - 1) sin(x)) \\
+	+ (\mu + \lambda) (2 x - 1) (sin(y) + (y - 1) cos(y)) \\
+	+ 2 \mu (x - 1) sin(x)) 
+	\\
+	f_2 = -((2 \mu + \lambda) x (x - 1) (2 cos(y) - (y - 1) sin(y)) \\
+	+ (\mu + \lambda) (2 y - 1) (sin(x) + (x - 1) cos(x)) \\ 
+	+ 2 \mu (y - 1) sin(y))
+\end{matrix}
+$$
+
+\subsubsection{变分}
+
+设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
+$$
+-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
+$$
+
+由
+$$
+\begin{matrix}
+	f div a = div(fa) - a : grad f \\
+	\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
+\end{matrix}
+$$
+
+得
+\par \quad \quad
+$-\int_{\Omega} div \sigma(u) \nu dxdy$
+$$ 
+\quad \quad
+\begin{matrix}
+	\begin{aligned}
+		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= \int_{\Omega} \sigma(u) : grad \nu dxdy 
+	\end{aligned}
+\end{matrix}
+$$
+
+所以
+$$
+\int_{\Omega} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
+$$
+
+该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
+$$
+a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
+$$ 
+\par
+其中
+$$
+\begin{matrix}
+	\begin{aligned}
+		a(u,\nu) :&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\  
+		&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy \\
+		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
+	\end{aligned}
+\end{matrix}
+$$
 
 \newpage
 \vfill

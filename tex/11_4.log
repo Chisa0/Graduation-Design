@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  11 FEB 2023 09:56
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  10 FEB 2023 11:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ElastictyFEM.tex
-(./ElastictyFEM.tex
+**11_4.tex
+(./11_4.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24>
 (/usr/local/texlive/2022/texmf-dist/tex/latex/ctex/ctexart.cls
@@ -417,9 +417,8 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \diagbox@insepr=\dimen266
 \diagbox@outsepl=\dimen267
 \diagbox@outsepr=\dimen268
-)
-(./ElastictyFEM.aux)
-\openout1 = `ElastictyFEM.aux'.
+) (./11_4.aux)
+\openout1 = `11_4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
@@ -503,213 +502,64 @@ LaTeX Warning: No \author given.
 
 [1
 
-] (./ElastictyFEM.toc
+]
 
 LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
-(Font)              size <10.95> substituted on input line 2.
+(Font)              size <10.95> substituted on input line 19.
 
-)
-\tf@toc=\write3
-\openout3 = `ElastictyFEM.toc'.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.26 ..._h^* := \{ \nu : \nu \in L^2(\Omega), \par
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
- [1]
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
+! Display math should end with $$.
+<to be read again> 
+                   \tex_par:D 
+l.26 ..._h^* := \{ \nu : \nu \in L^2(\Omega), \par
+                                                  
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.27 ^^I\quad \nu
+                 |_T \mbox{是线性的} \quad \forall T \in T^h, \quad \nu \mbox{在所...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.29 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (102.78186pt too wide) in paragraph at lines 27--29
+[] $\OML/cmm/m/it/10.53937 ^^W\OMS/cmsy/m/n/10.53937 j[][] 8\OML/cmm/m/it/10.53
+937 T \OMS/cmsy/m/n/10.53937 2 \OML/cmm/m/it/10.53937 T[];  ^^W[]\OT1/cmr/m/n/1
+0.53937 
+[] \OML/cmm/m/it/10.53937 ^^W \OT1/cmr/m/n/10.53937 =
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 84--95
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--95
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--122
-
- []
-
-File: ../image/Fig.11.1.png Graphic file (type bmp)
-<../image/Fig.11.1.png>
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 144--155
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 144--155
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--191
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--191
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
-
- []
-
-[5]
-File: ../image/subdivsion.png Graphic file (type bmp)
-<../image/subdivsion.png>
-
-Overfull \hbox (4.64305pt too wide) in paragraph at lines 289--290
-\TU/FandolSong-Regular(0)/m/n/10.53937 线，|  将 $\OMS/cmsy/m/n/10.53937 4\OT1/cmr
-/m/n/10.53937 (\OML/cmm/m/it/10.53937 p[]; p[]; p[]\OT1/cmr/m/n/10.53937 )$ \TU
-/FandolSong-Regular(0)/m/n/10.53937 分 成 三 个 三 角 形\TU/lmr/m/n/10.53937 : $\OMS/c
-msy/m/n/10.53937 4\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 p[]; p[]; p[]\O
-T1/cmr/m/n/10.53937 )\OML/cmm/m/it/10.53937 ; \OMS/cmsy/m/n/10.53937 4\OT1/cmr/
-m/n/10.53937 (\OML/cmm/m/it/10.53937 p[]; p[]; p[]\OT1/cmr/m/n/10.53937 )\OML/c
-mm/m/it/10.53937 ; \OMS/cmsy/m/n/10.53937 4\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it
-/10.53937 p[]; p[]; p[]\OT1/cmr/m/n/10.53937 )$\TU/FandolSong-Regular(0)/m/n/10
-.53937 ，|
- []
-
-File: ../image/TriangleElement.png Graphic file (type bmp)
-<../image/TriangleElement.png>
-[6] [7] [8] [9]
-Overfull \hbox (22.91887pt too wide) in paragraph at lines 565--574
-[][] 
- []
-
-File: ../image/elasticityLfemLam_1.png Graphic file (type bmp)
-<../image/elasticityLfemLam_1.png>
-File: ../image/elasticityLfemLam_10.png Graphic file (type bmp)
-<../image/elasticityLfemLam_10.png>
-File: ../image/elasticityLfemLam_100.png Graphic file (type bmp)
-<../image/elasticityLfemLam_100.png>
-File: ../image/elasticityLfemLam_1000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_1000.png>
-File: ../image/elasticityLfemLam_10000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_10000.png>
-File: ../image/elasticityLfemLam_100000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_100000.png>
-[10] [11] [12] (./ElastictyFEM.bbl
-Missing character: There is no ͂ (U+0342) in font [lmroman10-regular]:mapping=t
-ex-text;!
-) [13] (./ElastictyFEM.aux)
+[1] (./11_4.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 9926 strings out of 476179
- 260513 string characters out of 5809545
- 581107 words of memory out of 5000000
- 30533 multiletter control sequences out of 15000+600000
- 477288 words of font info for 82 fonts, out of 8000000 for 9000
+ 9719 strings out of 476179
+ 251338 string characters out of 5809545
+ 566908 words of memory out of 5000000
+ 30353 multiletter control sequences out of 15000+600000
+ 476081 words of font info for 70 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,16n,97p,396b,369s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,6n,97p,388b,270s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on ElastictyFEM.pdf (14 pages).
+Output written on 11_4.pdf (2 pages).
