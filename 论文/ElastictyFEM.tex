@@ -16,12 +16,12 @@
 \date{\today}
 \maketitle
 
-%\renewcommand{\abstractname}{\vspace{-2em}\large\bf 摘要}
-%\begin{abstract}
-%	摘要 \\
-%	\noindent{关键字：\textbf{弹性问题}}
-%\end{abstract}
-%\thispagestyle{empty}
+\renewcommand{\abstractname}{\vspace{-2em}\large\bf 摘要}
+\begin{abstract}
+	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下弹性界面问题进行求解  \\
+	\noindent{关键字：\textbf{弹性界面问题}；\textbf{非协调有限元};     \textbf{locking-free}}
+\end{abstract}
+\thispagestyle{empty}
 
 \tableofcontents
 
@@ -31,10 +31,9 @@
 
 \subsection{研究背景}
 
-具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
+具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}、声音在水中的传递、海市蜃楼现象等，同时在数值模拟等场景中也有者大量的界面问题。
 
 平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题 \cite{王兆清2018不可压缩平面问题的位移}。
-
 对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象\cite{陈绍春2007平面弹性的一个新的}。
 
 为了消除（近）不可压缩弹性问题中遇到的锁定现象，国内外研究学者提出了多种有效的数值分析方法。根据型函数建立过程中是否需要网格剖分，这些数值方法可以分为两类：一类是有网格方法，这其中包括
@@ -44,9 +43,13 @@
 不连续Galerkin法\cite{hansbo2003discontinuous}等；
 另一类是无网格方法，无网格方法又可分为弱形式无网格法和强形式的无网格方法\cite{王兆清2018不可压缩平面问题的位移}。
 
-\subsection{主要研究内容}
-
 本文将通过数值实验的方法，考察对于具有间断系数的平面弹性问题，使用C-R元是否仍可以解除闭锁现象。
+
+\subsection{国内外研究现状}
+
+1943年，R.W.Courant首次提出有限元法的核心思想。1956年，R.W.Clough等四位教授与工程师在科技期刊上发表一篇计算飞机机翼强度的论文，且把这种解法称之为刚性法(Stiffness)，是有限元法在工程学界上的开端。1960年，R.W.Clough教授发表的平面弹性论文中，“有限元法”这个名称被首次使用，同时也将有限元法扩展到土木工程上。1963年，Richard MacNeal博士与Robert Schwendler联手创办了MSC公司，并开发了第一个软件程序，名为SADSAM，即数字仿真模拟结构分析，标志着有限元方法(FEA)由理论向程序的转变，1964-1965年，O.C.Zienkiewicz等人发表关于利用极小位能原理和虚功原理，以新的思路推导出有限元法。
+
+我国有限元发展之路中较为著名的有：冯康（有限单元法理论），钱令希（余能定理），钱伟长（广义变分原理）等等。但是受限与当时的国际和国内环境，我国的学者在有限元方法上的进一步研究困难重重，很难跟上国际潮流，遗憾的被国外拉开距离。在之后的十年，伴随者国内有限元软件和有限元方法理论的诞生和发展，大型工程也逐渐使用有限元方法来计算，如水利、机械等多个领域，并且也都取得了不错的效果。上世纪90年代，国外的有限元软件大批量地涌入国内市场，涉及到各个领域。国外的学者专家也都进入各大学、工厂与企业进行宣传他们所掌握的技术和使用技巧，导致国内有限元发展更加困难。管理部门对有限元软件的认知上产生了偏差，对此失去了必要的支持，核心技术掌握在国外，所以至上世纪最后十几年里，国内自主技术创新的进度十分缓慢。但是进入21世纪后，国内自主知识产权的软件逐渐市场化，获得了一定的发展，同时也获得了国家对有限元技术的关注，逐渐走出低迷状态，有限元技术也不再仅仅停留在高校和企业中。
 
 \section{有限元近似和闭锁}
 
@@ -368,6 +371,7 @@ $$
 
 所以在此区间上 $\varphi_i = L_i$。
 
+\subsubsection{CR元}
 
 \section{算例}
 
@@ -610,9 +614,9 @@ $$
 \end{matrix}
 $$ 
 \par
-其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,2] \times [0,1] $
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,2] \times [0,1] , \Omega_1 = [0,1] \times [0,1] , \Omega_2 = [1,2] \times [0,1]$
 
-当$(x,y) \in [0,1] \times [0,1]$时，$\mu = \lambda = 1$
+当$(x,y) \in \Omega_1$时，$\mu = \lambda = 1$
 $$
 \begin{matrix}
 	u_1 = (x - 1)(y - 1) y sin(x) 
@@ -621,13 +625,13 @@ $$
 \end{matrix}
 $$
 
-当$(x,y) \in [1,2] \times [0,1]$时， $\mu = \lambda = 2$
+当$(x,y) \in \Omega_2$时， $\mu = \lambda = 2$
 
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) 
+	u_1 = (x - 1)(y - 1) y sin(x) / 2 
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) 
+	u_2 = (x - 1)(y - 1) x sin(y) / 2
 \end{matrix}
 $$
 
@@ -667,16 +671,19 @@ $$
 \quad \quad
 \begin{matrix}
 	\begin{aligned}
-		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= \int_{\Omega} \sigma(u) : grad \nu dxdy 
+		&= -\int_{\Omega_1} div \sigma(u) \nu dxdy -\int_{\Omega_2} div \sigma(u) \nu dxdy \\
+		&= -\int_{\Omega_1} div(\sigma(u) \nu) dxdy - \int_{\Omega_1} \sigma(u) : grad \nu dxdy  
+		-\int_{\Omega_2} div(\sigma(u) \nu) dxdy - \int_{\Omega_2} \sigma(u) : grad \nu dxdy\\
+		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega_1} \sigma(u) : grad \nu dxdy 
+		+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy\\
+		&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy 
 	\end{aligned}
 \end{matrix}
 $$
 
 所以
 $$
-\int_{\Omega} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
+\int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
 $$
 
 该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
@@ -688,8 +695,9 @@ $$
 $$
 \begin{matrix}
 	\begin{aligned}
-		a(u,\nu) :&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\  
-		&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy \\
+		a(u,\nu) :&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy \\  
+		&= \int_{\Omega_1} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy \\
+		&+ \int_{\Omega_2} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy\\
 		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
 	\end{aligned}
 \end{matrix}

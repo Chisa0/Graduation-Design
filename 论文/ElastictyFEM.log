@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  11 FEB 2023 09:56
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  24 FEB 2023 16:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,7 +503,7 @@ LaTeX Warning: No \author given.
 
 [1
 
-] (./ElastictyFEM.toc
+] [1] (./ElastictyFEM.toc
 
 LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 (Font)              size <10.95> substituted on input line 2.
@@ -513,157 +513,164 @@ LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 \openout3 = `ElastictyFEM.toc'.
 
  [1]
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--82
-
+Overfull \hbox (18.66092pt too wide) in paragraph at lines 50--51
+[]\TU/lmr/m/n/10.53937 1943 \TU/FandolSong-Regular(0)/m/n/10.53937 年，| \TU/lmr/
+m/n/10.53937 R.W.Courant \TU/FandolSong-Regular(0)/m/n/10.53937 首 次 提 出 有 限 元 法
+ 的 核 心 思 想。| \TU/lmr/m/n/10.53937 1956 \TU/FandolSong-Regular(0)/m/n/10.53937 年
+，| \TU/lmr/m/n/10.53937 R.W.Clough
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 84--95
+Underfull \hbox (badness 10000) in paragraph at lines 60--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--95
+Underfull \hbox (badness 10000) in paragraph at lines 60--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--122
+Underfull \hbox (badness 10000) in paragraph at lines 60--85
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--85
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--98
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--98
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 113--125
 
  []
 
 File: ../image/Fig.11.1.png Graphic file (type bmp)
 <../image/Fig.11.1.png>
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 144--155
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--155
+Underfull \hbox (badness 10000) in paragraph at lines 147--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
+Underfull \hbox (badness 10000) in paragraph at lines 159--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
+Underfull \hbox (badness 10000) in paragraph at lines 159--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
+Underfull \hbox (badness 10000) in paragraph at lines 159--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--191
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--191
+Underfull \hbox (badness 10000) in paragraph at lines 159--174
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 175--194
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 175--194
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--234
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--267
+Underfull \hbox (badness 10000) in paragraph at lines 195--237
 
  []
 
 [5]
+Underfull \hbox (badness 10000) in paragraph at lines 249--270
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--270
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--270
+
+ []
+
 File: ../image/subdivsion.png Graphic file (type bmp)
 <../image/subdivsion.png>
-
-Overfull \hbox (4.64305pt too wide) in paragraph at lines 289--290
+[6]
+Overfull \hbox (4.64305pt too wide) in paragraph at lines 292--293
 \TU/FandolSong-Regular(0)/m/n/10.53937 线，|  将 $\OMS/cmsy/m/n/10.53937 4\OT1/cmr
 /m/n/10.53937 (\OML/cmm/m/it/10.53937 p[]; p[]; p[]\OT1/cmr/m/n/10.53937 )$ \TU
 /FandolSong-Regular(0)/m/n/10.53937 分 成 三 个 三 角 形\TU/lmr/m/n/10.53937 : $\OMS/c
@@ -677,8 +684,8 @@ mm/m/it/10.53937 ; \OMS/cmsy/m/n/10.53937 4\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it
 
 File: ../image/TriangleElement.png Graphic file (type bmp)
 <../image/TriangleElement.png>
-[6] [7] [8] [9]
-Overfull \hbox (22.91887pt too wide) in paragraph at lines 565--574
+[7] [8] [9]
+Overfull \hbox (22.91887pt too wide) in paragraph at lines 569--578
 [][] 
  []
 
@@ -694,7 +701,12 @@ File: ../image/elasticityLfemLam_10000.png Graphic file (type bmp)
 <../image/elasticityLfemLam_10000.png>
 File: ../image/elasticityLfemLam_100000.png Graphic file (type bmp)
 <../image/elasticityLfemLam_100000.png>
-[10] [11] [12] (./ElastictyFEM.bbl
+[10] [11]
+Overfull \hbox (112.91272pt too wide) detected at line 682
+   [] 
+ []
+
+[12] (./ElastictyFEM.bbl
 Missing character: There is no ͂ (U+0342) in font [lmroman10-regular]:mapping=t
 ex-text;!
 ) [13] (./ElastictyFEM.aux)
@@ -704,12 +716,12 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 9926 strings out of 476179
- 260513 string characters out of 5809545
- 581107 words of memory out of 5000000
- 30533 multiletter control sequences out of 15000+600000
+ 9966 strings out of 476179
+ 263690 string characters out of 5809545
+ 589107 words of memory out of 5000000
+ 30573 multiletter control sequences out of 15000+600000
  477288 words of font info for 82 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,16n,97p,396b,369s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,16n,97p,534b,369s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on ElastictyFEM.pdf (14 pages).
+Output written on ElastictyFEM.pdf (15 pages).
