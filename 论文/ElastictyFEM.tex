@@ -623,14 +623,16 @@ $$
 	\begin{aligned}
 		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
 		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= \int_{\Omega} \sigma(u) : grad \nu dxdy 
+		&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy  \\
+		&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy
 	\end{aligned}
 \end{matrix}
 $$
 
 所以
 $$
-\int_{\Omega} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
+\mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy = \int_{\Omega} f \nu dxdy
 $$
 
 该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
@@ -642,8 +644,8 @@ $$
 $$
 	\begin{matrix}
 		\begin{aligned}
-			a(u,\nu) :&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\  
-			&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy \\
+			a(u,\nu) :&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy \\  
+			
 			V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
 		\end{aligned}
 	\end{matrix}

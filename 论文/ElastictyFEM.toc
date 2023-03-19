@@ -17,4 +17,4 @@
 \contentsline {subsubsection}{\numberline {3.1.5}实验结果}{11}{}%
 \contentsline {subsection}{\numberline {3.2}弹性界面问题}{11}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}模型}{11}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}变分}{13}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}变分}{14}{}%

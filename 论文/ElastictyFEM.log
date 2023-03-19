@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  17 MAR 2023 15:50
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  19 MAR 2023 13:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -976,7 +976,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 271--292
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [6] [7] [8] [9] [10]
-Overfull \hbox (22.91887pt too wide) in paragraph at lines 739--748
+Overfull \hbox (22.91887pt too wide) in paragraph at lines 741--750
 [][] 
  []
 
@@ -1010,12 +1010,12 @@ File: ../image/CRFem/elasticityCRfemLam_10000.0.png Graphic file (type bmp)
 <../image/CRFem/elasticityCRfemLam_10000.0.png>
 File: ../image/CRFem/elasticityCRfemLam_100000.0.png Graphic file (type bmp)
 <../image/CRFem/elasticityCRfemLam_100000.0.png>
-[11] [12]
-Overfull \hbox (112.91272pt too wide) detected at line 889
+[11] [12] [13]
+Overfull \hbox (112.91272pt too wide) detected at line 891
    [] 
  []
 
-[13] [14] (./ElastictyFEM.bbl
+[14] (./ElastictyFEM.bbl
 Missing character: There is no ͂ (U+0342) in font [lmroman10-regular]:mapping=t
 ex-text;!
 ) [15] (./ElastictyFEM.aux)
