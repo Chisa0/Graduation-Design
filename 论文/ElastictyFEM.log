@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  19 MAR 2023 13:25
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  7 APR 2023 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -715,10 +715,143 @@ File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (/usr/local/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-))) (./ElastictyFEM.aux
+)))
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
 
-LaTeX Warning: Label `1' multiply defined.
+(/usr/local/texlive/2022/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
 
+(/usr/local/texlive/2022/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen319
+\Hy@linkcounter=\count333
+\Hy@pagecounter=\count334
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count335
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4018.
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4390.
+\c@Hy@tempcnt=\count336
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4749.
+\XeTeXLinkMargin=\dimen320
+
+(/usr/local/texlive/2022/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/local/texlive/2022/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count337
+\Field@Width=\dimen321
+\Fld@charsize=\dimen322
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count338
+\c@Item=\count339
+\c@Hfootnote=\count340
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2022-02-21 v7.00n Hyperref driver for XeTeX
+
+(/usr/local/texlive/2022/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box73
+\c@Hy@AnnotLevel=\count341
+\HyField@AnnotCount=\count342
+\Fld@listcount=\count343
+\c@bookmark@seq@number=\count344
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip72
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 17.
+ (./ElastictyFEM.aux
 
 LaTeX Warning: Label `1' multiply defined.
 
@@ -728,82 +861,107 @@ LaTeX Warning: Label `1' multiply defined.
 )
 \openout1 = `ElastictyFEM.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 16.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 16.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 16.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 16.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 16.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 16.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 16.
-LaTeX Font Info:    Redeclaring math accent \check on input line 16.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 16.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 16.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 16.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 16.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 16.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 18.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 18.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 18.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 18.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 18.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 18.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 18.
+LaTeX Font Info:    Redeclaring math accent \check on input line 18.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 18.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 18.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 18.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 18.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 16.
+(Font)              `operators' in the math version `normal' on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 16.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 18.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 16.
+(Font)              `operators' in the math version `bold' on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 16.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 16.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 16.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 16.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 16.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 16.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 16.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 16.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 16.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 16.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 18.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 18.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count345
+)
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
+ (./ElastictyFEM.out) (./ElastictyFEM.out)
+\@outlinefile=\write4
+\openout4 = `ElastictyFEM.out'.
+
 
 
 LaTeX Warning: No \author given.
@@ -816,209 +974,49 @@ LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 (Font)              size <10.95> substituted on input line 2.
 
 )
-\tf@toc=\write4
-\openout4 = `ElastictyFEM.toc'.
+\tf@toc=\write5
+\openout5 = `ElastictyFEM.toc'.
 
  [1]
-Overfull \hbox (18.66092pt too wide) in paragraph at lines 52--53
+Overfull \hbox (18.66092pt too wide) in paragraph at lines 55--56
 []\TU/lmr/m/n/10.53937 1943 \TU/FandolSong-Regular(0)/m/n/10.53937 年，| \TU/lmr/
 m/n/10.53937 R.W.Courant \TU/FandolSong-Regular(0)/m/n/10.53937 首 次 提 出 有 限 元 法
  的 核 心 思 想。| \TU/lmr/m/n/10.53937 1956 \TU/FandolSong-Regular(0)/m/n/10.53937 年
 ，| \TU/lmr/m/n/10.53937 R.W.Clough
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 62--87
-
+[2] [3] [4]
+Overfull \hbox (31.82643pt too wide) in paragraph at lines 176--178
+\TU/FandolSong-Regular(0)/m/n/10.53937 令 $\OML/cmm/m/it/10.53937  $ \TU/FandolS
+ong-Regular(0)/m/n/10.53937 是 $[]$ 上 的 无 穷 次 可 微 函 数\TU/lmr/m/n/10.53937 , \TU/
+FandolSong-Regular(0)/m/n/10.53937 使 得 在 $\OT1/cmr/m/n/10.53937 
+$ \TU/FandolSong-Regular(0)/m/n/10.53937 的 边 界 上 $\OML/cmm/m/it/10.53937 curl  
+\OT1/cmr/m/n/10.53937 = 0$ \TU/FandolSong-Regular(0)/m/n/10.53937 且 $\OMS/cmsy/
+m/n/10.53937 k\OML/cmm/m/it/10.53937 ^^O\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10
+.53937 curl \OT1/cmr/m/n/10.53937 )\OMS/cmsy/m/n/10.53937 k[] \OT1/cmr/m/n/10.5
+3937 =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--87
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--87
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--87
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--100
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--100
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 115--127
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 169--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 169--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--196
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--216
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--216
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--259
+Underfull \hbox (badness 10000) in paragraph at lines 203--206
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 271--292
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 271--292
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 271--292
-
- []
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] [7] [8] [9] [10]
-Overfull \hbox (22.91887pt too wide) in paragraph at lines 741--750
-[][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-File: ../image/elasticityLfemLam_1.png Graphic file (type bmp)
-<../image/elasticityLfemLam_1.png>
-File: ../image/elasticityLfemLam_10.png Graphic file (type bmp)
-<../image/elasticityLfemLam_10.png>
-File: ../image/elasticityLfemLam_100.png Graphic file (type bmp)
-<../image/elasticityLfemLam_100.png>
-File: ../image/elasticityLfemLam_1000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_1000.png>
-File: ../image/elasticityLfemLam_10000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_10000.png>
-File: ../image/elasticityLfemLam_100000.png Graphic file (type bmp)
-<../image/elasticityLfemLam_100000.png>
-File: ../image/CRFem/elasticityCRfemLam_1.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_1.png>
-File: ../image/CRFem/elasticityCRfemLam_10.0.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_10.0.png>
-File: ../image/CRFem/elasticityCRfemLam_100.0.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_100.0.png>
-File: ../image/CRFem/elasticityCRfemLam_1000.0.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_1000.0.png>
-File: ../image/CRFem/elasticityCRfemLam_10000.0.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_10000.0.png>
-File: ../image/CRFem/elasticityCRfemLam_100000.0.png Graphic file (type bmp)
-<../image/CRFem/elasticityCRfemLam_100000.0.png>
-[11] [12] [13]
-Overfull \hbox (112.91272pt too wide) detected at line 891
+[6] [7] [8] [9] [10] [11] [12]
+Overfull \hbox (12.1418pt too wide) detected at line 872
    [] 
  []
 
-[14] (./ElastictyFEM.bbl
+[13] [14] (./ElastictyFEM.bbl
 Missing character: There is no ͂ (U+0342) in font [lmroman10-regular]:mapping=t
 ex-text;!
-) [15] (./ElastictyFEM.aux)
+) [15
+
+] (./ElastictyFEM.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41063pt have occurred.
@@ -1026,14 +1024,16 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
+Package rerunfilecheck Info: File `ElastictyFEM.out' has not changed.
+(rerunfilecheck)             Checksum: D81DACC08CC248BD90565E134E06027A;1940.
  ) 
 Here is how much of TeX's memory you used:
- 20519 strings out of 476179
- 493204 string characters out of 5809545
- 786259 words of memory out of 5000000
- 40902 multiletter control sequences out of 15000+600000
- 477288 words of font info for 82 fonts, out of 8000000 for 9000
+ 27206 strings out of 476179
+ 596725 string characters out of 5809545
+ 891508 words of memory out of 5000000
+ 47498 multiletter control sequences out of 15000+600000
+ 476513 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,16n,97p,534b,639s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,17n,97p,534b,652s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on ElastictyFEM.pdf (17 pages).

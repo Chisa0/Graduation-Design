@@ -11,8 +11,10 @@
 \usepackage{diagbox}
 \def\pgfsysdriver{pgfsys-dvipdfmx.def}
 \usepackage{tikz}
+\usepackage{hyperref}
 \pagestyle{plain}
 
+\hypersetup{colorlinks=true,linkcolor=black}
 \begin{document}
 \title{带间断系数的弹性问题}
 \date{\today}
@@ -25,6 +27,7 @@
 \end{abstract}
 \thispagestyle{empty}
 
+\newpage
 \tableofcontents
 
 \newpage
@@ -33,17 +36,17 @@
 
 \subsection{研究背景}
 
-具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}、声音在水中的传递、海市蜃楼现象等，同时在数值模拟等场景中也有者大量的界面问题。
+具有间断系数的方程成为交界面问题。这类问题起源于许多应用领域，例如2种不同材料或者相同材料在不同状态下物理机制的研究 \textsuperscript{\cite{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}}、声音在水中的传递、海市蜃楼现象等，同时在数值模拟等场景中也有者大量的界面问题。
 
-平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题 \cite{王兆清2018不可压缩平面问题的位移}。
-对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象\cite{陈绍春2007平面弹性的一个新的}。
+平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题 \textsuperscript{\cite{王兆清2018不可压缩平面问题的位移}}。
+对于各向同性均匀介质的平面弹性问题，当材料的Lam$\acute{e}$常数$\lambda \to \infty$时，即对于几乎不可压介质，通常低阶的协调有限元解，往往不再收敛到原问题的解，或者达不到最优收敛阶，这就是闭锁现象\textsuperscript{\cite{陈绍春2007平面弹性的一个新的}}。
 
 为了消除（近）不可压缩弹性问题中遇到的锁定现象，国内外研究学者提出了多种有效的数值分析方法。根据型函数建立过程中是否需要网格剖分，这些数值方法可以分为两类：一类是有网格方法，这其中包括
-高阶有限元法\cite{peet2014legendre}、
-混合有限元法\cite{masud2011variational}、
-增强有限元法\cite{auricchio2005analysis}和
-不连续Galerkin法\cite{hansbo2003discontinuous}等；
-另一类是无网格方法，无网格方法又可分为弱形式无网格法和强形式的无网格方法\cite{王兆清2018不可压缩平面问题的位移}。
+高阶有限元法\textsuperscript{\cite{peet2014legendre}}、
+混合有限元法\textsuperscript{\cite{masud2011variational}}、
+增强有限元法\textsuperscript{\cite{auricchio2005analysis}}和
+不连续Galerkin法\textsuperscript{\cite{hansbo2003discontinuous}}等；
+另一类是无网格方法，无网格方法又可分为弱形式无网格法和强形式的无网格方法\textsuperscript{\cite{王兆清2018不可压缩平面问题的位移}}。
 
 本文将通过数值实验的方法，考察对于具有间断系数的平面弹性问题，使用C-R元是否仍可以解除闭锁现象。
 
@@ -57,46 +60,36 @@
 
 \subsection{误差估计}
 
-假设$\Omega$是一个凸多边形区域，并且$\Gamma_1$ or $\Gamma_2$中任意一个为空。对于纯位移问题($\Gamma_2=\emptyset$)，我们只需考虑齐次边界条件。
+假设$\Omega$是一个凸多边形区域，并且$\Gamma_1$ or $\Gamma_2$中任意一个为空。对于纯位移问题($\Gamma_2=\emptyset$)，只考虑齐次边界条件。
 \par
 令$\emph{T}^h$ 是$\Omega$ 三角划分的一个非退化族。对于纯位移问题($\Gamma_2=\emptyset$),我们使用有限元空间
 % \begin{equation}\label{equ1} （\ref{newton}）引用
 	%	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \}
 	% \end{equation}
-\\ \\
-(1.3.1)
-$
-\quad \quad \quad
+$$
 V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
-$ 
-\\ \\
-并且对于纯牵引力问题($\Gamma_1 = \emptyset$)，我们使用
+$$
+并且对于纯牵引力问题($\Gamma_1 = \emptyset$)，使用
 % \begin{equation}\label{equ2}
 	%	V_h :=
 	%\end{equation}
-	\\ \\
-	(1.3.2)
-	$
+	$$
 	\quad \quad \quad
 	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
-	$
+	$$
 %	\\ \\
 %	根据第二章和第四章的理论我们得到以下定理。
-	\\ \\
-	\textbf{(1.3.3) Theorem\cite{brenner2008mathematical}.} 令 $u \in H^2(\Omega) \cap H^1(\Omega)$ 满足纯位移问题，并且$u_h \in V_h$ 满足
+	\textbf{Theorem\textsuperscript{\cite{brenner2008mathematical}}.} 令 $u \in H^2(\Omega) \cap H^1(\Omega)$ 满足纯位移问题，并且$u_h \in V_h$ 满足
 	$$
 	a(u_h, \nu) = \int_{\Omega} f \cdot \nu dx \quad \forall \nu \in V_h.
 	$$
 	\\
 	则存在一个正常数$C_{(\mu, \lambda)}$ 使得
-	\\ \\
-	(1.3.4)
-	$
+	$$
 	\quad \quad \quad
 	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
-	$
-	\\ \\
-	\textbf{(1.3.5) Theorem.} 令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
+	$$
+	\textbf{Theorem\textsuperscript{\cite{brenner2008mathematical}}.} 令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
 	$$
 	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma} t \cdot \nu ds \quad \forall \nu \in V_h.
 	$$ 
@@ -110,20 +103,16 @@ $
 
 \subsection{闭锁现象}
 
-	对于固定的 $\mu$ 和 $\lambda$，定理 1.3.3 和 1.3.5 给出了弹性问题令人满意近似的有限元近似。但是这些有限元方法的性能随着 $\lambda$ 趋向于 $\infty$ 而变差。这就是所谓的锁定现象。
+	对于固定的 $\mu$ 和 $\lambda$，以上定理给出了弹性问题令人满意近似的有限元近似。但是这些有限元方法的性能随着 $\lambda$ 趋向于 $\infty$ 而变差。这就是所谓的锁定现象\textsuperscript{\cite{brenner2008mathematical}}。
 	\par 
-	令 $\Omega = (0,1) \times (0,1)$. 我们考虑 $\mu = 1$ 时的纯位移边值问题:
-	\\ \\
-	(1.3.6)
-	$
-	\quad \quad \quad
+	令 $\Omega = (0,1) \times (0,1)$. 考虑 $\mu = 1$ 时的纯位移边值问题:
+	$$
 	\begin{matrix}
 		div \{ 2 \epsilon (u^{\lambda}) + \lambda tr (\epsilon (u^{\lambda})) \delta \} = f \quad in \quad \Omega \\ \quad \quad \quad \quad \quad 
 		u^{\lambda}|_{\partial \Omega} =  0.
 	\end{matrix}
-	$
-	\\
-	注意给定的 f ，当 $\lambda \to \infty$，(1.2.33)说明 $\| div u^{\lambda} \|_{H^1(\Omega)} \to 0$.换句话说，我们正在处理一种几乎不可能压缩的弹性材料。为了强调对 $\lambda$ 的依赖，我们将应力张量(1.1.3) $\sigma_{\lambda}(\nu)$ 和 变分形式(1.2.2) $a_{\lambda}(\nu,\omega)$ 表示为
+	$$
+	注意给定的 f ，当 $\lambda \to \infty$，$\| div u^{\lambda} \|_{H^1(\Omega)} \to 0$.换句话说，我们正在处理一种几乎不可能压缩的弹性材料。为了强调对 $\lambda$ 的依赖，将应力张量 $\sigma_{\lambda}(\nu)$ 和 变分形式 $a_{\lambda}(\nu,\omega)$ 表示为
 	$$
 	\begin{matrix}
 		\sigma_{\lambda}(\nu) = 2 \epsilon(\nu) + \lambda tr (\epsilon(\nu)) \delta \\
@@ -131,10 +120,13 @@ $
 	\end{matrix}
 	$$
 	
-	令 $\emph{T}^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分，并且 $V_h$ 被定义为 (1.3.1)。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
+	令 $\emph{T}^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
 	$$
-	a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
-	[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h.
+	\begin{matrix}
+		a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
+		[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h. \\
+		V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \}
+	\end{matrix}
 	$$
 	
 %	\begin{figure}[hbt]
@@ -168,93 +160,48 @@ $
 	L_{\lambda,h} := sup \{ \frac{|u-u_h^{\lambda}|_{H^1(\Omega)}}{\| div \sigma_{\lambda}(u) \|_{L^2(\Omega)}} : 0 \ne u \in H^2(\Omega) \cap H^1(\Omega) \}.
 	$$
 	\\ 
-	我们要证明存在一个与 h 无关的正常数 C 使得
-	\\ \\
-	(1.3.7)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad
-	\lim\limits_{\lambda \to \infty} \inf L_{\lambda,h} \ge C.
-	$
-	\\ \\
-	式 (1.3.7) 意味着：无论 h 取多小，只要 $\lambda$ 足够大，我们都能找到 $u \in H^2(\Omega) \cap H^1(\Omega)$ 使得相对误差$ |u-u_h|_{H^1(\Omega)} / \| div \sigma_{\lambda}(u) \|_{L^2(\Omega)} $ 以一个与 h 无关的常数为下界。换句话说，有限元方法的性能将会随着 $\lambda$ 变大而变坏。
+	要证明存在一个与 h 无关的正常数 C 使得
+	\begin{equation}
+	\lim\limits_{\lambda \to \infty} \inf L_{\lambda,h} \ge C . \label{ab}
+	\end{equation}
+	式 $\eqref{ab}$ 意味着：无论 h 取多小，只要 $\lambda$ 足够大，我们都能找到 $u \in H^2(\Omega) \cap H^1(\Omega)$ 使得相对误差$ |u-u_h|_{H^1(\Omega)} / \| div \sigma_{\lambda}(u) \|_{L^2(\Omega)} $ 以一个与 h 无关的常数为下界。换句话说，有限元方法的性能将会随着 $\lambda$ 变大而变坏。
 	\par
-	为证明式 (1.3.7)，我们首先观察到
-	\\ \\
-	(1.3.8)
-	$
-	\quad \quad \quad \quad \quad \quad \quad
+	为证明式 $\eqref{ab}$，首先观察到
+	$$
 	\{ \nu \in V_h : div \nu = 0 \} = \{ 0 \}
-	$
-	\\ \\
-	(cf.exercise 11.x.14). 因此，映射 $\nu \to div \nu$ 是有限维空间 $V_h$ 到 $L^2(\Omega)$ 的一个一对一映射，并且存在一个正常数 $C_1(h)$ 使得
-	\\ \\
-	(1.3.9)
-	$
-	\quad \quad \quad \quad \quad
+	$$
+	因此，映射 $\nu \to div \nu$ 是有限维空间 $V_h$ 到 $L^2(\Omega)$ 的一个一对一映射，并且存在一个正常数 $C_1(h)$ 使得
+	$$
 	\| \nu \|_{H^1(\Omega)} \le C_1(h) \| div \nu \|_{L^2(\Omega)} \quad \forall \nu \in V_h.
-	$
-	\\ \par 
+	$$
 	令 $\psi$ 是 $\overline{\Omega}$ 上的无穷次可微函数,使得在 $\Omega$ 的边界上 $curl \psi = 0$ 且 $\| \epsilon(curl \psi) \|_{L^2(\Omega)} = 1$。令 $u := curl \psi$。则 $u \in H^2(\Omega) \cap H^1(\Omega)$，并有
-	\\ \\
-	(1.3.10)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad
-	div u = 0,
-	$
-	\\
-	(1.3.11)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad
-	\| \epsilon(u) \|_{L^2(\Omega)} = 1,
-	$
-	\\
-	(1.3.12)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad \quad \quad 
-	\sigma_{\lambda}(u) = 2 \epsilon(u).
-	$
-	\\ \par 
-	根据 (1.3.10)，(1.3.11) 和 1.2 节开始的分步积分得
-	\\ \\
-	(1.3.13)
-	$
-	\quad \quad \quad \quad
-	- \int_{\Omega} div \epsilon(u) \cdot u dx = \int_{\Omega} \epsilon(u) : \epsilon(u) dx = 1.
-	$
-	\\ \\
-	根据 (1.3.12)，(1.3.13) 推断
-	\\ \\
-	(1.3.14)
-	$
+	\begin{align}	
+	div u = 0, \label{a2} \\
+	\| \epsilon(u) \|_{L^2(\Omega)} = 1, \label{a3}\\
+	\sigma_{\lambda}(u) = 2 \epsilon(u).  \label{a4}
+	\end{align}
+	根据 $\eqref{a2}$, $\eqref{a4}$ 和分步积分得
+	\begin{align}
+	- \int_{\Omega} div \epsilon(u) \cdot u dx = \int_{\Omega} \epsilon(u) : \epsilon(u) dx = 1. \label{a5}
+	\end{align}
+	根据 $\eqref{a4}$, $\eqref{a5}$ 推断
+	$$
 	\quad \quad \quad \quad \quad \quad \quad
 	\lim\limits_{\lambda \to \infty} div \sigma_{\lambda}(u) = 2 div \epsilon(u) \ne 0. 
-	$
-	\\ \\
+	$$
 	由 (2.5.10) 得,
-	\\ \\
-	(1.3.15)
-	$
-	\quad \quad \quad 
+	$$
 	a_{\lambda}(u-u_h^{\lambda}, u-u_h^{\lambda}) = \min\limits_{\nu \in V_h} a_{\lambda}(u-\nu,u-\nu) \le a_{\lambda}(u,u).
-	$
-	\\ \\
-	由 (1.3.10) 和 (1.3.11)，我们得到
-	\\ \\
-	(1.3.16)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad \quad
+	$$
+	由 $\eqref{a2}$ 和 $\eqref{a3}$，得到
+	$$
 	a_{\lambda}(u,u) = 2.
-	$
-	\\ \\
+	$$
 	因此，对于 $\lambda$ 足够大时有
-	\\ \\
-	(1.3.17)
-	$
-	\quad \quad \quad \quad \quad \quad \quad 
-	a_{\lambda} (u-u_h^{\lambda}, u-u_h^{\lambda}) \le 2.
-	$
-	\\ \\ 
-	由 (1.3.10) 和 (1.3.17) 得
+	\begin{align} 
+	a_{\lambda} (u-u_h^{\lambda}, u-u_h^{\lambda}) \le 2. \label{a6}
+	\end{align}
+	由 $\eqref{a2}$ 和 $\eqref{a6}$ 得
 	\\
 	$$
 	\begin{matrix}
@@ -270,25 +217,18 @@ $
 	\lim\limits_{\lambda \to \infty} \| div u_h^{\lambda} \|_{L^2(\Omega)} = 0.
 	$$
 	\\
-	由式 (1.3.9) 有
-	\\ \\
-	(1.3.18)
-	$
-	\quad \quad \quad \quad \quad \quad \quad \quad 
+	由式 $\eqref{ab}$ 有
+	$$
 	\lim\limits_{\lambda \to \infty} \| u_h^{\lambda} \|_{H^1(\Omega)} = 0.
-	$
-	\\ \\
-	最后，我们得到 %(cf.exercise 11.x.16)
-	\\ \\
-	(1.3.19) 
-	$
-	\quad \quad \quad \quad \quad 
+	$$
+	最后，得到 %(cf.exercise 11.x.16)
+	$$ 
 	\begin{matrix}
 		\lim\limits_{\lambda \to \infty}\inf L_{\lambda,h} \ge \lim\limits_{\lambda \to \infty}\inf \frac{|u-u_h^{\lambda}|_{H^1(\Omega)}}{\| div \sigma_{\lambda}(u) \|_{L^2(\Omega)}} \\
 		\quad \quad \quad \quad
 		= \frac{|u|_{H^1(\Omega)}}{\| div \sigma(u) \|_{L^2(\Omega)}} > 0.
 	\end{matrix}
-	$
+	$$
 
 \subsection{剖分与基函数}
 
@@ -334,16 +274,18 @@ $
 	\label{1}
 \end{figure}
 
+\iffalse
 设基函数为 
 $$ 
 (\varphi_0,0)^t, (0,\varphi_0)^t, (\varphi_1,0)^t, (0,\varphi_1)^t, ... , (\varphi_n,0)^t, (0,\varphi_n)^t 
 $$
 
 $\varphi_i$ 为线性元，以下得到其在各单元上表达式。 
+\fi
 
 \subsubsection{线性元}
 
-如图3，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点p，坐标为$(x,y)$。过p点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p), \bigtriangleup(p_0,p,p_2), \bigtriangleup(p_0,p_1,p) $，其面积分别为$S_0,S_1,S_2$
+如图3，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点p，坐标为$(x,y)$。过p点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p), \bigtriangleup(p_0,p,p_2), \bigtriangleup(p_0,p_1,p) $，其面积分别为$S_0,S_1,S_2$ \textsuperscript{\cite{李荣华2007偏微分方程数值解}}
 
 %\begin{figure}[hbt]
 %	\centering
@@ -738,6 +680,7 @@ $$
 
 \begin{table}[h]
 	\caption{线性元误差}
+	\scalebox{0.8}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} \hline
 		\diagbox{$\lambda$}{h} &3.125e-2 &7.812e-3 &1.953e-3 &4.882e-4 &1.220e-4 &3.051e-5 \\ \hline
 		1 &3.1007e-3 &6.6322e-4 &1.4833e-4 &4.3538e-5 &1.6079e-5 &6.2883e-6 \\ \hline
@@ -746,11 +689,39 @@ $$
 		1e3 &3.4040e-3 &8.5781e-2 &3.5580e-2 &9.8154e-3 &2.5446e-3 &6.4444e-4 \\ \hline
 		1e4 &3.4050e-3 &8.5287e-1 &3.5492e-1 &9.7931e-2 &2.5383e-2 &6.4295e-3 \\ \hline
 		1e5 &3.4051e-3 &8.5237 &3.5484 &9.7909e-1 &2.5377e-1 &6.4280e-2 \\ \hline
-	\end{tabular}
+	\end{tabular}}
 \end{table}
 
+\iffalse
+\begin{figure}[h]
+	\centering
+	\subfigure[$\lambda$=1]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_1.png}
+		\label{1}}	
+	\subfigure[$\lambda$=10]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_10.0.png}
+		\label{10}}
+	\subfigure[$\lambda$=100]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_100.0.png}
+		\label{100}}
+	
+	\subfigure[$\lambda$=1000]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_1000.0.png}
+		\label{1000}}
+	\subfigure[$\lambda$=10000]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_10000.0.png}
+		\label{10000}}
+	\subfigure[$\lambda$=100000]{
+		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_100000.0.png}
+		\label{100000}}
+	\caption{线性元误差}
+\end{figure}
+\fi
+
 \begin{table}[h]
+	\centering
 	\caption{CR元误差}
+	\scalebox{0.8}{
 	\begin{tabular}{|c|c|c|c|c|c|} \hline
 		\diagbox{$\lambda$}{h} &0.5 &1.25e-1 &3.12e-2 &7.81e-3 &1.95e-3 \\ \hline
 		1 &2.7996e-2 &4.3846e-2 &1.6357e-2 &5.4237e-3 &1.5470e-3  \\ \hline
@@ -759,34 +730,11 @@ $$
 		1e3 &3.0521e-2 &2.0996e1 &8.1121 &2.6791 &7.6635e-1  \\ \hline
 		1e4 &5.5771e-1 &2.09.77e2 &8.1054e1 &2.6768e1 &7.6567 \\ \hline
 		1e5 &5.8296 &2.097.5e3 &8.1047e2 &2.6765e2  &7.6561e1 \\ \hline
-	\end{tabular}
+	\end{tabular}}
 \end{table}
 
-\begin{figure}[ht]
-	\centering
-	\subfigure[$\lambda$=1]{
-		\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_1.png}
-		\label{1}}	
-	\subfigure[$\lambda$=10]{
-		\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_10.png}
-		\label{10}}
-	\subfigure[$\lambda$=100]{
-	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_100.png}
-	\label{100}}
-
- 	\subfigure[$\lambda$=1000]{
-	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_1000.png}
-	\label{1000}}
-	\subfigure[$\lambda$=10000]{
-	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_10000.png}
-	\label{10000}}
-	\subfigure[$\lambda$=100000]{
-	\includegraphics[height=2cm,width=3cm]{../image/elasticityLfemLam_100000.png}
-	\label{100000}}
-	\caption{线性元误差}
-\end{figure}
-
-\begin{figure}[ht]
+\iffalse
+\begin{figure}[h]
 	\centering
 	\subfigure[$\lambda$=1]{
 		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_1.png}
@@ -809,6 +757,9 @@ $$
 		\label{CR100000}}
 	\caption{CR元误差}
 \end{figure}
+\fi
+
+\newpage
 
 \subsection{弹性界面问题}
 
@@ -823,24 +774,50 @@ $$
 \end{matrix}
 $$ 
 \par
-其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,2] \times [0,1] , \Omega_1 = [0,1] \times [0,1] , \Omega_2 = [1,2] \times [0,1]$
-
-当$(x,y) \in \Omega_1$时，$\mu = \lambda = 1$
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，
+$ 
+\Omega = [0,1] \times [0,1] , \quad 
+\Omega_1 = [0,0.5] \times [0,0.5] , \quad
+\Omega_2 = [0.5,1] \times [0,0.5], \quad
+\Omega_3 = [0,0.5] \times [0.5,1], \quad
+\Omega_4 = [0.5,1] \times [0.5,1]
+$ 
+\par
+当$(x,y) \in \Omega_1$时，$\mu = \lambda = \lambda_1$
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) 
+	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_1
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) 
+	u_2 = (x - 1)(y - 1) x sin(y) \ \lambda_1
 \end{matrix}
 $$
 
-当$(x,y) \in \Omega_2$时， $\mu = \lambda = 2$
+当$(x,y) \in \Omega_2$时， $\mu = \lambda = \lambda_2$
 
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) / 2 
+	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_2 
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) / 2
+	u_2 = (x - 1)(y - 1) x sin(y) / \lambda_2
+\end{matrix}
+$$
+
+当$(x,y) \in \Omega_3$时，$\mu = \lambda = \lambda_3$
+$$
+\begin{matrix}
+	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_3
+	\\
+	u_2 = (x - 1)(y - 1) x sin(y) \ \lambda_3
+\end{matrix}
+$$
+
+当$(x,y) \in \Omega_4$时， $\mu = \lambda = \lambda_4$
+
+$$
+\begin{matrix}
+	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_4 
+	\\
+	u_2 = (x - 1)(y - 1) x sin(y) / \lambda_4
 \end{matrix}
 $$
 
@@ -880,22 +857,31 @@ $$
 \quad \quad
 \begin{matrix}
 	\begin{aligned}
-		&= -\int_{\Omega_1} div \sigma(u) \nu dxdy -\int_{\Omega_2} div \sigma(u) \nu dxdy \\
-		&= -\int_{\Omega_1} div(\sigma(u) \nu) dxdy - \int_{\Omega_1} \sigma(u) : grad \nu dxdy  
-		-\int_{\Omega_2} div(\sigma(u) \nu) dxdy - \int_{\Omega_2} \sigma(u) : grad \nu dxdy\\
+		&= -\int_{\Omega_1} div \sigma(u) \nu dxdy -\int_{\Omega_2} div \sigma(u) \nu dxdy - \int_{\Omega_3} div \sigma(u) \nu dxdy \\
+		&-\int_{\Omega_4} div \sigma(u) \nu dxdy \\
+		&= -\int_{\partial \Omega_1} div(\sigma(u) \nu) dxdy + \int_{\Omega_1} \sigma(u) : grad \nu dxdy -\int_{\partial \Omega_2} div(\sigma(u) \nu) dxdy \\
+		&+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy - \int_{\partial \Omega_3} div(\sigma(u) \nu) dxdy + \int_{\Omega_3} \sigma(u) : grad \nu dxdy \\
+		&-\int_{\partial \Omega_4} div(\sigma(u) \nu) dxdy + \int_{\Omega_4} \sigma(u) : grad \nu dxdy \\
 		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega_1} \sigma(u) : grad \nu dxdy 
-		+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy\\
-		&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy 
+		+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy \\
+		&+ \int_{\Omega_3} \sigma(u) : grad \nu dxdy + \int_{\Omega_4} \sigma(u) : grad \nu dxdy\\
+		&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy + \int_{\Omega_3} \sigma(u) : grad \nu dxdy \\
+		&+ \int_{\Omega_4} \sigma(u) : grad \nu dxdy \\
+	\end{aligned}
+\end{matrix}
+$$
+$$
+\begin{matrix}
+	\begin{aligned}
+		&= \mu \int_{\Omega_1} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_1} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_2} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_2} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_3} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_3} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_4} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_4} div u div \nu  dxdy
 	\end{aligned}
 \end{matrix}
 $$
 
-所以
-$$
-\int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy = \int_{\Omega} f \nu dxdy
-$$
-
-该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
+所以，该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
 $$
 a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
 $$ 
@@ -904,18 +890,27 @@ $$
 $$
 \begin{matrix}
 	\begin{aligned}
-		a(u,\nu) :&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy \\  
-		&= \int_{\Omega_1} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy \\
-		&+ \int_{\Omega_2} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy\\
+		a(u,\nu) :&= \mu \int_{\Omega_1} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_1} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_2} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_2} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_3} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_3} div u div \nu  dxdy \\
+		&+ \mu \int_{\Omega_4} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_4} div u div \nu  dxdy\\
 		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
 	\end{aligned}
 \end{matrix}
 $$
 
+\section{总结}
+
+1
+
 \newpage
 \vfill
 
 \bibliographystyle{unsrt}
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\tolerance=500
 \bibliography{interface_problem}
 
 \end{document}
