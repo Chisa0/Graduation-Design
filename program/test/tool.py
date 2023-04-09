@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from numpy.linalg import solve
 
 def error(u, uh):
     e = u - uh
@@ -200,10 +201,14 @@ class MESH():
         # n 特定情况下剖分次数
         n  = math.log(self.NC/2, 4)
         self.cr_NN = int(3 * 2 * 4**n - (3 * 2 * 4**n - 4 * 2**n) / 2)
-        self.node = node
-        self.cell = cell
-        self.cr_node, self.cr_cell = get_cr_node_cell(node, cell)
-        self.cm = np.ones(self.NC, dtype=np.float64) / self.NC
+        self.node = node # [NN,2]
+        self.cell = cell # [NC,3]
+        self.cr_node, self.cr_cell = get_cr_node_cell(node, cell)   #[cr_NN,2] #[cr_NC,3]
+        self.cm = np.ones(self.NC, dtype=np.float64) / self.NC      #[cr_NC,]
+        #[NC,3(CR元),2(对x，y的偏导)] #[NC,3(3个系数),3(CR元)]
+        self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
+        # phi_val [NC,3(点),6(6个基函数),2(两个分量)]
+        self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
 
     def my_uniform_refine(self, n):
         if n != 0:
@@ -229,7 +234,63 @@ class MESH():
                 nn  = math.log(self.NC/2, 4)
                 self.cr_NN = int(3 * 2 * 4**nn - (3 * 2 * 4**nn - 4 * 2**nn) / 2)
                 self.cm = np.ones(self.NC, dtype=np.float64) / self.NC
+                self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
+                self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
 
+def get_cr_glam_and_pre(cr_node, cr_cell):
+    NC = cr_cell.shape[0]
+    NN = cr_node.shape[0]
+    cr_node_cell = cr_node[cr_cell]
+    ##求解CR元导数
+    cr_node_cell_A = np.ones((NC, 3, 3), dtype=np.float64)
+    #求解CR元导数的系数矩阵
+    cr_node_cell_A[:, :, 0:2] = cr_node_cell
+    #print("cr_node_cell_A= ", cr_node_cell_A[0])
+    #用于求解CR元的值
+    # cr_glam_x_y_pre [NC, 3, 3]
+    cr_glam_x_y_pre = np.zeros((NC, 3, 3), dtype=np.float64)
+    for k in range(NC):
+        cr_glam_x_y_pre[k, :, :] = solve(cr_node_cell_A[k, :, :], np.diag(np.ones(3)))
+    #print("cr_glam_x_y_pre= ", cr_glam_x_y_pre[0])
+    #[NC,3,3]
+    cr_glam_x_y = np.copy(cr_glam_x_y_pre)
+    cr_glam_x_y = cr_glam_x_y[:, 0:2, :]
+    #print("cr_glam_x_y= ", cr_glam_x_y)
+    cr_glam_x_y = cr_glam_x_y.transpose((0,2,1))
+    #print("cr_glam_x_y= ", cr_glam_x_y[0])
+    return cr_glam_x_y, cr_glam_x_y_pre
+    
+# phi_val [NC,3(点),6(6个基函数),2(两个分量)]
+def get_phi_val(node, cell, cr_glam_pre):
+    NC = cell.shape[0]
+    # cr_node_val [NC,3(点),3(三个cr元的值)] CR元在各顶点的值
+    node_cell_A = np.ones((NC,3,3), dtype=np.float64)
+    node_cell_A[:,:,0:2] = node[cell]
+    cr_node_val = np.einsum("cij, cjk -> cik", node_cell_A, cr_glam_pre)
+    #print("cr_node_vall= ", cr_node_val)
+        
+    # phi_node_val [NC,3(点),6(6个基函数),2(两个分量)]
+    phi_node_val = np.zeros((NC,3,6,2), dtype=np.float64)
+    phi_node_val[:,:,0:5:2,0] = cr_node_val
+    phi_node_val[:,:,1:6:2,1] = cr_node_val
+    #print("phi_node_val= ", phi_node_val[0,0])
+    return phi_node_val
+
+def get_phi_grad_and_div(cr_node, cr_cell):
+    NC = cr_cell.shape[0]
+    cr_glam_x_y, cr_glam_x_y_pre = get_cr_glam_and_pre(cr_node, cr_cell)
+    #求 cr_phi_grad [NC,6(基函数),2(分量 x , y),2(导数)]
+    cr_phi_grad = np.zeros((NC,6,2,2), dtype=np.float64)
+    cr_phi_grad[:, 0:5:2, 0, :] = cr_glam_x_y
+    cr_phi_grad[:, 1:6:2, 1, :] = cr_glam_x_y
+    #print("cr_phi_grad= ", cr_phi_grad)
+        
+    # cr_phi_div [NC, 6]
+    #cr_phi_div = np.einsum("cmij -> cm", cr_phi_grad)
+    cr_phi_div = cr_glam_x_y.copy()
+    cr_phi_div = cr_phi_div.reshape(NC, 6)
+    #print("cr_phi_div= ", cr_phi_div)
+    return cr_phi_grad, cr_phi_div
 
 if __name__ == "__main__":
     node = np.array([
@@ -239,10 +300,22 @@ if __name__ == "__main__":
             (0,1)], dtype=np.float64)
     cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
 
+    # 剖分次数
+    n = 1
     mesh = MESH(node, cell)
-    mesh.my_uniform_refine(1)
-    print(mesh.cm)
+    mesh.my_uniform_refine(n)
+    cr_node, cr_cell = mesh.cr_node, mesh.cr_cell
+    #print("cr_node[cr_cell]= ", cr_node[cr_cell][0])
+    cr_glam, cr_glam_pre = mesh.cr_glam, mesh.cr_glam_pre
+    #print("cr_glam= ", cr_glam[0])
+    #print("cr_glam_pre= ", cr_glam_pre[0])
     
+    a = np.ones((3,3), dtype=np.float64)
+    a[:, :2] = cr_node[cr_cell][0]
+    print("cr_glam_pre[0] @ a= ", cr_glam_pre[0] @ a)
+    print("phi_val= ", mesh.phi_val.shape)
+    
+    """
     #剖分次数
     n = 1
     if n != 0:
@@ -250,3 +323,4 @@ if __name__ == "__main__":
             print("----------剖分次数{}----------".format(i+1))
             node, cell = uniform_refine(node, cell)
             cr_node, cr_cell = get_cr_node_cell(node, cell)
+    """
