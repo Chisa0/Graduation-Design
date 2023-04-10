@@ -1,0 +1,106 @@
+\documentclass[UTF8]{ctexbeamer} % 文档类型为beamer,即幻灯片
+\usepackage{beamerthemesplit} % 加载主题宏包
+\usetheme{Warsaw} % 选用该主题
+\usepackage{subfig}
+\usepackage{amssymb,amsmath,mathtools}
+\usepackage{amsfonts,booktabs}
+\usepackage{lmodern,textcomp}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{natbib}
+\usepackage{multicol}
+% 导入所需的宏包
+\usepackage[utf8]{inputenc}
+\usepackage{ctex}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{diagbox}
+
+\title{带间断系数的弹性问题} % 中式翻译，不要学
+\author[唐小康]{答辩人:唐小康 ，指导老师:王华}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\tableofcontents
+\end{frame}
+
+\section{研究背景和主要内容}
+\begin{frame}
+	平面弹性力学方程组是弹性力学中最基础、最常见的模型。当研究的弹性体形状和受力具有一定特点时，通过适当的简化处理，就可以归结为平面弹性问题，其控制方程可以表示为以下形式
+	$$
+	\begin{matrix}
+		-div \sigma (u) = f \in \Omega \\
+		\sigma(u) = 2 \mu \epsilon(u) + \lambda tr(\epsilon(u)) \delta \\
+		u |_{\Gamma} = 0
+	\end{matrix}
+	$$
+	
+	其中 $u=(u_1,u_2)^t$ 为求解向量，$\Omega = [0,1] \times [0,1]$，$\Gamma$ 为 $\Omega$ 的边界。 
+\end{frame}
+
+\begin{frame}
+	使用协调有限元求解弹性问题时，有限元方法的性能会随着系数 $\lambda$ 趋向于 $\infty$ 而变差，称其为闭锁现象，而使用非协调元(如CR元)时则可以解除闭锁现象，本文的主要内容是当系数 $\lambda, \mu$ 在区域 $\Omega$ 上间断时，使用CR元是否任然可以解除闭锁现象。
+\end{frame}
+
+\section{研究方法}
+\begin{frame}
+	本文的研究方法是，先通过查阅文献等方法了解有限元的基础理论，如Sobolev空间、线性元、CR元的定义以及误差估计，然后通过三组数值实验得到结论，通过线性元和CR元求解弹性问题的对比可以观察到闭锁现象，通过CR元求解弹性问题和带间断系数的弹性问题的对比可以初步判断CR元是否可以解除闭锁现象。
+\end{frame}
+
+\section{实验结果和待完成内容}
+\subsection{实验结果}
+\begin{frame}
+	\begin{table}[h]
+		\centering
+		\caption{线性元误差}
+		\scalebox{0.5}{
+			\begin{tabular}{|c|c|c|c|c|c|} \hline
+				\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 \\ \hline
+				1 &0.0 &5.3881e-5 &1.1197e-4 &3.9125e-5 &1.0772e-5 \\ \hline
+				10 &0.0 &1.1963e-2 &2.6789e-3 &6.4168e-4 &1.6060e-4  \\ \hline
+				100 &0.0 &1.8830e-2 &4.7420e-3 &1.2635e-3 &3.5042e-4  \\ \hline
+				1e3 &0.0 &1.9855e-2 &5.2306e-3 &1.6399e-3 &6.7184e-4  \\ \hline
+				1e4 &0.0 &1.9963e-2 &5.2878e-3 &1.7076e-3 &6.6349e-4  \\ \hline
+				1e5 &0.0 &1.9974e-2 &5.2936e-3 &1.7150e-3 &8.2476e-4 \\ \hline
+		\end{tabular}}
+	\end{table}
+	
+	\begin{table}[h]
+		\centering
+		\caption{CR元误差}
+		\scalebox{0.5}{
+			\begin{tabular}{|c|c|c|c|c|c|} \hline
+				\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 \\ \hline
+				1 &2.9011 &7.9878e-2 &2.0326e-2 &5.8054e-3 &1.5808e-3  \\ \hline
+				10 &1.8652 &4.9859e-2 &1.2611e-2 &3.4043e-3 &9.0626e-4  \\ \hline
+				100 &1.7617 &4.6901e-2 &1.1864e-2 &3.1691e-3 &8.3997e-4  \\ \hline
+				1e3 &1.7513 &4.6605e-2 &1.1790e-2 &3.1457e-3 &8.3336e-4  \\ \hline
+				1e4 &1.7503 &4.6577e-2 &1.1783e-2 &3.1434e-3 &8.3270e-4 \\ \hline
+				1e5 &1.7502 &4.6574e-2 &1.1782e-2 &3.1431e-3  &8.3263e-4 \\ \hline
+		\end{tabular}}
+	\end{table}
+
+可以看到，随着 $\lambda$ 的增大，使用线性元得到的近似解的收敛效果逐渐下降，而使用CR元的收敛速度保持不变。
+
+\end{frame}
+
+\subsection{待完成内容}
+\begin{frame}
+	接下来将完成求解带间断系数的弹性问题的程序的编写，得到实验结果并且与以上结果对比，最后得到结论。
+\end{frame}
+
+\section{致谢}
+\begin{frame}
+	\begin{center}
+		\huge 谢谢!
+	\end{center}
+\end{frame}
+
+
+\end{document}

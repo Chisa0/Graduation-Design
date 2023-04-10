@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  7 APR 2023 13:20
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  10 APR 2023 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -985,33 +985,16 @@ m/n/10.53937 R.W.Courant \TU/FandolSong-Regular(0)/m/n/10.53937 首 次 提 出 
 ，| \TU/lmr/m/n/10.53937 R.W.Clough
  []
 
-[2] [3] [4]
-Overfull \hbox (31.82643pt too wide) in paragraph at lines 176--178
-\TU/FandolSong-Regular(0)/m/n/10.53937 令 $\OML/cmm/m/it/10.53937  $ \TU/FandolS
-ong-Regular(0)/m/n/10.53937 是 $[]$ 上 的 无 穷 次 可 微 函 数\TU/lmr/m/n/10.53937 , \TU/
-FandolSong-Regular(0)/m/n/10.53937 使 得 在 $\OT1/cmr/m/n/10.53937 
-$ \TU/FandolSong-Regular(0)/m/n/10.53937 的 边 界 上 $\OML/cmm/m/it/10.53937 curl  
-\OT1/cmr/m/n/10.53937 = 0$ \TU/FandolSong-Regular(0)/m/n/10.53937 且 $\OMS/cmsy/
-m/n/10.53937 k\OML/cmm/m/it/10.53937 ^^O\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10
-.53937 curl \OT1/cmr/m/n/10.53937 )\OMS/cmsy/m/n/10.53937 k[] \OT1/cmr/m/n/10.5
-3937 =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 203--206
-
- []
-
-[5]
+[2] [3] [4] [5] [6]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] [7] [8] [9] [10] [11] [12]
-Overfull \hbox (12.1418pt too wide) detected at line 872
+[7] [8] [9] [10] [11]
+Overfull \hbox (12.1418pt too wide) detected at line 918
    [] 
  []
 
-[13] [14] (./ElastictyFEM.bbl
+[12] [13] [14] (./ElastictyFEM.bbl
 Missing character: There is no ͂ (U+0342) in font [lmroman10-regular]:mapping=t
 ex-text;!
 ) [15
@@ -1025,13 +1008,13 @@ LaTeX Font Warning: Size substitutions with differences
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `ElastictyFEM.out' has not changed.
-(rerunfilecheck)             Checksum: D81DACC08CC248BD90565E134E06027A;1940.
+(rerunfilecheck)             Checksum: C80FDCA1F02B85F5E6C9E549CD42AFBC;2025.
  ) 
 Here is how much of TeX's memory you used:
- 27206 strings out of 476179
- 596725 string characters out of 5809545
+ 27201 strings out of 476179
+ 596705 string characters out of 5809545
  891508 words of memory out of 5000000
- 47498 multiletter control sequences out of 15000+600000
+ 47493 multiletter control sequences out of 15000+600000
  476513 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,17n,97p,534b,652s stack positions out of 10000i,1000n,20000p,200000b,200000s

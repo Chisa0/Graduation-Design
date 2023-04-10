@@ -1,6 +1,8 @@
 import math
 import numpy as np
 from numpy.linalg import solve
+from scipy.sparse import csr_matrix
+from scipy.sparse.linalg import spsolve
 
 def error(u, uh):
     e = u - uh
@@ -292,6 +294,82 @@ def get_phi_grad_and_div(cr_node, cr_cell):
     #print("cr_phi_div= ", cr_phi_div)
     return cr_phi_grad, cr_phi_div
 
+# 定义一个函数，计算向量的H_1范数
+def H_1_norm(u, h):
+    # 参数u是一个一维数组，表示离散向量
+    # 参数h是一个浮点数，表示离散步长
+    # 返回一个浮点数，表示向量的H_1范数
+
+    # 计算向量的L_2范数，使用numpy.linalg.norm函数
+    u_L2 = np.linalg.norm(u)
+
+    # 计算向量的梯度，使用numpy.diff函数
+    u_grad = np.diff(u) / h
+
+    # 计算梯度的L_2范数，使用numpy.linalg.norm函数
+    u_grad_L2 = np.linalg.norm(u_grad)
+
+    # 计算向量的H_1范数，使用平方和开根号的公式
+    u_H1 = np.sqrt(u_L2**2 + u_grad_L2**2)
+
+    # 返回结果
+    return u_H1
+
+def get_stiff_and_div_matrix(cr_node, cr_cell, cm):
+    cr_phi_grad, cr_phi_div = get_phi_grad_and_div(cr_node, cr_cell)
+        
+    ## 单元刚度矩阵
+    # A1 A2 [NC, 6, 6]
+    A1 = np.einsum("cnij, cmij, c -> cnm", cr_phi_grad, cr_phi_grad, cm)
+    A2 = np.einsum("cn, cm, c -> cnm", cr_phi_div, cr_phi_div, cm)
+    #print("A1= ", A1)
+    #print("A2= ", A2)
+    return A1, A2
+
+#input 
+#单元刚度矩阵 A1, A2 [NC, 6, 6], bb [NC,6]
+# output
+# A1, A2 [2*NN,2*NN], F [2*NN]
+def get_A1_A2_F(A1, A2, bb, cr_node, cr_cell):
+    NN = cr_node.shape[0]
+    NC = cr_cell.shape[0]
+    # cell_x_y [NC, 3(三个点), 2(x y 方向上基函数的编号)]
+    cell_x_y = np.broadcast_to(cr_cell[:,:,None], shape=(NC, 3, 2)).copy()
+    cell_x_y[:,:,0] = 2 * cell_x_y[:,:,0]       #[NC,3] 三个节点x方向上基函数在总刚度矩阵的位置
+    cell_x_y[:,:,1] = 2 * cell_x_y[:,:,1] + 1   #[NC,3] 三个节点y方向上基函数在总刚度矩阵的位置
+    #print("cr_cell= ", cr_cell)
+    #print("cell_x_y= ", cell_x_y)
+    cell_x_y = cell_x_y.reshape(NC, 6)
+    #print("cell_x_y= ", cell_x_y)
+    I = np.broadcast_to(cell_x_y[:, :, None], shape=A1.shape)
+    J = np.broadcast_to(cell_x_y[:, None, :], shape=A2.shape)
+    #print("I= ", I)
+    #print("J= ", J)
+        
+    #S = csr_matrix((S.flat, (I.flat, J.flat)), shape=(2 * NN,2 * NN))
+    #M = csr_matrix((M.flat, (I.flat, J.flat)), shape=(2 * NN,2 * NN))
+    A1 = csr_matrix((A1.flat, (I.flat, J.flat)), shape=(2 * NN,2 * NN))
+    A2 = csr_matrix((A2.flat, (I.flat, J.flat)), shape=(2 * NN,2 * NN))
+    F = np.zeros(2 * NN)
+    np.add.at(F, cell_x_y, bb)
+    return A1, A2, F
+
+def my_solve(A, F, cr_node, getIsBdNode):
+    NN = cr_node.shape[0]
+    isBdNode    = getIsBdNode(cr_node)
+    isInterNode = ~isBdNode
+    #print("isInterNode= ", isInterNode)
+    isInterNodeA = np.broadcast_to(isInterNode[:, None], shape=(NN, 2))
+    isInterNodeA = isInterNodeA.reshape(2 * NN)
+    #print("isInterNodeA= ", isInterNodeA)
+
+    uh = np.zeros((2 * NN), dtype=np.float64)
+    uh[isInterNodeA] = spsolve(A[:, isInterNodeA][isInterNodeA], F[isInterNodeA])
+    #uh = spsolve(A, F)
+    #print("uh= ", uh)
+    uh = uh.reshape(NN, 2)
+    return uh
+
 if __name__ == "__main__":
     node = np.array([
             (0,0),
@@ -315,6 +393,12 @@ if __name__ == "__main__":
     print("cr_glam_pre[0] @ a= ", cr_glam_pre[0] @ a)
     print("phi_val= ", mesh.phi_val.shape)
     
+    u = np.array([[0.0,0.5],
+                  [0.2,0.2]])
+    h = 0.5
+    # 调用函数，打印结果
+    print(H_1_norm(u, h))
+
     """
     #剖分次数
     n = 1
