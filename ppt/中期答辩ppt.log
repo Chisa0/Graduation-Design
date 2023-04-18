@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  10 APR 2023 21:25
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  10 APR 2023 21:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1630,10 +1630,6 @@ Missing character: There is no 2 ("32) in font nullfont!
 [7
 
 ]
-Missing character: There is no 2 ("32) in font nullfont!
-[8
-
-]
 \tf@nav=\write6
 \openout6 = `中期答辩ppt.nav'.
 
@@ -1645,15 +1641,15 @@ Missing character: There is no 2 ("32) in font nullfont!
 
  (./中期答辩ppt.aux)
 Package rerunfilecheck Info: File `中期答辩ppt.out' has not changed.
-(rerunfilecheck)             Checksum: 7C83D5795EB5D6419E08361ABEB60717;558.
+(rerunfilecheck)             Checksum: 0D630C31E00402E31B14E6ED7266F266;372.
  ) 
 Here is how much of TeX's memory you used:
- 44044 strings out of 476179
- 1098191 string characters out of 5809545
- 1524315 words of memory out of 5000000
- 63947 multiletter control sequences out of 15000+600000
+ 44007 strings out of 476179
+ 1097280 string characters out of 5809545
+ 1516315 words of memory out of 5000000
+ 63910 multiletter control sequences out of 15000+600000
  483097 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  142i,19n,136p,729b,669s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 中期答辩ppt.pdf (8 pages).
+Output written on 中期答辩ppt.pdf (7 pages).

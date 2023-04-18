@@ -54,7 +54,6 @@
 \end{frame}
 
 \section{实验结果和待完成内容}
-\subsection{实验结果}
 \begin{frame}
 	\begin{table}[h]
 		\centering
@@ -71,28 +70,8 @@
 		\end{tabular}}
 	\end{table}
 	
-	\begin{table}[h]
-		\centering
-		\caption{CR元误差}
-		\scalebox{0.5}{
-			\begin{tabular}{|c|c|c|c|c|c|} \hline
-				\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 \\ \hline
-				1 &2.9011 &7.9878e-2 &2.0326e-2 &5.8054e-3 &1.5808e-3  \\ \hline
-				10 &1.8652 &4.9859e-2 &1.2611e-2 &3.4043e-3 &9.0626e-4  \\ \hline
-				100 &1.7617 &4.6901e-2 &1.1864e-2 &3.1691e-3 &8.3997e-4  \\ \hline
-				1e3 &1.7513 &4.6605e-2 &1.1790e-2 &3.1457e-3 &8.3336e-4  \\ \hline
-				1e4 &1.7503 &4.6577e-2 &1.1783e-2 &3.1434e-3 &8.3270e-4 \\ \hline
-				1e5 &1.7502 &4.6574e-2 &1.1782e-2 &3.1431e-3  &8.3263e-4 \\ \hline
-		\end{tabular}}
-	\end{table}
+可以看到，随着 $\lambda$ 的增大，使用线性元得到的近似解的收敛效果逐渐下降。接下来将完成CR元求解弹性问题的程序的编写，得到实验结果并且与以上结果对比，最后得到结论。
 
-可以看到，随着 $\lambda$ 的增大，使用线性元得到的近似解的收敛效果逐渐下降，而使用CR元的收敛速度保持不变。
-
-\end{frame}
-
-\subsection{待完成内容}
-\begin{frame}
-	接下来将完成求解带间断系数的弹性问题的程序的编写，得到实验结果并且与以上结果对比，最后得到结论。
 \end{frame}
 
 \section{致谢}

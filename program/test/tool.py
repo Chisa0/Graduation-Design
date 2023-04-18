@@ -4,6 +4,112 @@ from numpy.linalg import solve
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
 
+class PDE():
+    def __init__(self, mu=1, lam=1):
+        self.mu  = mu
+        self.lam = lam
+    
+    def source(self, p):
+        x   = p[..., 0]
+        y   = p[..., 1]
+        mu  = self.mu
+        lam = self.lam
+        
+        sin = np.sin
+        cos = np.cos
+        val = np.zeros(p.shape, dtype=np.float64)
+        """
+        val[..., 0] = -((2 * mu + lam) * y * (y - 1) * (2 * cos(x) - (x - 1) * sin(x))
+                        + (mu + lam) * (2 * x - 1) * (sin(y) + (y - 1) * cos(y)) 
+                        + 2 * mu * (x -1) * sin(x))
+        val[..., 1] = -((2 * mu + lam) * x * (x - 1) * (2 * cos(y) - (y - 1) * sin(y))
+                        + (mu + lam) * (2 * y - 1) * (sin(x) + (x - 1) * cos(x))
+                        + 2 * mu * (y - 1) * sin(y))
+        """
+        frac_u1_x   = y * (y-1) * (2*cos(x) - (x-1) * sin(x))
+        frac_u1_y   = 2 * (x-1) * sin(x)
+        frac_u1_x_y = (2*y-1) * (sin(x) + (x-1) * cos(x))
+        frac_u2_x   = 2 * (y-1) * sin(y)
+        frac_u2_y   = x * (x-1) * (2*cos(y) - (y-1) * sin(y))
+        frac_u2_x_y = (2*x-1) * (sin(y) + (y-1) * cos(y))
+
+        val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
+        val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
+
+        return val
+    
+    def solution(self, p):
+        x = p[..., 0]
+        y = p[..., 1]
+        
+        val = np.zeros(p.shape, dtype=np.float64)
+        
+        val[..., 0] = y * (x - 1) * (y - 1) * np.sin(x)
+        val[..., 1] = x * (x - 1) * (y - 1) * np.sin(y)
+
+        return val
+    
+class interfaceData():
+    def __init__(self, mu=np.array([1,2,3,4]), lam=np.array([1,2,3,4])):
+        self.mu = mu
+        self.lam = lam
+        self.node = np.array([(0,0),
+                        (0.5,0),
+                        (1,0),
+                        (0,0.5),
+                        (0.5,0.5),
+                        (1,0.5),
+                        (0,1),
+                        (0.5,1),
+                        (1,1)], dtype=np.float64)
+        self.cell = np.array([[0,1,4],
+                [0,4,3],
+                [1,2,5],
+                [1,5,4],
+                [3,4,7],
+                [3,7,6],
+                [4,5,8],
+                [4,8,7]], dtype=np.int64)
+    
+    def source(self, p):
+        x   = p[..., 0]
+        y   = p[..., 1]
+        
+        mu  = 1
+        lam = 1
+        sin = np.sin
+        cos = np.cos
+        val = np.zeros(p.shape, dtype=np.float64)
+
+        frac_u1_x   = y * (y-1) * (2*cos(x) - (x-1) * sin(x))
+        frac_u1_y   = 2 * (x-1) * sin(x)
+        frac_u1_x_y = (2*y-1) * (sin(x) + (x-1) * cos(x))
+        frac_u2_x   = 2 * (y-1) * sin(y)
+        frac_u2_y   = x * (x-1) * (2*cos(y) - (y-1) * sin(y))
+        frac_u2_x_y = (2*x-1) * (sin(y) + (y-1) * cos(y))
+
+        val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
+        val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
+
+        return val
+    
+    def solution(self, p, cr_node):
+        x = p[..., 0]
+        y = p[..., 1]
+        
+        val = np.zeros(p.shape, dtype=np.float64)
+        
+        val[..., 0] = y * (x - 1) * (y - 1) * np.sin(x)
+        val[..., 1] = x * (x - 1) * (y - 1) * np.sin(y)
+
+        crCell = getWhichCell(cr_node)
+        #print("val= ", val)
+        for i in range(4):
+            val[crCell[i], :] /= self.lam[i]
+        #print("val= ", val)
+
+        return val
+
 def error(u, uh):
     e = u - uh
     emax = np.max(np.abs(e))
@@ -195,50 +301,6 @@ def uniform_refine(node, cell):
 
     return new_node, new_cell
 
-class MESH():
-    def __init__(self, node, cell):
-        self.NN = node.shape[0]
-        self.NC = cell.shape[0]
-        self.cr_NC = self.NC
-        # n 特定情况下剖分次数
-        n  = math.log(self.NC/2, 4)
-        self.cr_NN = int(3 * 2 * 4**n - (3 * 2 * 4**n - 4 * 2**n) / 2)
-        self.node = node # [NN,2]
-        self.cell = cell # [NC,3]
-        self.cr_node, self.cr_cell = get_cr_node_cell(node, cell)   #[cr_NN,2] #[cr_NC,3]
-        self.cm = np.ones(self.NC, dtype=np.float64) / self.NC      #[cr_NC,]
-        #[NC,3(CR元),2(对x，y的偏导)] #[NC,3(3个系数),3(CR元)]
-        self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
-        # phi_val [NC,3(点),6(6个基函数),2(两个分量)]
-        self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
-
-    def my_uniform_refine(self, n):
-        if n != 0:
-            for j in range(n):
-                nn  = math.log(self.NC/2, 4)
-                new_NC = 4 * self.NC
-                num_edge = int(3 * 2 * 4**nn - (3 * 2 * 4**nn - 4 * 2**nn) / 2)
-                #print("num_edge= ", num_edge)
-                new_NN = self.NN + num_edge
-
-                new_node = np.zeros((new_NN, 2), dtype=np.float64)
-                new_cell = np.zeros((new_NC, 3), dtype=np.int64)
-                new_node[:self.NN] = self.node
-
-                for i in range(self.NC):
-                    new_node, new_cell = refine_a_cell(self.cell[i], new_node, new_cell)
-                self.node, self.cell = new_node, new_cell
-                self.cr_node, self.cr_cell = get_cr_node_cell(self.node, self.cell)
-                self.NN = self.node.shape[0]
-                self.NC = self.cell.shape[0]
-                self.cr_NC = self.NC
-                # n 特定情况下剖分次数
-                nn  = math.log(self.NC/2, 4)
-                self.cr_NN = int(3 * 2 * 4**nn - (3 * 2 * 4**nn - 4 * 2**nn) / 2)
-                self.cm = np.ones(self.NC, dtype=np.float64) / self.NC
-                self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
-                self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
-
 def get_cr_glam_and_pre(cr_node, cr_cell):
     NC = cr_cell.shape[0]
     NN = cr_node.shape[0]
@@ -315,6 +377,7 @@ def H_1_norm(u, h):
     # 返回结果
     return u_H1
 
+## 单元刚度矩阵， 单元质量矩阵 stiff, div [NC, 6, 6]
 def get_stiff_and_div_matrix(cr_node, cr_cell, cm):
     cr_phi_grad, cr_phi_div = get_phi_grad_and_div(cr_node, cr_cell)
         
@@ -326,10 +389,30 @@ def get_stiff_and_div_matrix(cr_node, cr_cell, cm):
     #print("A2= ", A2)
     return A1, A2
 
+## 单元载荷向量 bb [NC, 6]
+def get_bb(pde, node, cell, cm):
+    cr_node, cr_cell = get_cr_node_cell(node,cell)
+    cr_glam_x_y, cr_glam_x_y_pre = get_cr_glam_and_pre(cr_node, cr_cell)
+    # phi_val [NC,3(点),6(6个基函数),2(两个分量)]
+    phi_node_val = get_phi_val(node, cell, cr_glam_x_y_pre)
+        
+    #print("node[cell]= ", node[cell].shape)
+    # val [NC,3(点),2(分量)] 右端项在各顶点的值
+    val = pde.source(node[cell])
+    #print("val= ", val[0,0])
+        
+    # phi_val [NC,3,6] 基函数和右端项的点乘
+    phi_val = np.einsum("cijk, cik -> cij", phi_node_val, val)
+    #print("phi_val= ", phi_val.shape)
+    # bb [NC,6]
+    #print("type(phi_val)= ", type(phi_val))
+    bb = phi_val.sum(axis=1) * cm[0] / 3
+    return bb
+
 #input 
 #单元刚度矩阵 A1, A2 [NC, 6, 6], bb [NC,6]
 # output
-# A1, A2 [2*NN,2*NN], F [2*NN]
+# 总刚度矩阵 A1, A2 [2*NN,2*NN], F [2*NN]
 def get_A1_A2_F(A1, A2, bb, cr_node, cr_cell):
     NN = cr_node.shape[0]
     NC = cr_cell.shape[0]
@@ -370,7 +453,172 @@ def my_solve(A, F, cr_node, getIsBdNode):
     uh = uh.reshape(NN, 2)
     return uh
 
+## [4,NN] 返回各点属于哪个区间 
+## \Omega_1 [0,0.5]   \times [0,0.5)
+## \Omega_2 (0.5, 1]  \times [0,0.5]
+## \Omega_3 [0,0.5)   \times [0.5,1]
+## \Omega_4 [0.5,1] \times (0.5,1]
+def getWhichCell(node):
+    isWhichCellNode = np.zeros((4,node.shape[0]), dtype=bool)
+    for i in range(node.shape[0]):
+        a = node[i, 0] - 0
+        b = node[i, 1] - 0
+        if a <= 0.5 and b < 0.5:
+            isWhichCellNode[0,i] = True
+        if a > 0.5 and b <= 0.5:
+            isWhichCellNode[1,i] = True
+        if a < 0.5 and b >= 0.5:
+            isWhichCellNode[2,i] = True
+        if a >= 0.5 and b > 0.5:
+            isWhichCellNode[3,i] = True
+    return isWhichCellNode
+
+## [4, NC] 返回各单元属于哪个区间
+def getCellInOmega(node, cell):
+    cellInOmega = np.zeros(cell.shape[0], dtype=bool)
+    #print("node[cell]= ", node[cell])
+    mid_p = node[cell].sum(axis=1) / 3
+    #print("mid_p= ", mid_p)
+    cellInOmega = getWhichCell(mid_p)
+    return cellInOmega
+
+## [4,NN] 
+## \line_1 x=0.5, y<0.5
+## \line_2 x=0.5, y>0.5
+## \line_3 x<0.5, y=0.5
+## \line_4 x>0.5, y=0.5
+def getInterfaceCell(node):
+    interfaceCell = np.zeros((4,node.shape[0]), dtype=bool)
+    for i in range(node.shape[0]):
+        a = node[i,0]
+        b = node[i,1]
+        if a == 0.5 and b < 0.5:
+            interfaceCell[0,i] = True
+        if a == 0.5 and b > 0.5:
+            interfaceCell[1,i] = True
+        if a < 0.5 and b == 0.5:
+            interfaceCell[2,i] = True
+        if a > 0.5 and b == 0.5:
+            interfaceCell[3,i] = True
+    return interfaceCell
+
+def phiInWhichCell(whichCell):
+    phiCell = np.broadcast_to(whichCell[:, :, None], shape=(4, whichCell.shape[1], 2))
+    phiCell = phiCell.reshape(4, 2 * whichCell.shape[1])
+    return phiCell
+
+class MESH():
+    def __init__(self, node, cell):
+        """
+        self.NN = node.shape[0]
+        self.NC = cell.shape[0]
+        self.cr_NC = self.NC
+        # n 特定情况下剖分次数
+        n  = math.log(self.NC/2, 4)
+        self.cr_NN = int(3 * 2 * 4**n - (3 * 2 * 4**n - 4 * 2**n) / 2)
+        """
+        self.node = node # [NN,2]
+        self.cell = cell # [NC,3]
+        """
+        self.cr_node, self.cr_cell = get_cr_node_cell(node, cell)   #[cr_NN,2] #[cr_NC,3]
+        self.cm = np.ones(self.NC, dtype=np.float64) / self.NC      #[cr_NC,]
+        #[NC,3(CR元),2(对x，y的偏导)] #[NC,3(3个系数),3(CR元)]
+        self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
+        # phi_val [NC,3(点),6(6个基函数),2(两个分量)]
+        self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
+        """
+        
+    def my_uniform_refine(self, n):
+        if n != 0:
+            for j in range(n):
+                NN, NC = self.get_number_of_node_and_cell()
+                #print("NC= ", NC)
+                nn  = math.log(NC/2, 4)
+                new_NC = 4 * NC
+                num_edge = int(3 * 2 * 4**nn - (3 * 2 * 4**nn - 4 * 2**nn) / 2)
+                #print("num_edge= ", num_edge)
+                new_NN = NN + num_edge
+
+                new_node = np.zeros((new_NN, 2), dtype=np.float64)
+                new_cell = np.zeros((new_NC, 3), dtype=np.int64)
+                new_node[:NN] = self.node
+
+                for i in range(NC):
+                    new_node, new_cell = refine_a_cell(self.cell[i], new_node, new_cell)
+                self.node, self.cell = new_node, new_cell
+                """
+                self.cr_node, self.cr_cell = get_cr_node_cell(self.node, self.cell)
+                self.NN = self.node.shape[0]
+                self.NC = self.cell.shape[0]
+                self.cr_NC = self.NC
+                # n 特定情况下剖分次数
+                nn  = math.log(self.NC/2, 4)
+                self.cr_NN = int(3 * 2 * 4**nn - (3 * 2 * 4**nn - 4 * 2**nn) / 2)
+                self.cm = np.ones(self.NC, dtype=np.float64) / self.NC
+                self.cr_glam, self.cr_glam_pre = get_cr_glam_and_pre(self.cr_node, self.cr_cell) 
+                self.phi_val = get_phi_val(self.node, self.cell, self.cr_glam_pre)
+                """
+                
+    def get_number_of_node_and_cell(self):
+        NN = self.node.shape[0]
+        NC = self.cell.shape[0]
+        return NN,NC
+    
+    def get_number_of_cr_node_and_cell(self):
+        NC = self.cell.shape[0]
+        cr_NC = NC
+        # n 特定情况下剖分次数
+        n  = math.log(NC/2, 4)
+        cr_NN = int(3 * 2 * 4**n - (3 * 2 * 4**n - 4 * 2**n) / 2)
+        return cr_NN, cr_NC
+    
+    def get_cr_node_cell(self):
+        return get_cr_node_cell(self.node, self.cell)   #[cr_NN,2] #[cr_NC,3]
+    
+    def get_cm(self):
+        NC = self.cell.shape[0]
+        return np.ones(NC, dtype=np.float64) / NC
+    
+    def get_cr_glam_and_pre(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return get_cr_glam_and_pre(cr_node, cr_cell) 
+    
+    def get_phi_val(self):
+        cr_glam, cr_glam_pre = self.get_cr_glam_and_pre()
+        return get_phi_val(self.node, self.cell, cr_glam_pre)
+    
+    def get_phi_grad_and_div(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return get_phi_grad_and_div(cr_node, cr_cell)
+    
+    def get_stiff_and_div_matrix(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        cm = self.get_cm()
+        return get_stiff_and_div_matrix(cr_node, cr_cell, cm)
+    
+    def get_bb(self, pde):
+        return get_bb(pde, self.node, self.cell, self.get_cm())
+
+    def get_A1_A2_F(self, bb):
+        A1, A2 = self.get_stiff_and_div_matrix()
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return get_A1_A2_F(A1, A2, bb, cr_node, cr_cell)
+    
+    def getWhichCell(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return getWhichCell(cr_node)
+    
+    def phiInWhichCell(self):
+        whichCell = self.getWhichCell()
+        return phiInWhichCell(whichCell)
+    
+    def getCellInOmega(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return getCellInOmega(cr_node, cr_cell)
+
+
 if __name__ == "__main__":
+    """
     node = np.array([
             (0,0),
             (1,0),
@@ -379,32 +627,50 @@ if __name__ == "__main__":
     cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
 
     # 剖分次数
-    n = 1
+    n = 0
     mesh = MESH(node, cell)
     mesh.my_uniform_refine(n)
-    cr_node, cr_cell = mesh.cr_node, mesh.cr_cell
+    cr_node, cr_cell = mesh.get_cr_node_cell()
     #print("cr_node[cr_cell]= ", cr_node[cr_cell][0])
-    cr_glam, cr_glam_pre = mesh.cr_glam, mesh.cr_glam_pre
-    #print("cr_glam= ", cr_glam[0])
-    #print("cr_glam_pre= ", cr_glam_pre[0])
+    cr_glam, cr_glam_pre = mesh.get_cr_glam_and_pre()
+    #print("cr_glam= ", cr_glam)
+    #print("cr_glam_pre= ", cr_glam_pre)
     
     a = np.ones((3,3), dtype=np.float64)
     a[:, :2] = cr_node[cr_cell][0]
     print("cr_glam_pre[0] @ a= ", cr_glam_pre[0] @ a)
-    print("phi_val= ", mesh.phi_val.shape)
-    
-    u = np.array([[0.0,0.5],
-                  [0.2,0.2]])
-    h = 0.5
-    # 调用函数，打印结果
-    print(H_1_norm(u, h))
+    #print("phi_val= ", mesh.get_phi_val().shape)
 
+
+    phi_grad, phi_div = mesh.get_phi_grad_and_div()
+    #print("phi_grad= ", phi_grad)
+    print("phi_div= ", phi_div)
+
+    cm = mesh.get_cm()
+    print("cm= ", cm[0])
+    A1, A2 = mesh.get_stiff_and_div_matrix()
+    print("A2= ", A2)
     """
-    #剖分次数
-    n = 1
-    if n != 0:
-        for i in range(n):
-            print("----------剖分次数{}----------".format(i+1))
-            node, cell = uniform_refine(node, cell)
-            cr_node, cr_cell = get_cr_node_cell(node, cell)
-    """
+
+    interfacePde = interfaceData()
+    node, cell = interfacePde.node, interfacePde.cell
+
+    n = 0
+    mesh = MESH(node, cell)
+    mesh.my_uniform_refine(n)
+
+    node, cell = mesh.node, mesh.cell
+    #print("cell= ", cell)
+
+    cr_node, cr_cell = mesh.get_cr_node_cell()
+    #print("cr_node= ", cr_node)
+    #print("cr_cell= ", cr_cell)
+
+    cellInOmega = mesh.getCellInOmega()
+    print("cellInOmega", cellInOmega[0])
+
+    A1, A2 = mesh.get_stiff_and_div_matrix()
+    print("A1= ", A1[0:2])
+
+    A1[cellInOmega[0]] *= 2
+    print("A1= ", A1[0:2])
