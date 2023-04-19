@@ -274,6 +274,7 @@ def get_cr_node_cell(node, cell):
     return cr_node, cr_cell
     
 # 返回 node 中是否为边界点的信息
+# isBdNode [NN] bool
 def getIsBdNode(cr_node):
     is_BdNode = np.zeros(cr_node.shape[0], dtype=bool)
     for i in range(cr_node.shape[0]):
@@ -282,6 +283,16 @@ def getIsBdNode(cr_node):
         if a < 1e-13 or b < 1e-13:
             is_BdNode[i] = True
     return is_BdNode
+
+def getIsBdLineNode(cr_node):
+    NN = cr_node.shape[0]
+    isBdLineNode = getIsBdNode(cr_node)
+    for i in range(NN):
+        a = cr_node[i,0]
+        b = cr_node[i,1]
+        if a == 0.5 or b == 0.5:
+            isBdLineNode[i] = True
+    return isBdLineNode
 
 def uniform_refine(node, cell):
     old_NN = node.shape[0]
@@ -502,6 +513,16 @@ def getInterfaceCell(node):
             interfaceCell[3,i] = True
     return interfaceCell
 
+def getInterLineNode(node):
+    NN = node.shape[0]
+    lineNode = np.zeros(NN, dtype=bool)
+    for i in range(NN):
+        a = node[i,0]
+        b = node[i,1]
+        if a == 0.5 or b == 0.5:
+            lineNode[i] = True
+    return lineNode
+
 def phiInWhichCell(whichCell):
     phiCell = np.broadcast_to(whichCell[:, :, None], shape=(4, whichCell.shape[1], 2))
     phiCell = phiCell.reshape(4, 2 * whichCell.shape[1])
@@ -615,42 +636,17 @@ class MESH():
     def getCellInOmega(self):
         cr_node, cr_cell = self.get_cr_node_cell()
         return getCellInOmega(cr_node, cr_cell)
+    
+    def getInterLineNode(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return getInterLineNode(cr_node)
 
+    def getIsBdLineNode(self):
+        cr_node, cr_cell = self.get_cr_node_cell()
+        return getIsBdLineNode(cr_node)
 
 if __name__ == "__main__":
-    """
-    node = np.array([
-            (0,0),
-            (1,0),
-            (1,1),
-            (0,1)], dtype=np.float64)
-    cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
 
-    # 剖分次数
-    n = 0
-    mesh = MESH(node, cell)
-    mesh.my_uniform_refine(n)
-    cr_node, cr_cell = mesh.get_cr_node_cell()
-    #print("cr_node[cr_cell]= ", cr_node[cr_cell][0])
-    cr_glam, cr_glam_pre = mesh.get_cr_glam_and_pre()
-    #print("cr_glam= ", cr_glam)
-    #print("cr_glam_pre= ", cr_glam_pre)
-    
-    a = np.ones((3,3), dtype=np.float64)
-    a[:, :2] = cr_node[cr_cell][0]
-    print("cr_glam_pre[0] @ a= ", cr_glam_pre[0] @ a)
-    #print("phi_val= ", mesh.get_phi_val().shape)
-
-
-    phi_grad, phi_div = mesh.get_phi_grad_and_div()
-    #print("phi_grad= ", phi_grad)
-    print("phi_div= ", phi_div)
-
-    cm = mesh.get_cm()
-    print("cm= ", cm[0])
-    A1, A2 = mesh.get_stiff_and_div_matrix()
-    print("A2= ", A2)
-    """
 
     interfacePde = interfaceData()
     node, cell = interfacePde.node, interfacePde.cell
@@ -659,18 +655,12 @@ if __name__ == "__main__":
     mesh = MESH(node, cell)
     mesh.my_uniform_refine(n)
 
-    node, cell = mesh.node, mesh.cell
-    #print("cell= ", cell)
+    lineNode = mesh.getInterLineNode()
+    print("lineNode= ", lineNode)
 
     cr_node, cr_cell = mesh.get_cr_node_cell()
-    #print("cr_node= ", cr_node)
-    #print("cr_cell= ", cr_cell)
+    print("cr_node= ", cr_node)
+    print("cr_node= ", cr_node[lineNode])
 
-    cellInOmega = mesh.getCellInOmega()
-    print("cellInOmega", cellInOmega[0])
-
-    A1, A2 = mesh.get_stiff_and_div_matrix()
-    print("A1= ", A1[0:2])
-
-    A1[cellInOmega[0]] *= 2
-    print("A1= ", A1[0:2])
+    isBdLineNode = mesh.getIsBdLineNode()
+    print("isBdLineNode= ", isBdLineNode)
