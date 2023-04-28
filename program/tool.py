@@ -8,12 +8,6 @@ class PDE():
     def __init__(self, mu=1, lam=1):
         self.mu  = mu
         self.lam = lam
-        self.node = np.array([
-            (0,0),
-            (1,0),
-            (1,1),
-            (0,1)], dtype=np.float64)
-        self.cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
     
     def source(self, p):
         x   = p[..., 0]
@@ -83,14 +77,16 @@ class interfaceData():
         
         mu  = 1
         lam = 1
+        sin = np.sin
+        cos = np.cos
         val = np.zeros(p.shape, dtype=np.float64)
 
-        frac_u1_x   = (6*x-3) * (y**3-(3/2)*y**2+(1/2)*y)
-        frac_u1_y   = (x**3-(3/2)*x**2+(1/2)*x) * (6*y-3)
-        frac_u1_x_y = (3*x**2-3*x+1/2) * (3*y**2-3*y+1/2)
-        frac_u2_x   = frac_u1_x
-        frac_u2_y   = frac_u1_y
-        frac_u2_x_y = frac_u1_x_y
+        frac_u1_x   = y * (y-1) * (2*cos(x) - (x-1) * sin(x))
+        frac_u1_y   = 2 * (x-1) * sin(x)
+        frac_u1_x_y = (2*y-1) * (sin(x) + (x-1) * cos(x))
+        frac_u2_x   = 2 * (y-1) * sin(y)
+        frac_u2_y   = x * (x-1) * (2*cos(y) - (y-1) * sin(y))
+        frac_u2_x_y = (2*x-1) * (sin(y) + (y-1) * cos(y))
 
         val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
         val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
@@ -103,8 +99,8 @@ class interfaceData():
         
         val = np.zeros(p.shape, dtype=np.float64)
         
-        val[..., 0] = x * (x - 0.5) * (x - 1) * y * (y - 0.5) * (y - 1)
-        val[..., 1] = x * (x - 0.5) * (x - 1) * y * (y - 0.5) * (y - 1)
+        val[..., 0] = y * (x - 1) * (y - 1) * np.sin(x)
+        val[..., 1] = x * (x - 1) * (y - 1) * np.sin(y)
 
         crCell = getWhichCell(cr_node)
         #print("val= ", val)
@@ -118,15 +114,6 @@ def error(u, uh):
     e = u - uh
     emax = np.max(np.abs(e))
     return emax
-
-def H1Error(u, uh):
-    tmp = u - uh
-    #sum = 0
-    #for i in range(u.shape[0]):
-    #    sum += tmp[i] @ tmp[i]
-    e = np.einsum("ni, ni -> n", tmp, tmp)
-    sum = e.sum()
-    return np.sqrt(sum)
 
 def print_error(Lam, H, E):
     for i in range(len(Lam)):
@@ -613,9 +600,6 @@ class MESH():
         NC = self.cell.shape[0]
         return np.ones(NC, dtype=np.float64) / NC
     
-    def get_glam_and_pre(self):
-        return get_cr_glam_and_pre(self.node, self.cell)
-
     def get_cr_glam_and_pre(self):
         cr_node, cr_cell = self.get_cr_node_cell()
         return get_cr_glam_and_pre(cr_node, cr_cell) 
@@ -662,26 +646,21 @@ class MESH():
         return getIsBdLineNode(cr_node)
 
 if __name__ == "__main__":
+
+
     interfacePde = interfaceData()
     node, cell = interfacePde.node, interfacePde.cell
-
-    pde = PDE()
-    node, cell = pde.node, pde.cell
 
     n = 0
     mesh = MESH(node, cell)
     mesh.my_uniform_refine(n)
 
-    node, cell = mesh.node, mesh.cell
+    lineNode = mesh.getInterLineNode()
+    print("lineNode= ", lineNode)
+
     cr_node, cr_cell = mesh.get_cr_node_cell()
-
-    print("node= ", node)
-    print("cell= ", cell)
     print("cr_node= ", cr_node)
-    print("cr_cell= ", cr_cell)
+    print("cr_node= ", cr_node[lineNode])
 
-    glam, glam_pre = mesh.get_glam_and_pre()
-    cr_glam, cr_glam_pre = mesh.get_cr_glam_and_pre()
-
-    print("glam= ", glam)
-    print("cr_glam= ", cr_glam_pre)
+    isBdLineNode = mesh.getIsBdLineNode()
+    print("isBdLineNode= ", isBdLineNode)
