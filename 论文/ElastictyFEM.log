@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  10 APR 2023 11:42
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  4 MAY 2023 19:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1011,11 +1011,11 @@ Package rerunfilecheck Info: File `ElastictyFEM.out' has not changed.
 (rerunfilecheck)             Checksum: C80FDCA1F02B85F5E6C9E549CD42AFBC;2025.
  ) 
 Here is how much of TeX's memory you used:
- 27201 strings out of 476179
- 596705 string characters out of 5809545
+ 27196 strings out of 476179
+ 596574 string characters out of 5809545
  891508 words of memory out of 5000000
- 47493 multiletter control sequences out of 15000+600000
- 476513 words of font info for 80 fonts, out of 8000000 for 9000
+ 47491 multiletter control sequences out of 15000+600000
+ 476497 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  89i,17n,97p,534b,652s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

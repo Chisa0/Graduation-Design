@@ -104,19 +104,19 @@ $$
 
 假设$\Omega$是一个凸多边形区域，并且$\Gamma_1$ or $\Gamma_2$中任意一个为空。对于纯位移问题($\Gamma_2=\emptyset$)，只考虑齐次边界条件。
 \par
-令$\emph{T}^h$ 是$\Omega$ 三角划分的一个非退化族。对于纯位移问题($\Gamma_2=\emptyset$),我们使用有限元空间
+令$T^h$ 是$\Omega$ 三角划分的一个非退化族。对于纯位移问题($\Gamma_2=\emptyset$),我们使用有限元空间
 % \begin{equation}\label{equ1} （\ref{newton}）引用
 	%	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \}
 	% \end{equation}
 $$
-V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
+V_h := \{ \nu \in H^1(\Omega) : \nu |_{T} , \forall T \in T^h \},
 $$
 并且对于纯牵引力问题($\Gamma_1 = \emptyset$)，使用
 % \begin{equation}\label{equ2}
 	%	V_h :=
 	%\end{equation}
 	$$
-	V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \},
+	V_h := \{ \nu \in H^1(\Omega) : \nu |_{T} , \forall T \in T^h \},
 	$$
 %	\\ \\
 %	根据第二章和第四章的理论我们得到以下定理。
@@ -161,12 +161,12 @@ $$
 	\end{matrix}
 	$$
 	
-	令 $\emph{T}^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
+	令 $T^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
 	$$
 	\begin{matrix}
 		a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
 		[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h. \\
-		V_h := \{ \nu \in H^1(\Omega) : \nu |_{\emph{T}} \mbox{为线性函数}, \forall \emph{T} \in \emph{T}^h \}
+		V_h := \{ \nu \in H^1(\Omega) : \nu |_{T}, \forall T \in T^h \}
 	\end{matrix}
 	$$
 	

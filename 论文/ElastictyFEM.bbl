@@ -43,13 +43,13 @@ Peter Hansbo and Mats~G Larson.
 \newblock {\em ESAIM: Mathematical Modelling and Numerical Analysis},
   37(1):63--72, 2003.
 
+\bibitem{李荣华2007偏微分方程数值解}
+李荣华.
+\newblock 偏微分方程数值解, 2007.
+
 \bibitem{brenner2008mathematical}
 Susanne~C Brenner, L~Ridgway Scott, and L~Ridgway Scott.
 \newblock {\em The mathematical theory of finite element methods}, volume~3.
 \newblock Springer, 2008.
-
-\bibitem{李荣华2007偏微分方程数值解}
-李荣华.
-\newblock 偏微分方程数值解, 2007.
 
 \end{thebibliography}
