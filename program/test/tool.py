@@ -4,6 +4,11 @@ from numpy.linalg import solve
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
 
+# PDE1
+# u1 = y(x-1)(y-1)sin(x)
+# u2 = x(x-1)(y-1)sin(y)
+# uh_dir = "../../image/tmp/elaticity_uh_u/PDE1/uh_lam={}.png".format(Lam[i])
+# u_dir = "../../image/tmp/elaticity_uh_u/PDE1/u_lam={}.png".format(Lam[i])
 class PDE():
     def __init__(self, mu=1, lam=1):
         self.mu  = mu
@@ -55,6 +60,128 @@ class PDE():
 
         return val
     
+# PDE2
+# u1 = u2 = x^2 * sin(x-1) * y^2 * sin(y-1) 
+# uh_dir = "../../image/tmp/elaticity_uh_u/PDE2/uh_lam={}.png".format(Lam[i])
+# u_dir = "../../image/tmp/elaticity_uh_u/PDE2/u_lam={}.png".format(Lam[i])
+class PDE2():
+    def __init__(self, mu=1, lam=1):
+        self.mu  = mu
+        self.lam = lam
+        self.node = np.array([
+            (0,0),
+            (1,0),
+            (1,1),
+            (0,1)], dtype=np.float64)
+        self.cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
+    
+    def source(self, p):
+        x   = p[..., 0]
+        y   = p[..., 1]
+        mu  = self.mu
+        lam = self.lam
+        
+        sin = np.sin
+        cos = np.cos
+        val = np.zeros(p.shape, dtype=np.float64)
+
+        ux         = x**2 * sin(x-1)
+        uy         = y**2 * sin(y-1)
+        frac_ux_x  = 2 * x * sin(x-1) + x**2 * cos(x-1)
+        frac_ux_xx = 2 * sin(x-1) + 2 * x *cos(x-1) + 2 * x * cos(x-1) - x**2 * sin(x-1)
+        frac_uy_y  = 2 * y * sin(y-1) + y**2 * cos(y-1)
+        frac_uy_yy = 2 * sin(y-1) + 2 * y *cos(y-1) + 2 * y * cos(y-1) - y**2 * sin(y-1)
+
+        frac_u1_x   = frac_ux_xx * uy
+        frac_u1_y   = ux * frac_uy_yy
+        frac_u1_x_y = frac_ux_x * frac_uy_y
+        frac_u2_x   = frac_ux_xx * uy
+        frac_u2_y   = ux * frac_uy_yy
+        frac_u2_x_y = frac_ux_x * frac_uy_y
+
+        val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
+        val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
+
+        return val
+    
+    def solution(self, p):
+        x = p[..., 0]
+        y = p[..., 1]
+        
+        sin = np.sin
+        val = np.zeros(p.shape, dtype=np.float64)
+        
+        ux = x**2 * sin(x-1)
+        uy = y**2 * sin(y-1)
+
+        val[..., 0] = ux * uy
+        val[..., 1] = ux * uy
+
+        return val
+
+# PDE3
+# u1 = u2 = (x-1) * (e^x-1) * (y-1) * (e^y-1)
+# uh_dir = "../../image/tmp/elaticity_uh_u/PDE3/uh_lam={}.png".format(Lam[i])
+# u_dir = "../../image/tmp/elaticity_uh_u/PDE3/u_lam={}.png".format(Lam[i])
+class PDE3():
+    def __init__(self, mu=1, lam=1):
+        self.mu  = mu
+        self.lam = lam
+        self.node = np.array([
+            (0,0),
+            (1,0),
+            (1,1),
+            (0,1)], dtype=np.float64)
+        self.cell = np.array([(1,2,0), (3,0,2)], dtype=np.int64)
+    
+    def source(self, p):
+        x   = p[..., 0]
+        y   = p[..., 1]
+        mu  = self.mu
+        lam = self.lam
+        
+        sin = np.sin
+        cos = np.cos
+        exp = np.exp
+        val = np.zeros(p.shape, dtype=np.float64)
+
+        ux = (x-1) * (exp(x) - 1)
+        uy = (y-1) * (exp(y) - 1)
+        frac_ux_x = x * exp(x) - 1
+        frac_ux_xx = exp(x) * (x+1)
+        frac_uy_y = y * exp(y) - 1
+        frac_uy_yy = exp(y) * (y+1)
+
+        frac_u1_x   = frac_ux_xx * uy
+        frac_u1_y   = ux * frac_uy_yy
+        frac_u1_x_y = frac_ux_x * frac_uy_y
+        frac_u2_x   = frac_ux_xx * uy
+        frac_u2_y   = ux * frac_uy_yy
+        frac_u2_x_y = frac_ux_x * frac_uy_y
+
+        val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
+        val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
+
+        return val
+    
+    def solution(self, p):
+        x = p[..., 0]
+        y = p[..., 1]
+        
+        val = np.zeros(p.shape, dtype=np.float64)
+        
+        ux = (x-1) * (np.exp(x) - 1)
+        uy = (y-1) * (np.exp(y) - 1)
+
+        val[..., 0] = ux * uy
+        val[..., 1] = ux * uy
+
+        return val
+
+# interfaceData1
+# u1 = u2 = x(x-0.5)(x-1) * y(y-0.5)(y-1)
+# uh_dir = "../../image/tmp/interface_uh_u/PDE1/uh_lam={}.png".format(Lam[i])
+# u_dir = "../../image/tmp/interface_uh_u/PDE1/u_lam={}.png".format(Lam[i])
 class interfaceData():
     def __init__(self, mu=np.array([1,2,3,4]), lam=np.array([1,2,3,4])):
         self.mu = mu
@@ -540,6 +667,25 @@ def phiInWhichCell(whichCell):
     phiCell = np.broadcast_to(whichCell[:, :, None], shape=(4, whichCell.shape[1], 2))
     phiCell = phiCell.reshape(4, 2 * whichCell.shape[1])
     return phiCell
+
+# uh_dir = "../../image/tmp/elaticity_uh_u/uh_lam={}.png".format(Lam[i])"
+# u_dir = "../../image/tmp/elaticity_uh_u/u_lam={}.png".format(Lam[i])
+def drawer_uh_u(cr_node, uh, u, uh_dir, u_dir):
+    import matplotlib.pyplot as plt
+    fig = plt.figure(figsize=(10,10))
+    ax = fig.add_subplot(111, projection='3d')
+    #ax2 = fig.add_subplot(122, projection='3d')
+    #plt.subplots_adjust(wspace=0.5)
+
+    x = cr_node[:,0]
+    y = cr_node[:,1]
+
+    ax.plot_trisurf(x, y, uh[:,0], cmap='rainbow')
+    plt.savefig(fname=uh_dir)
+
+    ax.plot_trisurf(x, y, u[:,0], cmap='rainbow')
+    plt.savefig(fname=u_dir)
+    plt.close(fig)
 
 class MESH():
     def __init__(self, node, cell):
