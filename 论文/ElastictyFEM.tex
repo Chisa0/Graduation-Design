@@ -12,7 +12,41 @@
 \def\pgfsysdriver{pgfsys-dvipdfmx.def}
 \usepackage{tikz}
 \usepackage{hyperref}
+\usepackage{amsfonts,amssymb}
+\usepackage{blindtext}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
 \pagestyle{plain}
+
+% 用来设置附录中代码的样式
+
+\lstset{
+	basicstyle          =   \sffamily,          % 基本代码风格
+	keywordstyle        =   \bfseries,          % 关键字风格
+	commentstyle        =   \rmfamily\itshape,  % 注释的风格，斜体
+	stringstyle         =   \ttfamily,  % 字符串风格
+	flexiblecolumns,                % 别问为什么，加上这个
+	numbers             =   left,   % 行号的位置在左边
+	showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+	numberstyle         =   \zihao{-5}\ttfamily,    % 行号的样式，小五号，tt等宽字体
+	showstringspaces    =   false,
+	captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+	frame               =   lrtb,   % 显示边框
+}
+
+\lstdefinestyle{Python}{
+	language        =   Python, % 语言选Python
+	basicstyle      =   \zihao{-5}\ttfamily,
+	numberstyle     =   \zihao{-5}\ttfamily,
+	keywordstyle    =   \color{blue},
+	keywordstyle    =   [2] \color{teal},
+	stringstyle     =   \color{magenta},
+	commentstyle    =   \color{red}\ttfamily,
+	breaklines      =   true,   % 自动换行，建议不要写太长的行
+	columns         =   fixed,  % 如果不加这一句，字间距就不固定，很丑，必须加
+	basewidth       =   0.5em,
+}
 
 \hypersetup{colorlinks=true,linkcolor=black}
 \begin{document}
@@ -23,11 +57,21 @@
 \renewcommand{\abstractname}{\vspace{-2em}\large\bf 摘要}
 \begin{abstract}
 	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下弹性界面问题进行求解  \\
-	\noindent{关键字：\textbf{弹性界面问题}；\textbf{非协调有限元};     \textbf{locking-free}}
+	\noindent{关键字：\textbf{平面弹性问题}; \textbf{间断系数}；\textbf{非协调有限元};   \textbf{locking-free}}
 \end{abstract}
 \thispagestyle{empty}
 
 \newpage
+
+\renewcommand{\abstractname}{\vspace{-2em}\large\bf Abstractname}
+\begin{abstract}
+	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下弹性界面问题进行求解  \\
+	\noindent{关键字：\textbf{平面弹性问题}; \textbf{间断系数}；\textbf{非协调有限元};   \textbf{locking-free}}
+\end{abstract}
+\thispagestyle{empty}
+
+\newpage
+
 \tableofcontents
 
 \newpage
@@ -100,6 +144,469 @@ $$
 $$
 
 则 $H^1$ 是 Hilbert 空间，称之为 Sobolev 空间。
+
+\subsection{弹性问题}
+
+\subsubsection{边值问题}
+
+令$u$，$g$，$t$，$\sigma=(\sigma_{ij})_{1 \le i,j \le 2}$， $\tau = (\tau_{ij})_{1\le i,j \le 2}$ 是双变量函数，定义以下符号
+$$
+\begin{matrix}
+	\epsilon(u) = \frac{1}{2} (grad u + (grad u)^t) \\
+	tr(\tau) = \tau_{11} + \tau_{22} \\
+	grad(u) = \begin{pmatrix}
+		\frac{\partial u_1}{\partial x} & \frac{\partial u_1}{\partial y} \\
+		\frac{\partial u_2}{\partial x} &
+		\frac{\partial u_2}{\partial y}
+	\end{pmatrix} \\
+	\delta = \begin{pmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{pmatrix} \\
+	div u = \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial y} \\
+	div \tau = \begin{pmatrix}
+		\frac{\partial \tau_{11}}{\partial x} + \frac{\partial \tau_{12}}{\partial y} \\
+		\frac{\partial \tau_{12}}{\partial x} + \frac{\partial \tau_{22}}{\partial 
+			y} 
+	\end{pmatrix} \\
+	\sigma : \tau = \sum\limits_{i=1}^{2} \sum\limits_{j=1}^{2} \sigma_{ij} \tau_{ij}
+\end{matrix}
+$$
+
+考虑各项同性弹性材料，令u(x,y)，f(x,y)是其位移和体力，由线弹性问题的静态理论，u，f满足以下方程
+
+\begin{equation}
+\begin{aligned}
+	-div \sigma(u) = f \quad  \in \Omega 
+	%(\sigma(u) \nu) |_{\Gamma2} = t
+\end{aligned}
+\label{elasiticityEq}
+\end{equation}
+
+应力张量 $\sigma(u)$ 定义为
+\begin{equation}
+\sigma(u) = 2 \mu \epsilon(u) + \lambda tr(\epsilon(u)) \delta
+\end{equation}
+
+其中 $\Omega \in \mathbb{R}^2$，正常数$\lambda$， $\mu$为 Lam$\acute{e}$ 常数。假定$(\mu, \lambda) \in [\mu_1,\mu_2] \times (0, +\infty)$。
+
+令 $\Gamma_1$、$\Gamma_2$ 为 $\partial \Omega$ 的两个开子集，使得 $\partial \Omega = \overline{\Gamma_1} \bigcup \overline{\Gamma_2}$ 并且 $\overline{\Gamma_1} \bigcap \overline{\Gamma_2} = \emptyset$，令$\Gamma_1$上的位移边界条件为
+\begin{equation}
+	u|_{\Gamma_1} = g
+\end{equation}
+并且$\Gamma_2$上的牵引力边值条件为
+\begin{equation}
+	(\sigma(u) \nu) |_{\Gamma_2} = t
+\end{equation}
+
+如果$\Gamma_1 = \emptyset$ (或 $\Gamma_2 = \emptyset$)，则边值问题为纯牵引力(或纯位移)问题。
+
+\subsubsection{变分}
+
+对于齐次纯位移问题，令u在边界上满足
+\begin{equation}
+u |_{\partial \Omega} = 0
+\label{qcbjtj}
+\end{equation}
+
+设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程 $\eqref{elasiticityEq}$ 两边同乘 $\nu$ 并积分得
+
+\begin{equation}
+-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
+\label{dycjf}
+\end{equation}
+
+参考文献知\textsuperscript{\cite{陈纪修2004数学分析}}
+
+\begin{equation}
+	f div a = div(fa) - a : grad f 
+\label{fbjf}
+\end{equation}
+\begin{equation}
+	\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
+\label{sddl}
+\end{equation}
+
+将边界条件$\eqref{qcbjtj}$，方程$\eqref{fbjf}$，$\eqref{sddl}$带入方程$\eqref{dycjf}$得
+
+\par \quad \quad
+$-\int_{\Omega} div \sigma(u) \nu dxdy$
+$$ 
+\quad \quad
+\begin{matrix}
+	\begin{aligned}
+		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\
+		&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy  \\
+		&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy
+	\end{aligned}
+\end{matrix}
+$$
+
+所以
+$$
+\mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy = \int_{\Omega} f \nu dxdy
+$$
+
+\textbf{该问题的变分问题为}，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = 0$，并且
+\begin{equation}
+a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
+\label{bffc}
+\end{equation}
+\par
+其中
+$$
+\begin{matrix}
+	\begin{aligned}
+		a(u,\nu) :&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy \\  
+		
+		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
+	\end{aligned}
+\end{matrix}
+$$
+
+\textbf{Lax-Milgram定理\textsuperscript{\cite{brenner2008mathematical}}：} 设 H 是 Hilbert 空间，$a(\bullet,\bullet)$ 是 $H \times H$ 上的有界的强制的双线性泛函。则对任意的$F \in H$，存在唯一的 $u \in H$ 满足
+$$
+	a(u,\nu) = (f,\nu), \quad \forall \nu \in H 
+$$
+
+由Lax-Milgram定理知，此变分问题的解存在且唯一。
+
+%证其与原问题的等价性
+
+%\begin{enumerate}
+%	\item 若 u 为原问题的解 \\
+
+
+%	\item 若 u 为变分问题的解 \\
+%	由
+%	\par \quad \quad
+%	$\int_{\Omega} \sigma(u) : grad \nu dxdy$
+%	$$
+%	\quad \quad
+%	\begin{matrix}
+	%		\begin{aligned}
+		%			&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad %\nu dxdy \\
+		%			&= -\int_{\Omega} div \sigma(u) \nu dxdy
+		%		\end{aligned}
+	%	\end{matrix} 
+%	$$
+%
+%	得
+%	$$
+%		-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
+%	$$
+%	
+%	由变分法基本引理得
+%	$$
+%		-div \sigma(u) = f
+%	$$
+%	
+%\end{enumerate}
+
+\subsubsection{引入间断系数}
+
+设 $\Omega_1$，$\Omega_2$ 是 $\Omega$ 的两个子集，使得 $\Omega_1 \bigcup \Omega_2 = \Omega$ 并且 $\Omega_1 \bigcap \Omega_2 = \emptyset$，
+
+考虑以下边值问题
+$$
+\begin{matrix}
+	-div \sigma(u) = f \quad \in \Omega \\
+	u |_{\partial \Omega} = 0
+\end{matrix}
+$$
+
+当Lam$\acute{e}$ 常数 $\lambda$，$\mu$ 在 $\Omega_1$，$\Omega_2$ 上取不同值，即 $(x,y) \in \Omega_1$ 时 $\lambda = \lambda_1$，$\mu = \mu_1$，$(x,y) \in \Omega_2$ 时 $\lambda = \lambda_2$，$\mu = \mu_2$，通过计算得到与此问题对应的双线性形式为
+\begin{equation}
+\begin{aligned}
+	a(u,\nu) &= \mu_1 \int_{\Omega_1} grad u : grad \nu dxdy + (\mu_1 +\lambda_1) \int_{\Omega_1} div u div \nu  dxdy \\
+	&+ \mu_2 \int_{\Omega_2} grad u : grad \nu dxdy + (\mu_2 +\lambda_2) \int_{\Omega_2} div u div \nu  dxdy
+\end{aligned}
+\end{equation}
+
+\subsection{离散}
+
+\subsubsection{Galerkin法}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw [step=71pt] (0,5) grid (5,0);
+		
+		\draw (0,0)--(5,5);
+		\draw (0,2.5)--(2.5,5);
+		\draw (2.5,0)--(5,2.5);
+		
+		\node at(-0.5,-0.5) {$p_0$};
+		\node at(2.5,-0.5)  {$p_4$};
+		\node at(5.5,-0.5)  {$p_1$};
+		\node at(-0.5,2.5)  {$p_6$};
+		\node at(2.5,2)     {$p_5$};
+		\node at(5.5,2)     {$p_7$};
+		\node at(-0.5,5.5)  {$p_3$};
+		\node at(2.5,5.5)   {$p_8$};
+		\node at(5.5,5.5)   {$p_2$};
+		
+		\node at(0.8,1.6) {3};
+		\node at(1.7,0.9) {4};
+		\node at(3.3,1.6) {6};
+		\node at(4.2,0.9) {0};
+		\node at(0.8,4.1) {1};
+		\node at(1.7,3.4) {7};
+		\node at(3.3,4.1) {5};
+		\node at(4.2,3.4) {2};
+	\end{tikzpicture}
+	\caption{}
+	\label{hf}
+\end{figure}
+
+设求解区间$\Omega = [0,1] \times [0,1]$，首先对其按照图$\ref{hf}$进行网格剖分，节点为
+$$
+p_0, p_1, ... , p_n 
+$$
+图中的三角形区域称为单元。
+
+其次，在Sobolev空间 $H^1$ 内取子空间 $U_h$，它的元素在每一单元是次数不超过某一正整数 m 的多项式，在全区域 $\Omega$ 上属于函数空间 $H^1$。则 $U_h \times U_h$ 为试图函数空间。
+
+设
+$$
+\begin{matrix}
+	U_h = span(\varphi_0, \varphi_1, ... , \varphi_n) \\
+	\phi_{2i} = (\varphi_i, 0), \quad \phi_{2i+1} = (0, \varphi_i), \quad i=0,...,n
+\end{matrix}
+$$
+
+则 $\forall u_h \in U_h \times U_h$，可表成
+\begin{equation}
+	u_h = \sum\limits_{i=0}^{2n+1} c_i \phi_i
+	\label{uh}
+\end{equation}
+
+将式 $\eqref{uh}$ 带入方程 $\eqref{bffc}$中得到 Galerkin 方程
+$$
+	\sum\limits_{i=0}^{2n+1} a(\phi_i, \phi_j) c_i = (f,\phi_j), \quad j = 0, 1, ... , 2n+1 
+$$ 
+
+令
+
+$$
+\begin{matrix}
+	A = (a(\phi_j, \phi_i))_{0 \le i,j \le 2n+1} \\
+	F = ((f,\phi_i))_{0 \le i \le 2n+1} \\
+	c = (c_i)_{0 \le i \le 2n+1}
+\end{matrix}
+$$
+
+则 Galerkin 方程的矩阵形式为
+
+$$
+	Ac = F
+$$
+
+模型为齐次边界条件，若$(x_i,y_i)$为边界点，则 A 第 2i 行第 2i 列，第 2i+1 行第 2i+1 列元素为1，第 2i 和 2i+1 行的其他元素及  F(2i)，F(2i+1) 都为0。
+
+\subsubsection{线性元}
+
+如图$\ref{xxy}$，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点p，坐标为$(x,y)$。过p点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p), \bigtriangleup(p_0,p,p_2), \bigtriangleup(p_0,p_1,p) $，其面积分别为$S_0,S_1,S_2$ \textsuperscript{\cite{李荣华2007偏微分方程数值解}}
+
+%\begin{figure}[hbt]
+%	\centering
+%\includegraphics[height=3cm,width=4cm]{../image/TriangleElement.png}
+%	\caption{}
+%	\label{SampleOfDatasets}
+%\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw (3,0)--(7,0)--(5,3)--cycle;
+		\draw (3,0)--(5,1.3)--(7,0);
+		\draw (5,1.3)--(5,3);
+		\filldraw (3,0)   circle(.1)
+		(7,0) circle(.1)
+		(5,3) circle(.1)
+		(5,1.3) circle(.1);
+		\node at(2.5,0)  {$p_0$};
+		\node at(7.5,0)   {$p_1$};
+		\node at(5,3.5)   {$p_2$};
+		\node at(5.3,1.3) {p};
+	\end{tikzpicture}
+	\caption{}
+	\label{xxy}
+\end{figure}
+
+显然$S_0 + S_1 + S_2 = S$，令
+$$
+L_0 = \frac{S_0}{S}, \quad L_1 = \frac{S_1}{S}, \quad L_2 = \frac{S_2}{S}
+$$
+\par
+%称$(L_0,L_1,L_2)$位$P_3$的面积坐标，其中
+%$$
+%	\begin{cases}
+	%		2S = \left| \begin{matrix}
+		%				1 & x_0 & y_0 \\
+		%				1 & x_1 & y_1 \\
+		%				1 & x_2 & y_2
+		%			 \end{matrix} \right| ,
+	%		 \quad
+	%		 2S_0 = \left| \begin{matrix}
+		%		 			1 & x   & y   \\
+		%		 			1 & x_1 & y_1 \\
+		%		 			1 & x_2 & y_2
+		%		 \end{matrix} \right| 
+	%		 \\
+	%		2S_1 = \left| \begin{matrix}
+		%					1 & x_0 & y_0 \\
+		%					1 & x   & y   \\
+		%					1 & x_2 & y_2
+		%			   \end{matrix} \right|,
+	%		\quad
+	%		2S_2 = \left| \begin{matrix}
+		%					1 & x_0 & y_0 \\
+		%					1 & x_1 & y_1 \\
+		%					1 & x   & y
+		%			   \end{matrix} \right|
+	%	\end{cases}
+%$$
+
+%由此可得面积坐标和直角坐标的转化关系
+%$$
+%\begin{cases}
+%	x = x_0 L_0 + x_1 L_1 + x_2 L_2 \\
+%	y = y_0 L_0 + y_1 L_1 + x_2 L_2
+%\end{cases}
+%$$
+$$
+\begin{cases}
+	L_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
+	L_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
+	L_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
+\end{cases} 
+$$
+
+因为
+
+$$
+\begin{cases}
+	L_0 = \begin{cases}
+		1, \quad x = x_0, y = y_0 \\
+		0, \quad x = x_1, y = y_1 \\
+		0, \quad x = x_2, y = y_2
+	\end{cases} \\
+	L_1 = \begin{cases}
+		0, \quad x = x_0, y = y_0 \\
+		1, \quad x = x_1, y = y_1 \\
+		0, \quad x = x_2, y = y_2
+	\end{cases} \\
+	L_2 = \begin{cases}
+		0, \quad x = x_0, y = y_0 \\
+		0, \quad x = x_1, y = y_1 \\
+		1, \quad x = x_2, y = y_2
+	\end{cases} \\
+\end{cases}
+$$
+
+所以在此区间上 $\varphi_i = L_i$，即
+
+$$
+\begin{cases}
+	\varphi_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
+	\varphi_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
+	\varphi_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
+\end{cases} 
+$$
+
+
+\subsubsection{C-R元}
+
+如图$\ref{CRElem}$，设三角形 $\bigtriangleup(q_0,q_1,q_2)$ 是以 $q0,q1,q2$ 为顶点的任意三角形元，$p_0,p_1,p_2$ 为其三条边的中点，其坐标分别为$(x_0.y_0),(x_1,y_1),(x_2,y_2)$。
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=0.9]
+		\draw (0,0)--(4,0)--(2,3)--cycle;
+		\filldraw (2,0)   circle(.1)
+		(3,1.5) circle(.1)
+		(1,1.5) circle(.1)
+		(0,0) circle(.1)
+		(4,0) circle(.1)
+		(2,3) circle(.1);
+		
+		\node at(2,-0.5)  {$p_0$};
+		\node at(3.5,1.5) {$p_1$};
+		\node at(0.5,1.5) {$p_2$};
+		
+		\node at(-0.5,0) {$q_1$};
+		\node at(4.5,0) {$q_2$};
+		\node at(2,3.5) {$q_0$};
+	\end{tikzpicture}
+	\caption{}
+	\label{CRElem}
+\end{figure}
+
+设三角形 $\bigtriangleup(q_0,q_1,q_2)$ 上的C-R元为 $\varphi_0, \varphi_1,\varphi_2$，
+
+$$
+\varphi_i = a_i x + b_i y + c_i, \quad i = 0,1,2
+$$
+
+且其在 $p_0$，$p_1$，$p_2$ 点上满足以下关系式
+
+\begin{equation}
+\varphi_i(p_j) = \begin{cases}
+	1, \quad i = j \\
+	0, \quad i \ne j	
+\end{cases}, \quad i, j = 0,1,2
+\label{crjs}
+\end{equation}
+
+设
+
+$$
+A = \begin{bmatrix}
+	x_0 & y_0 &1 \\
+	x_1 & y_1 &1 \\
+	x_2 & y_2 &1 \\
+\end{bmatrix}, \quad 
+c_i = (a_i,b_i,c_i)^t , \quad
+f = (x,y,1)^t
+$$
+
+则方程组 $\eqref{crjs}$ 的矩阵形式为
+
+$$
+A c_i = e_i, \quad i = 0,1,2
+$$
+
+通过计算可以得到单元$\bigtriangleup(q_0, q_1, q_2)$ 上的 C-R 元为
+
+$$
+\varphi_i = A^{-1} e_i f, \quad i = 0,1,2
+$$ 
+
+\iffalse
+$$
+\begin{cases}
+	\begin{cases}
+		\varphi_0(p_0) = a_0 x_0 + b_0 y_0 + c_0 = 1 \\
+		\varphi_0(p_1) = a_0 x_1 + b_0 y_1 + c_0 = 0 \\
+		\varphi_0(p_2) = a_0 x_2 + b_0 y_2 + c_0 = 0
+	\end{cases} \\
+	\begin{cases}
+		\varphi_1(p_0) = a_1 x_0 + b_1 y_0 + c_1 = 0 \\
+		\varphi_1(p_1) = a_1 x_1 + b_1 y_1 + c_1 = 1 \\
+		\varphi_1(p_2) = a_1 x_2 + b_1 y_2 + c_1 = 0 
+	\end{cases} \\
+	\begin{cases}
+		\varphi_2(p_0) = a_2 x_0 + b_2 y_0 + c_2 = 0 \\
+		\varphi_2(p_1) = a_2 x_1 + b_2 y_1 + c_2 = 0 \\
+		\varphi_2(p_2) = a_2 x_2 + b_2 y_2 + c_2 = 1
+	\end{cases}
+\end{cases}
+$$
+\fi
+
 \subsection{误差估计}
 
 假设$\Omega$是一个凸多边形区域，并且$\Gamma_1$ or $\Gamma_2$中任意一个为空。对于纯位移问题($\Gamma_2=\emptyset$)，只考虑齐次边界条件。
@@ -132,7 +639,7 @@ $$
 	$$
 	\textbf{Theorem\textsuperscript{\cite{brenner2008mathematical}}.} 令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
 	$$
-	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma} t \cdot \nu ds \quad \forall \nu \in V_h.
+	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma_2} t \cdot \nu ds \quad \forall \nu \in V_h.
 	$$ 
 	\\
 	则存在一个正常数$C_{(\mu, \lambda)}$ 使得\textsuperscript{\cite{brenner2008mathematical}}
@@ -161,7 +668,7 @@ $$
 	\end{matrix}
 	$$
 	
-	令 $T^h$ 为 $\Omega $ (图 1) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
+	令 $T^h$ 为 $\Omega $ (图$\ref{pf}$) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
 	$$
 	\begin{matrix}
 		a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
@@ -194,6 +701,7 @@ $$
 		\node at(0.7,5.25) {$T_3$};
 	\end{tikzpicture}
 	\caption{}
+	\label{pf}
 \end{figure}
 	
 	定义 $L_{\lambda,h}$ 为
@@ -273,296 +781,17 @@ $$
 	$$
 	\fi
 
-\subsection{剖分与基函数}
-
-\subsubsection{剖分}
-
-对正方形区域 $\Omega$ 按图2方式剖分，并对节点和单元进行编号，各节点坐标为$(x_i,y_i)$， i=0, ... , n，
-
-%\begin{figure}[hbt]
-%	\centering
-%	\includegraphics[height=4cm,width=4cm]{../image/subdivsion.png}
-%	\caption{}
-%\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-		\draw [step=71pt] (0,5) grid (5,0);
-		
-		\draw (0,0)--(5,5);
-		\draw (0,2.5)--(2.5,5);
-		\draw (2.5,0)--(5,2.5);
-		
-		\node at(-0.5,-0.5) {p0};
-		\node at(2.5,-0.5)  {p4};
-		\node at(5.5,-0.5)  {p1};
-		\node at(-0.5,2.5)  {p6};
-		\node at(2.5,2)     {p5};
-		\node at(5.5,2)     {p7};
-		\node at(-0.5,5.5)  {p3};
-		\node at(2.5,5.5)   {p8};
-		\node at(5.5,5.5)   {p2};
-		
-		\node at(0.8,1.6) {3};
-		\node at(1.7,0.9) {4};
-		\node at(3.3,1.6) {6};
-		\node at(4.2,0.9) {0};
-		\node at(0.8,4.1) {1};
-		\node at(1.7,3.4) {7};
-		\node at(3.3,4.1) {5};
-		\node at(4.2,3.4) {2};
-	\end{tikzpicture}
-	\caption{划分}
-	\label{1}
-\end{figure}
-
-\iffalse
-设基函数为 
-$$ 
-(\varphi_0,0)^t, (0,\varphi_0)^t, (\varphi_1,0)^t, (0,\varphi_1)^t, ... , (\varphi_n,0)^t, (0,\varphi_n)^t 
-$$
-
-$\varphi_i$ 为线性元，以下得到其在各单元上表达式。 
-\fi
-
-\subsubsection{线性元}
-
-如图3，设 $ \bigtriangleup(p_0,p_1,p_2) $ 是以 $p_0,p_1,p_2$ 为顶点的任意三角型元，面积为S。在 $ \bigtriangleup (p_0,p_1,p_2) $ 内任取一点p，坐标为$(x,y)$。过p点作与三个顶点的连线，将 $ \bigtriangleup(p_0,p_1,p_2) $ 分成三个三角形: $ \bigtriangleup(p_1,p_2,p), \bigtriangleup(p_0,p,p_2), \bigtriangleup(p_0,p_1,p) $，其面积分别为$S_0,S_1,S_2$ \textsuperscript{\cite{李荣华2007偏微分方程数值解}}
-
-%\begin{figure}[hbt]
-%	\centering
-%\includegraphics[height=3cm,width=4cm]{../image/TriangleElement.png}
-%	\caption{}
-%	\label{SampleOfDatasets}
-%\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-		\draw (3,0)--(7,0)--(5,3)--cycle;
-		\draw (3,0)--(5,1.3)--(7,0);
-		\draw (5,1.3)--(5,3);
-		\filldraw (3,0)   circle(.1)
-		(7,0) circle(.1)
-		(5,3) circle(.1)
-		(5,1.3) circle(.1);
-		\node at(2.5,0)  {$p_0$};
-		\node at(7.5,0)   {$p_1$};
-		\node at(5,3.5)   {$p_2$};
-		\node at(5.3,1.3) {p};
-	\end{tikzpicture}
-	\caption{}
-	\label{1}
-\end{figure}
-
-显然$S_0 + S_1 + S_2 = S$，令
-$$
-L_0 = \frac{S_0}{S}, \quad L_1 = \frac{S_1}{S}, \quad L_2 = \frac{S_2}{S}
-$$
-\par
-%称$(L_0,L_1,L_2)$位$P_3$的面积坐标，其中
-%$$
-%	\begin{cases}
-	%		2S = \left| \begin{matrix}
-		%				1 & x_0 & y_0 \\
-		%				1 & x_1 & y_1 \\
-		%				1 & x_2 & y_2
-		%			 \end{matrix} \right| ,
-	%		 \quad
-	%		 2S_0 = \left| \begin{matrix}
-		%		 			1 & x   & y   \\
-		%		 			1 & x_1 & y_1 \\
-		%		 			1 & x_2 & y_2
-		%		 \end{matrix} \right| 
-	%		 \\
-	%		2S_1 = \left| \begin{matrix}
-		%					1 & x_0 & y_0 \\
-		%					1 & x   & y   \\
-		%					1 & x_2 & y_2
-		%			   \end{matrix} \right|,
-	%		\quad
-	%		2S_2 = \left| \begin{matrix}
-		%					1 & x_0 & y_0 \\
-		%					1 & x_1 & y_1 \\
-		%					1 & x   & y
-		%			   \end{matrix} \right|
-	%	\end{cases}
-%$$
-
-%由此可得面积坐标和直角坐标的转化关系
-%$$
-%\begin{cases}
-%	x = x_0 L_0 + x_1 L_1 + x_2 L_2 \\
-%	y = y_0 L_0 + y_1 L_1 + x_2 L_2
-%\end{cases}
-%$$
-$$
-\begin{cases}
-	L_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
-	L_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
-	L_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
-\end{cases} 
-$$
-
-因为
-
-$$
-\begin{cases}
-	L_0 = \begin{cases}
-		1, \quad x = x_0, y = y_0 \\
-		0, \quad x = x_1, y = y_1 \\
-		0, \quad x = x_2, y = y_2
-	\end{cases} \\
-	L_1 = \begin{cases}
-		0, \quad x = x_0, y = y_0 \\
-		1, \quad x = x_1, y = y_1 \\
-		0, \quad x = x_2, y = y_2
-	\end{cases} \\
-	L_2 = \begin{cases}
-		0, \quad x = x_0, y = y_0 \\
-		0, \quad x = x_1, y = y_1 \\
-		1, \quad x = x_2, y = y_2
-	\end{cases} \\
-\end{cases}
-$$
-
-所以在此区间上 $\varphi_i = L_i$，即。
-
-$$
-\begin{cases}
-	\varphi_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
-	\varphi_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
-	\varphi_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
-\end{cases} 
-$$
-
-
-\subsubsection{CR元}
-
-如图4，设三角形 $\bigtriangleup(q_0,q_1,q_2)$ 是以 $q0,q1,q2$ 为顶点的任意三角形元，$p_0,p_1,p_2$ 为其三条边的中点，其坐标分别为$(x_0.y_0),(x_1,y_1),(x_2,y_2)$。
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}[scale=0.9]
-		\draw (0,0)--(4,0)--(2,3)--cycle;
-		\filldraw (2,0)   circle(.1)
-				  (3,1.5) circle(.1)
-				  (1,1.5) circle(.1)
-				  (0,0) circle(.1)
-				  (4,0) circle(.1)
-				  (2,3) circle(.1);
-		
-		\node at(2,-0.5)  {$p_0$};
-		\node at(3.5,1.5) {$p_1$};
-		\node at(0.5,1.5) {$p_2$};
-		
-		\node at(-0.5,0) {$q_1$};
-		\node at(4.5,0) {$q_2$};
-		\node at(2,3.5) {$q_0$};
-	\end{tikzpicture}
-	\caption{}
-	\label{1}
-\end{figure}
-
-设三角形 $\bigtriangleup(q_0,q_1,q_2)$ 上的CR元为 $\varphi_0, \varphi_1,\varphi_2$，
-
-$$
-	\varphi_i = a_i x + b_i y + c_i, \quad i = 0,1,2
-$$
-
-$$
-	\varphi_i(p_j) = \begin{cases}
-		1, \quad i = j \\
-		0, \quad i \ne j	
-	\end{cases}, \quad i, j = 0,1,2
-$$
-
-设
-
-$$
-	A = \begin{bmatrix}
-		x_0 & y_0 &1 \\
-		x_1 & y_1 &1 \\
-		x_2 & y_2 &1 \\
-	\end{bmatrix}, \quad 
-	c_i = (a_i,b_i,c_i)^t , \quad
-	f = (x,y,1)^t
-$$
-
-则
-
-$$
-	A c_i = e_i, \quad i = 0,1,2
-$$
-
-所以
-
-$$
-	c_i = A^{-1} e_i
-$$
-
-$$
-	\varphi_i = A^{-1} e_i f, \quad i = 0,1,2
-$$ 
-
-\iffalse
-$$
-\begin{cases}
-	\begin{cases}
-		\varphi_0(p_0) = a_0 x_0 + b_0 y_0 + c_0 = 1 \\
-		\varphi_0(p_1) = a_0 x_1 + b_0 y_1 + c_0 = 0 \\
-		\varphi_0(p_2) = a_0 x_2 + b_0 y_2 + c_0 = 0
-	\end{cases} \\
-	\begin{cases}
-		\varphi_1(p_0) = a_1 x_0 + b_1 y_0 + c_1 = 0 \\
-		\varphi_1(p_1) = a_1 x_1 + b_1 y_1 + c_1 = 1 \\
-		\varphi_1(p_2) = a_1 x_2 + b_1 y_2 + c_1 = 0 
-	\end{cases} \\
-	\begin{cases}
-		\varphi_2(p_0) = a_2 x_0 + b_2 y_0 + c_2 = 0 \\
-		\varphi_2(p_1) = a_2 x_1 + b_2 y_1 + c_2 = 0 \\
-		\varphi_2(p_2) = a_2 x_2 + b_2 y_2 + c_2 = 1
-	\end{cases}
-\end{cases}
-$$
-\fi
-
 \section{算例}
 
 \subsection{弹性问题}
 
-\subsubsection{模型}
+\subsubsection{算例一}
 
-令
-$$
-\begin{matrix}
-	\sigma(u) = 2 \mu \epsilon(u) + \lambda tr(\epsilon(u)) \delta \\
-	\epsilon(u) = \frac{1}{2} (grad u + (grad u)^t) \\
-	tr(\tau) = \tau_{11} + \tau_{22} \\
-	grad(u) = \begin{pmatrix}
-		\frac{\partial u_1}{\partial x} & \frac{\partial u_1}{\partial y} \\
-		\frac{\partial u_2}{\partial x} &
-		\frac{\partial u_2}{\partial y}
-	\end{pmatrix} \\
-	\delta = \begin{pmatrix}
-		1 & 0 \\
-		0 & 1
-	\end{pmatrix} \\
-	div u = \frac{\partial u_1}{\partial x} + \frac{\partial u_2}{\partial y} \\
-	div \tau = \begin{pmatrix}
-		\frac{\partial \tau_{11}}{\partial x} + \frac{\partial \tau_{12}}{\partial y} \\
-		\frac{\partial \tau_{12}}{\partial x} + \frac{\partial \tau_{22}}{\partial 
-		y}
-	\end{pmatrix}
-\end{matrix}
-$$
-
-考察模型
+考察以下边值问题
 $$
 \begin{matrix}
 	-div \sigma(u) = f \quad \in \Omega  \\
-	u |_{\Gamma} = 0
+	u |_{\partial \Omega} = 0
 	%(\sigma(u) \nu) |_{\Gamma2} = t
 \end{matrix}
 $$ 
@@ -573,245 +802,141 @@ $$
 	u_1 = (x - 1)(y - 1) y sin(x) 
 	\\
 	u_2 = (x - 1)(y - 1) x sin(y) 
-	\\
-	f_1 = -((2 \mu + \lambda) y (y - 1) (2 cos(x) - (x - 1) sin(x)) \\
-	+ (\mu + \lambda) (2 x - 1) (sin(y) + (y - 1) cos(y)) \\
-	+ 2 \mu (x - 1) sin(x)) 
-	\\
-	f_2 = -((2 \mu + \lambda) x (x - 1) (2 cos(y) - (y - 1) sin(y)) \\
-	+ (\mu + \lambda) (2 y - 1) (sin(x) + (x - 1) cos(x)) \\ 
-	+ 2 \mu (y - 1) sin(y))
 \end{matrix}
 $$
 
-\subsubsection{变分}
+通过数值实验得到，当 $\mu = \lambda = 1, 1E4, 1E8$ 时的误差及误差阶如下表
 
-设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
-$$
--\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
-$$
+\begin{table}[h]
+	\centering
+	\caption{$|u-u_h|_{H_1}$}
+	\scalebox{0.8}{
+	\begin{tabular}{|c|c|c|c|c|c|c|} \hline
+		\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+		1 &4.102804E-1 &1.424371E-1 &8.382384E-2 &4.737414-2 &2.528276E-2 &0.8305559 \\ \hline
+		1E4 &4.102804E-1 &1.424371E-1 &8.382384E-2 &4.737414E-2 &2.528276E-2 &0.8305559  \\ \hline
+		1E8 &4.102804E-1 &1.424371E-1 &8.382384E-2 &4.737414E-2 &2.528276E-2 &0.8305559 \\ \hline
+	\end{tabular}}
+\end{table}
 
-由
+数值解和精确解图像如下
+
+\begin{figure}[ht]
+	\centering
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE1/uh_lam=1.png}
+		\label{elsticity_uh_1}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE1/u_lam=1.png}
+		\label{elsticity_u_1}}
+\end{figure}
+
+\newpage
+
+\subsubsection{算例二}
+
+考察以下边值问题
 $$
 \begin{matrix}
-	f div a = div(fa) - a : grad f \\
-	\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
+	-div \sigma(u) = f \quad \in \Omega  \\
+	u |_{\partial \Omega} = 0
+	%(\sigma(u) \nu) |_{\Gamma2} = t
 \end{matrix}
-$$
-
-得
-\par \quad \quad
-$-\int_{\Omega} div \sigma(u) \nu dxdy$
-$$ 
-\quad \quad
-\begin{matrix}
-	\begin{aligned}
-		&= -\int_{\Omega} div(\sigma(u) \nu) dxdy - \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= \int_{\Omega} \sigma(u) : grad \nu dxdy \\
-		&= \int_{\Omega} 2 \mu \epsilon(u) : grad \nu + \lambda div u div \nu dxdy  \\
-		&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy
-	\end{aligned}
-\end{matrix}
-$$
-
-所以
-$$
-\mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy = \int_{\Omega} f \nu dxdy
-$$
-
-该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
-$$
-	a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
 $$ 
 \par
-其中
-$$
-	\begin{matrix}
-		\begin{aligned}
-			a(u,\nu) :&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy \\  
-			
-			V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
-		\end{aligned}
-	\end{matrix}
-$$
-
-%证其与原问题的等价性
-
-%\begin{enumerate}
-%	\item 若 u 为原问题的解 \\
-
-	
-%	\item 若 u 为变分问题的解 \\
-%	由
-%	\par \quad \quad
-%	$\int_{\Omega} \sigma(u) : grad \nu dxdy$
-%	$$
-%	\quad \quad
-%	\begin{matrix}
-%		\begin{aligned}
-%			&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega} \sigma(u) : grad %\nu dxdy \\
-%			&= -\int_{\Omega} div \sigma(u) \nu dxdy
-%		\end{aligned}
-%	\end{matrix} 
-%	$$
-%
-%	得
-%	$$
-%		-\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
-%	$$
-%	
-%	由变分法基本引理得
-%	$$
-%		-div \sigma(u) = f
-%	$$
-%	
-%\end{enumerate}
-
-\subsubsection{刚度矩阵}
-
-设 $\varphi_{xi} = (\varphi_i, 0)^t, \varphi_{yi} = (0,\varphi_i)^t$，i = 0, ... , n 为试探函数空间$U_h$的基函数，则任一 $u_h \in U_h$ 可表成
-$$
-	u_h = \sum\limits_{i=1}^n u^{i}_1 \varphi_{xi} + \sum\limits_{i=1}^n u^{i}_2 \varphi_{yi}, \quad u^i = u_h(x_i,y_i)
-$$ 
-\\ 
-令 $\phi_{2i} = \varphi_{xi}$ ，$\phi_{2i+1} = \varphi_{yi}$ , $c_{2i} = u^i_1$ ， $c_{2i+1} = u^i_2$
-带入变分形式得
-$$
-	\sum\limits_{j=0}^{2n+1} a(\phi_j, \phi_i) c_i = (f,\phi_i) \quad i=0, ... ,2n+1
-$$
-
-矩阵形式为
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,1] \times [0,1] $
 $$
 \begin{matrix}
-	A c = F \\
-	A = (a(\phi_i, \phi_j))_{(2n+1) \times (2n+1)} \\
-	F = ((f,\phi_i))_{(2n+1) \times 1} \\
-	c = (c_i)_{(2n+1) \times 1}
+	u_1 = x^2 sin(x-1) y^2 sin(y-1) 
+	\\
+	u_2 = x^2 sin(x-1) y^2 sin(y-1)
 \end{matrix}
 $$
 
-%\subsection{单元刚度矩阵}
-%
-%在第m个单元cell=$\bigtriangleup(i,j,k)$上，单元刚度矩阵和单元载荷向量为
-%$$
-%\begin{matrix}
-%	A^{(m)} = (\int_{cell} (2 \mu \epsilon(\phi_{i_1}) : \epsilon(\phi_{j_1}) + %\lambda div \phi_{i_1} div \phi_{j_1}))_{3 \times 3} \\
-%	F^{(m)} = (\int_{cell} f \cdot \phi_{i_1})_{3 \times 1} \\
-%	i_1, j_1 = i, j, k
-%\end{matrix} 
-%$$
-%
-%将$A^{(m)}$扩展成$n \times n$矩阵，行列为i，j，k的九个元素即为$A^{(m)}$的九个元素，并以同样的方式将$F^{(m)}$扩展成$n \times 1$向量，则
-%$$
-%\begin{matrix} 
-%	A = \sum\limits_{m=0}^n A^{(m)} \\
-%	F = \sum\limits_{m=0}^n F^{(m)}
-%\end{matrix}
-%$$
-
-\subsubsection{边界条件}
-
-模型为齐次边界条件，若$(x_i,y_i)$为边界点，则 A 第 2i 行第 2i 列，第 2i+1 行第 2i+1 列元素为1，其他元素及  F(2i)，F(2i+1) 都为0。
-
-%\vfill \newpage
-
-%\bibliographystyle{unsrt}
-%\bibliography{interface_problem}
-
-\subsubsection{实验结果}
-
-通过数值实验得到，当 $\mu = 1, \lambda = 1, 1e1, ..., 1e5$ 时的误差如下表
+通过数值实验得到，当 $\mu = \lambda = 1, 1E4, 1E8$ 时的误差及误差阶如下表
 
 \begin{table}[h]
 	\centering
-	\caption{线性元误差}
+	\caption{$|u-u_h|_{H_1}$}
 	\scalebox{0.8}{
-	\begin{tabular}{|c|c|c|c|c|c|} \hline
-		\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 \\ \hline
-		1 &0.0 &5.3881e-5 &1.1197e-4 &3.9125e-5 &1.0772e-5 \\ \hline
-		10 &0.0 &1.1963e-2 &2.6789e-3 &6.4168e-4 &1.6060e-4  \\ \hline
-		100 &0.0 &1.8830e-2 &4.7420e-3 &1.2635e-3 &3.5042e-4  \\ \hline
-		1e3 &0.0 &1.9855e-2 &5.2306e-3 &1.6399e-3 &6.7184e-4  \\ \hline
-		1e4 &0.0 &1.9963e-2 &5.2878e-3 &1.7076e-3 &6.6349e-4  \\ \hline
-		1e5 &0.0 &1.9974e-2 &5.2936e-3 &1.7150e-3 &8.2476e-4 \\ \hline
+		\begin{tabular}{|c|c|c|c|c|c|c|} \hline
+			\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+			1 &1.381670E-1 &1.038442E-1 &4.190134E-2 &2.135923E-2 &1.113314E-2 &1.063660 \\ \hline
+			1E4 &1.381670E-1 &1.038442E-1 &4.190134E-2 &2.135923E-2 &1.113314E-2 &1.063660  \\ \hline
+			1E8 &1.381670E-1 &1.038442E-1 &4.190134E-2 &2.135923E-2 &1.113314E-2 &1.063660 \\ \hline
 	\end{tabular}}
 \end{table}
 
-\iffalse
-\begin{figure}[h]
-	\centering
-	\subfigure[$\lambda$=1]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_1.png}
-		\label{1}}	
-	\subfigure[$\lambda$=10]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_10.0.png}
-		\label{10}}
-	\subfigure[$\lambda$=100]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_100.0.png}
-		\label{100}}
-	
-	\subfigure[$\lambda$=1000]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_1000.0.png}
-		\label{1000}}
-	\subfigure[$\lambda$=10000]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_10000.0.png}
-		\label{10000}}
-	\subfigure[$\lambda$=100000]{
-		\includegraphics[height=2cm,width=3cm]{../image/Fem/elasticityFemLam_100000.0.png}
-		\label{100000}}
-	\caption{线性元误差}
-\end{figure}
-\fi
+数值解和精确解图像如下
 
-\begin{table}[h]
+\begin{figure}[ht]
 	\centering
-	\caption{CR元误差}
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE2/uh_lam=1.png}
+		\label{elsticity_uh_2}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE2/u_lam=1.png}
+		\label{elsticity_u_2}}
+\end{figure}
+
+\newpage
+
+\subsubsection{算例三}
+
+考察以下边值问题
+$$
+\begin{matrix}
+	-div \sigma(u) = f \quad \in \Omega  \\
+	u |_{\partial \Omega} = 0
+	%(\sigma(u) \nu) |_{\Gamma2} = t
+\end{matrix}
+$$ 
+\par
+其中$ u = (u_1,u_2)^t $ 为求解向量，$ f = (f_1,f_2)^t $为右端向量，$ \Omega = [0,1] \times [0,1] $
+$$
+\begin{matrix}
+	u_1 = -(x-1) (e^x-1) (y-1) (e^y-1)
+	\\
+	u_2 = -(x-1) (e^x-1) (y-1) (e^y-1) 
+\end{matrix}
+$$
+
+通过数值实验得到，当 $\mu = \lambda = 1, 1E4, 1E8$ 时的误差及误差阶如下表
+
+\begin{table}[ht]
+	\centering
+	\caption{$|u-u_h|_{H_1}$}
 	\scalebox{0.8}{
-	\begin{tabular}{|c|c|c|c|c|c|} \hline
-		\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 \\ \hline
-		1 &2.9011 &7.9878e-2 &2.0326e-2 &5.8054e-3 &1.5808e-3  \\ \hline
-		10 &1.8652 &4.9859e-2 &1.2611e-2 &3.4043e-3 &9.0626e-4  \\ \hline
-		100 &1.7617 &4.6901e-2 &1.1864e-2 &3.1691e-3 &8.3997e-4  \\ \hline
-		1e3 &1.7513 &4.6605e-2 &1.1790e-2 &3.1457e-3 &8.3336e-4  \\ \hline
-		1e4 &1.7503 &4.6577e-2 &1.1783e-2 &3.1434e-3 &8.3270e-4 \\ \hline
-		1e5 &1.7502 &4.6574e-2 &1.1782e-2 &3.1431e-3  &8.3263e-4 \\ \hline
+		\begin{tabular}{|c|c|c|c|c|c|c|} \hline
+			\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+			1 &8.170963E-1 &3.487612E-1 &1.669124E-1 &8.921846E-2 &4.718501E-2 &0.95611946 \\ \hline
+			1E4 &8.170963E-1 &3.487612E-1 &1.669124E-1 &8.921846E-2 &4.718501E-2 &0.95611946  \\ \hline
+			1E8 &8.170963E-1 &3.487612E-1 &1.669124E-1 &8.921846E-2 &4.718501E-2 &0.95611946 \\ \hline
 	\end{tabular}}
 \end{table}
 
-\iffalse
+数值解和精确解图像如下
+
 \begin{figure}[h]
 	\centering
-	\subfigure[$\lambda$=1]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_1.png}
-		\label{CR1}}	
-	\subfigure[$\lambda$=10]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_10.0.png}
-		\label{CR10}}
-	\subfigure[$\lambda$=100]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_100.0.png}
-		\label{CR100}}
-	
-	\subfigure[$\lambda$=1000]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_1000.0.png}
-		\label{CR1000}}
-	\subfigure[$\lambda$=10000]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_10000.0.png}
-		\label{CR10000}}
-	\subfigure[$\lambda$=100000]{
-		\includegraphics[height=2cm,width=3cm]{../image/CRFem/elasticityCRfemLam_100000.0.png}
-		\label{CR100000}}
-	\caption{CR元误差}
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE3/uh_lam=1.png}
+		\label{elsticity_uh_3}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/elaticity_uh_u/PDE3/u_lam=1.png}
+		\label{elsticity_u_3}}
 \end{figure}
-\fi
 
-可以看到，随着 $\lambda$ 的增大，使用线性元得到的近似解的收敛效果逐渐下降，而使用CR元的收敛速度保持不变。
+\newpage
 
-\subsection{弹性界面问题}
+\subsection{带间断系数的弹性问题}
 
-\subsubsection{模型}
+\subsubsection{算例}
 
-考察模型
+考察以下边值问题
 $$
 \begin{matrix}
 	-div \sigma(u) = f \quad \in \Omega  \\
@@ -832,9 +957,9 @@ $
 当$(x,y) \in \Omega_1$时，$\mu = \lambda = \lambda_1$
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_1
+	u_1 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_1
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) \ \lambda_1
+	u_2 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_1
 \end{matrix}
 $$
 
@@ -842,18 +967,18 @@ $$
 
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_2 
+	u_1 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_2 
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) / \lambda_2
+	u_2 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_2
 \end{matrix}
 $$
 
 当$(x,y) \in \Omega_3$时，$\mu = \lambda = \lambda_3$
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_3
+	u_1 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_3
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) \ \lambda_3
+	u_2 = x (x-0.5) (x-1) y (y-0.5) (y-1) \ \lambda_3
 \end{matrix}
 $$
 
@@ -861,105 +986,128 @@ $$
 
 $$
 \begin{matrix}
-	u_1 = (x - 1)(y - 1) y sin(x) / \lambda_4 
+	u_1 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_4 
 	\\
-	u_2 = (x - 1)(y - 1) x sin(y) / \lambda_4
+	u_2 = x (x-0.5) (x-1) y (y-0.5) (y-1) / \lambda_4
 \end{matrix}
 $$
+令 $\lambda = [\lambda_1, \lambda_2, \lambda_3, \lambda_4]$，$\mu = [\mu_1, \mu_2, \mu_3, \mu_4]$
 
-右端向量
+\begin{enumerate} 
+	
+\item 当 $\lambda = \mu= [1,2,3,4]$ 时误差如下
 
-$$
-\begin{matrix}
-	f_1 = -(3((6x-3) (y^3-\frac{3}{2}y^2+\frac{1}{2}y)) \\
-	\quad \quad \quad \quad+ 2((3x^2-3x+\frac{1}{2}) (3y^2-3y+\frac{1}{2})) \\
-	\quad + (x^3-\frac{3}{2}x^2+\frac{1}{2}x) (6y-3))
-\end{matrix}
-$$
-$$
-\begin{matrix}
-	f_2 = -(3(x^3-\frac{3}{2}x^2+\frac{1}{2}x) (6y-3)) \\
-	\quad \quad \quad \quad+2((3x^2-3x+\frac{1}{2}) (3y^2-3y+\frac{1}{2})) \\
-	\quad \quad + ((6x-3) (y^3-\frac{3}{2}y^2+\frac{1}{2}y)))
-\end{matrix}
-$$
+\begin{table}[ht]
+	\centering
+	\caption{$|u-u_h|_{H_1}$}
+	\scalebox{0.8}{
+		\begin{tabular}{|c|c|c|c|c|c|} \hline
+			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+	\end{tabular}}
+\end{table}
 
-\subsubsection{变分}
+\begin{figure}[h]
+	\centering
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_uh_0}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_u_0}}
+\end{figure}
 
-设 $\nu = (\nu_1,\nu_2)^t, \quad \nu_1, \nu_2 \in C_0^{\infty}(\Omega)$，方程两边同乘 $\nu$ 并积分得
-$$
--\int_{\Omega} div \sigma(u) \nu dxdy = \int_{\Omega} f \nu dxdy
-$$
+\newpage
 
-由
-$$
-\begin{matrix}
-	f div a = div(fa) - a : grad f \\
-	\int_{\Omega} div a dV = \int_{\partial \Omega} a dS
-\end{matrix}
-$$
+\item 当 $\lambda = \mu= [1E4,2E4,3E4,4E4]$ 时误差如下
 
-得
-\par \quad \quad
-$-\int_{\Omega} div \sigma(u) \nu dxdy$
-$$ 
-\quad \quad
-\begin{matrix}
-	\begin{aligned}
-		&= -\int_{\Omega_1} div \sigma(u) \nu dxdy -\int_{\Omega_2} div \sigma(u) \nu dxdy - \int_{\Omega_3} div \sigma(u) \nu dxdy \\
-		&-\int_{\Omega_4} div \sigma(u) \nu dxdy \\
-		&= -\int_{\partial \Omega_1} div(\sigma(u) \nu) dxdy + \int_{\Omega_1} \sigma(u) : grad \nu dxdy -\int_{\partial \Omega_2} div(\sigma(u) \nu) dxdy \\
-		&+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy - \int_{\partial \Omega_3} div(\sigma(u) \nu) dxdy + \int_{\Omega_3} \sigma(u) : grad \nu dxdy \\
-		&-\int_{\partial \Omega_4} div(\sigma(u) \nu) dxdy + \int_{\Omega_4} \sigma(u) : grad \nu dxdy \\
-		&= -\int_{\Gamma} \sigma(u) \nu dxdy + \int_{\Omega_1} \sigma(u) : grad \nu dxdy 
-		+ \int_{\Omega_2} \sigma(u) : grad \nu dxdy \\
-		&+ \int_{\Omega_3} \sigma(u) : grad \nu dxdy + \int_{\Omega_4} \sigma(u) : grad \nu dxdy\\
-		&= \int_{\Omega_1} \sigma(u) : grad \nu dxdy + \int_{\Omega_2} \sigma(u) : grad \nu dxdy + \int_{\Omega_3} \sigma(u) : grad \nu dxdy \\
-		&+ \int_{\Omega_4} \sigma(u) : grad \nu dxdy \\
-	\end{aligned}
-\end{matrix}
-$$
-$$
-\begin{matrix}
-	\begin{aligned}
-		&= \mu \int_{\Omega_1} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_1} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_2} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_2} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_3} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_3} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_4} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_4} div u div \nu  dxdy
-	\end{aligned}
-\end{matrix}
-$$
+\begin{table}[ht]
+	\centering
+	\caption{$|u-u_h|_{H_1}$}
+	\scalebox{0.8}{
+		\begin{tabular}{|c|c|c|c|c|c|} \hline
+			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+	\end{tabular}}
+\end{table}
 
-所以，该问题的变分问题为，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = g$，并且
-$$
-a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
-$$ 
-\par
-其中
-$$
-\begin{matrix}
-	\begin{aligned}
-		a(u,\nu) :&= \mu \int_{\Omega_1} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_1} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_2} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_2} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_3} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_3} div u div \nu  dxdy \\
-		&+ \mu \int_{\Omega_4} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega_4} div u div \nu  dxdy\\
-		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
-	\end{aligned}
-\end{matrix}
-$$
+\begin{figure}[h]
+	\centering
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_uh_4}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_u_4}}
+\end{figure}
+
+\item 当 $\lambda = \mu= [1E8,2E8,3E8,4E8]$ 时误差如下
+
+\begin{table}[ht]
+	\centering
+	\caption{$|u-u_h|_{H_1}$}
+	\scalebox{0.8}{
+		\begin{tabular}{|c|c|c|c|c|c|} \hline
+			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
+			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+	\end{tabular}}
+\end{table}
+
+\begin{figure}[h]
+	\centering
+	\caption{}
+	\subfigure[数值解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_uh_8}}	
+	\subfigure[精确解图像]{
+		\includegraphics[height=5.5cm,width=5.5cm]{../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png}
+		\label{interface_u_8}}
+\end{figure}
+
+\end{enumerate}
+
+\newpage
 
 \section{总结}
 
-令$\lambda=[\lambda_1,\lambda_2,\lambda_3,\lambda_4], \mu=[\mu_1,\mu_2,\mu_3,\mu_4]$
+弹性问题在使用非协调元求解时可以解除闭锁现象，本文对带间断系数的平面弹性问题使用C-R有限元求解，考察是否仍然可以解除闭锁现象。通过编写程序得到的近似解收敛阶，与理论上的收敛阶一致，可以得知当Lam$\acute{e}$常数间断且相等的情况下使用C-R元仍然可以解除闭锁现象。
 
 \newpage
 \vfill
 
+\CTEXsetup[format={\large\bfseries\songti\centering},beforeskip=0.5em,afterskip=0.5em]{section}
 \bibliographystyle{unsrt}
 \clearpage
 \phantomsection
 \addcontentsline{toc}{section}{参考文献}
 \tolerance=500
 \bibliography{interface_problem}
+
+\newpage
+
+%\chapter{\centerline{致谢}}
+\section*{致谢}
+\addcontentsline{toc}{section}{致谢}
+
+时光荏苒, 岁月如梭, 转眼间大学生活来到了最后阶段. 当我写完这篇毕业论文的时候, 有一种如释重负的感觉, 感慨颇多. 回首大学四年, 得到过太多人的帮助了. 首先诚挚的感谢我的论文指导老师王华老师. 本文的研究工作都是在王华老师的悉心指导下完成的. 王老师平易近人, 严谨务实, 由于我知识储备不足, 在论文撰写过程中遇到了许多困难和疑惑, 王华老师都及时给予指点, 耐心解释所犯的错误, 投入了大量的心血和精力, 更是不厌其烦地帮我察看论文中的小漏洞. 王华老师对我的帮忙和关怀实在无法用言语表明. 还要感谢所有的老师们, 正是因为有了他们的督促和教导才能让我在这四年的学习生活里受益匪浅, 快速汲取专业知识, 提升专业能力. 同时也要感谢组内的同学们, 是他们以极大的热情来解答我在理论和程序上的疑问, 帮忙收集资料, 让平淡的日子不再那么枯燥乏味. 最后还要感谢我的家人, 是他们的支持与付出才给了我学习的机会, 感谢一直对我的理解, 这是我不断前进的动力. 
+
+\newpage
+
+\appendix
+\section{附录}
+
+\lstinputlisting[
+style       =   Python,
+caption     =   {\bf elasticityCR.py},
+label       =   {elasticityCR.py}
+]{../program/toPdf/elasticityCR.py}
+
+\lstinputlisting[
+style       =   Python,
+caption     =   {\bf tool.py},
+label       =   {tool.py}
+]{../program/toPdf/tool.py}
 
 \end{document}

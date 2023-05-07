@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
 邵文婷.
@@ -46,6 +46,11 @@ Peter Hansbo and Mats~G Larson.
 \bibitem{李荣华2007偏微分方程数值解}
 李荣华.
 \newblock 偏微分方程数值解, 2007.
+
+\bibitem{陈纪修2004数学分析}
+陈纪修, 於崇华, and 金路.
+\newblock {\em 数学分析}.
+\newblock 高等教育出版社, 2004.
 
 \bibitem{brenner2008mathematical}
 Susanne~C Brenner, L~Ridgway Scott, and L~Ridgway Scott.
