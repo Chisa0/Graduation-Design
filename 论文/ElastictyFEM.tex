@@ -56,17 +56,21 @@
 
 \renewcommand{\abstractname}{\vspace{-2em}\large\bf 摘要}
 \begin{abstract}
-	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下弹性界面问题进行求解  \\
-	\noindent{关键字：\textbf{平面弹性问题}; \textbf{间断系数}；\textbf{非协调有限元};   \textbf{locking-free}}
+	
+	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下带间断系数的弹性问题进行求解  \\
+	
+	\noindent{\quad \quad \textbf{关键字：} 平面弹性问题; 间断系数；非协调有限元; locking-free}
 \end{abstract}
 \thispagestyle{empty}
 
 \newpage
 
-\renewcommand{\abstractname}{\vspace{-2em}\large\bf Abstractname}
+\renewcommand{\abstractname}{\vspace{-2em}\large\bf Abstract}
 \begin{abstract}
-	客观世界下的很多能接触到的材料都不仅仅是单一的材料构成，往往由不同种材料复合而来。其中不同材料复合而来的物理现象所构成的数学模型即为界面问题。材料之间的间断面称之为界面, 且在上述模型中, 模型的解通常受间断系数的影响需要满足某种跳跃条件, 即服从某种意义上的守恒律. 界面问题在足够光滑的界面条件下,其解也会在此区域上光滑. 但是由于解在界面上的跳跃, 导致使用一般的数值解法很难在解的整体光滑性较差的情况下还能有比较理想的逼近效果和逼近精度.本文采用非协调有限元对二维情况下弹性界面问题进行求解  \\
-	\noindent{关键字：\textbf{平面弹性问题}; \textbf{间断系数}；\textbf{非协调有限元};   \textbf{locking-free}}
+	
+	Many materials in the objective world that can be touched are not composed of a single material, but often composed of different materials. The mathematical model composed of the physical phenomena of different materials is called the interface problem. The discontinuous surface between materials is called the interface, and in the above model, the solution of the model usually needs to satisfy a certain jump condition under the influence of the discontinuous coefficient, that is, it obeys a certain sense of conservation law. The solution of the interface problem will also be smooth in this area under sufficiently smooth interface conditions. But because of the jump of the solution on the interface, it is difficult to use general numerical methods to achieve ideal approximation effect and approximation accuracy when the overall smoothness of the solution is poor. In this paper, nonconforming finite element method is used to solve the elastic problem with discontinuous coefficient in two-dimensional case.  \\
+	
+	\noindent{\quad \quad \textbf{Key words：} linear elasticity problem; discontinuous coefficient；nonconforming finite element; locking-free}
 \end{abstract}
 \thispagestyle{empty}
 
@@ -76,7 +80,7 @@
 
 \newpage
 
-\section{引言}
+\section{绪论}
 
 \subsection{研究背景}
 
@@ -107,41 +111,44 @@
 假定 G 是有界平面区域，其边界 $\Gamma$ 是按段光滑的简单闭曲线，$\overline{G} = G \cup \Gamma$ 是 G 的闭包。对于 $\overline{G}$ 上的任一函数 u(x,y)，称集合{(x,y) | u(x,y) $\ne$ 0, (x,y) $\in \overline{G}$} 的闭包为 u 的支集。如果 u 的支集 $\in$ G 内，则说 u 于 G 具有紧致支集。具有紧致支集的函数必在边界 $\Gamma$ 的某一邻域内恒等于零\textsuperscript{\cite{李荣华2007偏微分方程数值解}}。
 
 用 $C_0^{\infty} $ 表示 G 上无穷次可微并具有紧致支集的函数类，$L^2(G)$ 是定义在 G 上平方可积的可测函数空间，其内积和范数分别为
-$$
-\begin{matrix}
-	(f,g) = \int_G fg dxdy \\ 
+
+\begin{equation}
+	(f,g) = \int_G fg dxdy
+\end{equation}
+\begin{equation}
 	||f || = \sqrt{(f,f)} = (\int_G |f|^2 dxdy)^{\frac{1}{2}}
-\end{matrix}
-$$
+\end{equation}
 
 对 $f \in L^2(G)$，如果存在g,h $\in L^2(G)$，使等式
-$$
-\begin{matrix}
-	\int_G g \varphi dxdy = - \int_g f \frac{\partial \varphi}{\partial x} dxdy \\
+
+\begin{equation}
+	\int_G g \varphi dxdy = - \int_g f \frac{\partial \varphi}{\partial x} dxdy 
+\end{equation}
+\begin{equation}
 	\int_G h \varphi dxdy = - \int_G f \frac{\partial \varphi}{\partial y} dxdy
-\end{matrix}
-$$ 
+\end{equation}
 
 对任意的 $\varphi \in C_0^{\infty}$ 成立，则说 f 对 x 的一阶广义导数 g 和对 y 的一阶导数 h，记作
-$$
-\begin{matrix}
-	f_x = \frac{\partial f}{\partial x} = g \\
+
+\begin{equation}
+	f_x = \frac{\partial f}{\partial x} = g
+\end{equation}
+\begin{equation}
 	f_y = \frac{\partial f}{\partial y} = y
-\end{matrix}
-$$
+\end{equation}
 
 定义 
 $$
 	H^1(G) = \{f(x,y) | f, f_x, f_y \in L^2(G) \}
 $$
 其中 $f_x, f_y $ 是 f 的广义导数。与 $H^1(G)$ 引入内积
-$$
+\begin{equation}
 	(f,g)_1 = \int_G [fg + f_x g_x + f_y g_y] dxdy
-$$
+\end{equation}
 和范数
-$$
+\begin{equation}
 	||f||_1 = \sqrt{(f,f)} = (\int_G [|f|^2 + |f_x|^2 + |f_y|^2] dxdy )^{\frac{1}{2}}
-$$
+\end{equation}
 
 则 $H^1$ 是 Hilbert 空间，称之为 Sobolev 空间。
 
@@ -245,9 +252,10 @@ $$
 $$
 
 所以
-$$
+
+\begin{equation}
 \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy = \int_{\Omega} f \nu dxdy
-$$
+\end{equation}
 
 \textbf{该问题的变分问题为}，求$u \in H^1(\Omega)$ 使得 $u |_{\Gamma_1} = 0$，并且
 \begin{equation}
@@ -256,20 +264,18 @@ a(u,\nu) = \int_{\Omega} f \cdot \nu dxdy \quad \forall \nu \in V
 \end{equation}
 \par
 其中
-$$
-\begin{matrix}
+
+\begin{equation}
 	\begin{aligned}
-		a(u,\nu) :&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy \\  
-		
+		a(u,\nu) :&= \mu \int_{\Omega} grad u : grad \nu dxdy + (\mu +\lambda) \int_{\Omega} div u div \nu  dxdy \\  		
 		V :&= \{ \nu \in H^1(\Omega) \quad | \quad \nu |_{\Gamma} = 0 \}
 	\end{aligned}
-\end{matrix}
-$$
+\end{equation}
 
 \textbf{Lax-Milgram定理\textsuperscript{\cite{brenner2008mathematical}}：} 设 H 是 Hilbert 空间，$a(\bullet,\bullet)$ 是 $H \times H$ 上的有界的强制的双线性泛函。则对任意的$F \in H$，存在唯一的 $u \in H$ 满足
-$$
+\begin{equation}
 	a(u,\nu) = (f,\nu), \quad \forall \nu \in H 
-$$
+\end{equation}
 
 由Lax-Milgram定理知，此变分问题的解存在且唯一。
 
@@ -310,14 +316,14 @@ $$
 设 $\Omega_1$，$\Omega_2$ 是 $\Omega$ 的两个子集，使得 $\Omega_1 \bigcup \Omega_2 = \Omega$ 并且 $\Omega_1 \bigcap \Omega_2 = \emptyset$，
 
 考虑以下边值问题
-$$
-\begin{matrix}
-	-div \sigma(u) = f \quad \in \Omega \\
-	u |_{\partial \Omega} = 0
-\end{matrix}
-$$
+\begin{equation}
+\begin{aligned}
+	-div \sigma(u) &= f \quad \in \Omega \\
+	u |_{\partial \Omega} &= 0
+\end{aligned}
+\end{equation}
 
-当Lam$\acute{e}$ 常数 $\lambda$，$\mu$ 在 $\Omega_1$，$\Omega_2$ 上取不同值，即 $(x,y) \in \Omega_1$ 时 $\lambda = \lambda_1$，$\mu = \mu_1$，$(x,y) \in \Omega_2$ 时 $\lambda = \lambda_2$，$\mu = \mu_2$，通过计算得到与此问题对应的双线性形式为
+当Lam$\acute{e}$ 常数 $\lambda$，$\mu$ 在 $\Omega_1$，$\Omega_2$ 上取不同值，即 $(x,y) \in \Omega_1$ 时 $\lambda = \lambda_1$，$\mu = \mu_1$，$(x,y) \in \Omega_2$ 时 $\lambda = \lambda_2$，$\mu = \mu_2$，$\lambda_1 \ne \lambda_2$，$\mu_1 \ne \mu_2$，通过计算得到与此问题对应的双线性形式为
 \begin{equation}
 \begin{aligned}
 	a(u,\nu) &= \mu_1 \int_{\Omega_1} grad u : grad \nu dxdy + (\mu_1 +\lambda_1) \int_{\Omega_1} div u div \nu  dxdy \\
@@ -367,7 +373,7 @@ p_0, p_1, ... , p_n
 $$
 图中的三角形区域称为单元。
 
-其次，在Sobolev空间 $H^1$ 内取子空间 $U_h$，它的元素在每一单元是次数不超过某一正整数 m 的多项式，在全区域 $\Omega$ 上属于函数空间 $H^1$。则 $U_h \times U_h$ 为试图函数空间。
+其次，在Sobolev空间 $H^1$ 内取子空间 $U_h$，它的元素在每一单元是次数不超过某一正整数 m 的多项式，在全区域 $\Omega$ 上属于函数空间 $H^1$。则 $U_h \times U_h$ 为试探函数空间。
 
 设
 $$
@@ -384,9 +390,10 @@ $$
 \end{equation}
 
 将式 $\eqref{uh}$ 带入方程 $\eqref{bffc}$中得到 Galerkin 方程
-$$
+\begin{equation}
 	\sum\limits_{i=0}^{2n+1} a(\phi_i, \phi_j) c_i = (f,\phi_j), \quad j = 0, 1, ... , 2n+1 
-$$ 
+	\label{galerkin}
+\end{equation} 
 
 令
 
@@ -398,11 +405,11 @@ $$
 \end{matrix}
 $$
 
-则 Galerkin 方程的矩阵形式为
+则 Galerkin 方程$\eqref{galerkin}$的矩阵形式为
 
-$$
+\begin{equation}
 	Ac = F
-$$
+\end{equation}
 
 模型为齐次边界条件，若$(x_i,y_i)$为边界点，则 A 第 2i 行第 2i 列，第 2i+1 行第 2i+1 列元素为1，第 2i 和 2i+1 行的其他元素及  F(2i)，F(2i+1) 都为0。
 
@@ -437,9 +444,9 @@ $$
 \end{figure}
 
 显然$S_0 + S_1 + S_2 = S$，令
-$$
+\begin{equation}
 L_0 = \frac{S_0}{S}, \quad L_1 = \frac{S_1}{S}, \quad L_2 = \frac{S_2}{S}
-$$
+\end{equation}
 \par
 %称$(L_0,L_1,L_2)$位$P_3$的面积坐标，其中
 %$$
@@ -509,13 +516,13 @@ $$
 
 所以在此区间上 $\varphi_i = L_i$，即
 
-$$
+\begin{equation}
 \begin{cases}
 	\varphi_0 = \frac{1}{2S} [(x_2 y_3 - x_3 y_2) + (y_2 - y_3) x + (x_3 - x_2) y] \\
 	\varphi_1 = \frac{1}{2S} [(x_3 y_0 - x_0 y_3) + (y_3 - y_0) x + (x_0 - x_3) y] \\
 	\varphi_2 = \frac{1}{2S} [(x_0 y_1 - x_1 y_0) + (y_0 - y_1) x + (x_1 - x_0) y]
 \end{cases} 
-$$
+\end{equation}
 
 
 \subsubsection{C-R元}
@@ -547,9 +554,9 @@ $$
 
 设三角形 $\bigtriangleup(q_0,q_1,q_2)$ 上的C-R元为 $\varphi_0, \varphi_1,\varphi_2$，
 
-$$
+\begin{equation}
 \varphi_i = a_i x + b_i y + c_i, \quad i = 0,1,2
-$$
+\end{equation}
 
 且其在 $p_0$，$p_1$，$p_2$ 点上满足以下关系式
 
@@ -575,15 +582,15 @@ $$
 
 则方程组 $\eqref{crjs}$ 的矩阵形式为
 
-$$
+\begin{equation}
 A c_i = e_i, \quad i = 0,1,2
-$$
+\end{equation}
 
 通过计算可以得到单元$\bigtriangleup(q_0, q_1, q_2)$ 上的 C-R 元为
 
-$$
+\begin{equation}
 \varphi_i = A^{-1} e_i f, \quad i = 0,1,2
-$$ 
+\end{equation} 
 
 \iffalse
 $$
@@ -627,25 +634,25 @@ $$
 	$$
 %	\\ \\
 %	根据第二章和第四章的理论我们得到以下定理。
-	\textbf{Theorem\textsuperscript{\cite{brenner2008mathematical}}.} 令 $u \in H^2(\Omega) \cap H^1(\Omega)$ 满足纯位移问题，并且$u_h \in V_h$ 满足
-	$$
+	令 $u \in H^2(\Omega) \cap H^1(\Omega)$ 满足纯位移问题，并且$u_h \in V_h$ 满足
+	\begin{equation}
 	a(u_h, \nu) = \int_{\Omega} f \cdot \nu dx \quad \forall \nu \in V_h.
-	$$
-	\\
-	则存在一个正常数$C_{(\mu, \lambda)}$ 使得
-	$$
-	\quad \quad \quad
-	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
-	$$
-	\textbf{Theorem\textsuperscript{\cite{brenner2008mathematical}}.} 令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
-	$$
-	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma_2} t \cdot \nu ds \quad \forall \nu \in V_h.
-	$$ 
+	\end{equation}
 	\\
 	则存在一个正常数$C_{(\mu, \lambda)}$ 使得\textsuperscript{\cite{brenner2008mathematical}}
-	$$
+	\begin{equation}
+	\quad \quad \quad
 	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
-	$$
+	\end{equation}
+	令 $u \in H^2(\Omega)$ 满足纯牵引力问题。令 $u_h \in V_h$ 满足
+	\begin{equation}
+	a(u_h,\nu) = \int_{\Omega} f \cdot \nu dx + \int_{\Gamma_2} t \cdot \nu ds \quad \forall \nu \in V_h.
+	\end{equation}
+	\\
+	则存在一个正常数$C_{(\mu, \lambda)}$ 使得\textsuperscript{\cite{brenner2008mathematical}}
+	\begin{equation}
+	\| u - u_h \|_{H^1(\Omega)} \le C_{(\mu, \lambda)} h \| u \|_{H^2(\Omega)}.
+	\end{equation}
 %	对于一般情况 $ \emptyset \ne \Gamma_1 \ne \partial \Omega $ 下的收敛定理，查看练习 11.x.25. 
 %	\\
 
@@ -654,28 +661,28 @@ $$
 	对于固定的 $\mu$ 和 $\lambda$，以上定理给出了弹性问题令人满意近似的有限元近似。但是这些有限元方法的性能随着 $\lambda$ 趋向于 $\infty$ 而变差。这就是所谓的锁定现象\textsuperscript{\cite{brenner2008mathematical}}。
 	\par 
 	令 $\Omega = (0,1) \times (0,1)$. 考虑 $\mu = 1$ 时的纯位移边值问题:
-	$$
-	\begin{matrix}
-		div \{ 2 \epsilon (u^{\lambda}) + \lambda tr (\epsilon (u^{\lambda})) \delta \} = f \quad in \quad \Omega \\ \quad \quad \quad \quad \quad 
-		u^{\lambda}|_{\partial \Omega} =  0.
-	\end{matrix}
-	$$
+	\begin{equation}
+	\begin{aligned}
+		div \{ 2 \epsilon (u^{\lambda}) + \lambda tr (\epsilon (u^{\lambda})) \delta \} &= f \quad in \quad \Omega \\ \quad \quad \quad \quad \quad 
+		u^{\lambda}|_{\partial \Omega} &=  0.
+	\end{aligned}
+	\end{equation}
 	注意给定的 f ，当 $\lambda \to \infty$，$\| div u^{\lambda} \|_{H^1(\Omega)} \to 0$.换句话说，我们正在处理一种几乎不可能压缩的弹性材料。为了强调对 $\lambda$ 的依赖，将应力张量 $\sigma_{\lambda}(\nu)$ 和 变分形式 $a_{\lambda}(\nu,\omega)$ 表示为
-	$$
-	\begin{matrix}
-		\sigma_{\lambda}(\nu) = 2 \epsilon(\nu) + \lambda tr (\epsilon(\nu)) \delta \\
-		a_{\lambda}(\nu,\omega) = \int_{\Omega} \{ 2 \epsilon(\nu) : \epsilon(\omega) + \lambda div \nu div \omega \} dx.
-	\end{matrix}
-	$$
+	\begin{equation}
+	\begin{aligned}
+		\sigma_{\lambda}(\nu) &= 2 \epsilon(\nu) + \lambda tr (\epsilon(\nu)) \delta \\
+		a_{\lambda}(\nu,\omega) &= \int_{\Omega} \{ 2 \epsilon(\nu) : \epsilon(\omega) + \lambda div \nu div \omega \} dx.
+	\end{aligned}
+	\end{equation}
 	
 	令 $T^h$ 为 $\Omega $ (图$\ref{pf}$) 的一个规则三角剖分。对于每一个 $u \in H^2(\Omega) \cap H_0^1(\Omega)$，定义 $u_h^{\lambda} \in V_h$ 为以下方程组的特解
-	$$
-	\begin{matrix}
-		a_{\lambda}(u_h^{\lambda},\nu) = \int_{\Omega} 
+	\begin{equation}
+	\begin{aligned}
+		a_{\lambda}(u_h^{\lambda},\nu) &= \int_{\Omega} 
 		[ -div \sigma_{\lambda}(u) ] \cdot \nu dx \quad \forall \nu \in V_h. \\
-		V_h := \{ \nu \in H^1(\Omega) : \nu |_{T}, \forall T \in T^h \}
-	\end{matrix}
-	$$
+		V_h &:= \{ \nu \in H^1(\Omega) : \nu |_{T}, \forall T \in T^h \}
+	\end{aligned}
+	\end{equation}
 	
 %	\begin{figure}[hbt]
 %		\centering
@@ -705,9 +712,9 @@ $$
 \end{figure}
 	
 	定义 $L_{\lambda,h}$ 为
-	$$
+	\begin{equation}
 	L_{\lambda,h} := sup \{ \frac{|u-u_h^{\lambda}|_{H^1(\Omega)}}{\| div \sigma_{\lambda}(u) \|_{L^2(\Omega)}} : 0 \ne u \in H^2(\Omega) \cap H^1(\Omega) \}.
-	$$
+	\end{equation}
 	\\ 
 	则存在一个与 h 无关的正常数 C 使得\textsuperscript{\cite{brenner2008mathematical}}
 	\begin{equation}
@@ -809,7 +816,7 @@ $$
 
 \begin{table}[h]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 	\begin{tabular}{|c|c|c|c|c|c|c|} \hline
 		\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
@@ -858,7 +865,7 @@ $$
 
 \begin{table}[h]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 		\begin{tabular}{|c|c|c|c|c|c|c|} \hline
 			\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
@@ -907,7 +914,7 @@ $$
 
 \begin{table}[ht]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 		\begin{tabular}{|c|c|c|c|c|c|c|} \hline
 			\diagbox{$\lambda$}{h} &1.0 &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
@@ -995,15 +1002,17 @@ $$
 
 \begin{enumerate} 
 	
+\newpage
+	
 \item 当 $\lambda = \mu= [1,2,3,4]$ 时误差如下
 
-\begin{table}[ht]
+\begin{table}[h]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 		\begin{tabular}{|c|c|c|c|c|c|} \hline
 			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
-			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+			$|u-u_h|_{H^1(\Omega)}$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
 	\end{tabular}}
 \end{table}
 
@@ -1022,13 +1031,13 @@ $$
 
 \item 当 $\lambda = \mu= [1E4,2E4,3E4,4E4]$ 时误差如下
 
-\begin{table}[ht]
+\begin{table}[h]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 		\begin{tabular}{|c|c|c|c|c|c|} \hline
 			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
-			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+			$|u-u_h|_{H^1(\Omega)}$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
 	\end{tabular}}
 \end{table}
 
@@ -1043,15 +1052,17 @@ $$
 		\label{interface_u_4}}
 \end{figure}
 
+\newpage
+
 \item 当 $\lambda = \mu= [1E8,2E8,3E8,4E8]$ 时误差如下
 
-\begin{table}[ht]
+\begin{table}[h]
 	\centering
-	\caption{$|u-u_h|_{H_1}$}
+	\caption{$|u-u_h|_{H^1(\Omega)}$}
 	\scalebox{0.8}{
 		\begin{tabular}{|c|c|c|c|c|c|} \hline
 			h &0.5 &0.25 &0.125 &0.0625 &误差阶 \\ \hline
-			$\lambda$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
+			$|u-u_h|_{H^1(\Omega)}$ &1.984010E-1 &8.447614E-1 &4.446847E-1 &2.373949E-2 &0.9156274 \\ \hline
 	\end{tabular}}
 \end{table}
 
@@ -1068,11 +1079,11 @@ $$
 
 \end{enumerate}
 
-\newpage
-
 \section{总结}
 
-弹性问题在使用非协调元求解时可以解除闭锁现象，本文对带间断系数的平面弹性问题使用C-R有限元求解，考察是否仍然可以解除闭锁现象。通过编写程序得到的近似解收敛阶，与理论上的收敛阶一致，可以得知当Lam$\acute{e}$常数间断且相等的情况下使用C-R元仍然可以解除闭锁现象。
+本文使用 C-R 有限元方法求解了带间断系数的平面弹性问题，分析了非协调元对闭锁现象的影响。数值结果表明，当 Lam$\acute{e}$ 常数间断且相等时，C-R 元可以有效地解除闭锁现象，并且具有预期的收敛阶。
+
+为了完善本文的研究，未来可以考虑对纯牵引力问题进行数值实验，以检验 C-R 元在不同的边界条件下的表现。同时，也可以通过改变间断系数的大小和形式，以及使用不同的网格划分方式，来进一步探究 C-R 元的有效性和稳定性，以及对间断系数的敏感性。
 
 \newpage
 \vfill
@@ -1096,7 +1107,7 @@ $$
 \newpage
 
 \appendix
-\section{附录}
+\section{附录 数值程序}
 
 \lstinputlisting[
 style       =   Python,

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  7 MAY 2023 20:13
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  8 MAY 2023 11:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1057,40 +1057,43 @@ LaTeX Warning: No \author given.
 
 [1
 
-] [1] [1] (./ElastictyFEM.toc)
+]
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+
+ []
+
+[1] (./ElastictyFEM.toc)
 \tf@toc=\write5
 \openout5 = `ElastictyFEM.toc'.
 
  [1]
-Overfull \hbox (18.63676pt too wide) in paragraph at lines 99--100
+Overfull \hbox (18.63676pt too wide) in paragraph at lines 103--104
 []\T1/lmr/m/n/10.53937 1943 \TU/FandolSong-Regular(0)/m/n/10.53937 年，| \T1/lmr/
 m/n/10.53937 R.W.Courant \TU/FandolSong-Regular(0)/m/n/10.53937 首 次 提 出 有 限 元 法
  的 核 心 思 想。| \T1/lmr/m/n/10.53937 1956 \TU/FandolSong-Regular(0)/m/n/10.53937 年
 ，| \T1/lmr/m/n/10.53937 R.W.Clough
  []
 
-[2] [3] [4] [5] [6]
+[2] [3] [4] [5]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[8] [9] [10]
-Overfull \hbox (6.15952pt too wide) in paragraph at lines 819--820
+[6] [7] [8] [9] [10] [11]
+Overfull \hbox (6.15952pt too wide) in paragraph at lines 826--827
  [][] 
  []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: ../image/elaticity_uh_u/PDE1/uh_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE1/uh_lam=1.png>
 File: ../image/elaticity_uh_u/PDE1/u_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE1/u_lam=1.png>
-[11] [12]
-Overfull \hbox (1.94374pt too wide) in paragraph at lines 868--869
+[12]
+Overfull \hbox (1.94374pt too wide) in paragraph at lines 875--876
  [][] 
  []
 
@@ -1099,7 +1102,7 @@ File: ../image/elaticity_uh_u/PDE2/uh_lam=1.png Graphic file (type bmp)
 File: ../image/elaticity_uh_u/PDE2/u_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE2/u_lam=1.png>
 [13]
-Overfull \hbox (10.37527pt too wide) in paragraph at lines 917--918
+Overfull \hbox (10.37527pt too wide) in paragraph at lines 924--925
  [][] 
  []
 
@@ -1107,39 +1110,29 @@ File: ../image/elaticity_uh_u/PDE3/uh_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE3/uh_lam=1.png>
 File: ../image/elaticity_uh_u/PDE3/u_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE3/u_lam=1.png>
-[14]
+[14] [15]
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[15]
+ [16]
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+ [17]
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
 File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
 <../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[16] [17]
+ [18]
 
 Package ctex Warning: Command `\CTEXsetup' is deprecated.
 (ctex)                \ctexset { section = { format={\large \bfseries \songti
 (ctex)                \centering },beforeskip=0.5em,afterskip=0.5em } } is
 (ctex)                set.
 
-[18] (./ElastictyFEM.bbl
+(./ElastictyFEM.bbl
 
 Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
 (fontspec)                Script "CJK".
@@ -1167,14 +1160,14 @@ Missing character: There is no ͂ ("342) in font ec-lmr10!
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 1105.
+nput line 1116.
 
 
 Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
 (fontspec)                Script "CJK".
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-105.
+116.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1195,15 +1188,15 @@ Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
 [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]) [37]
 (./ElastictyFEM.aux)
 Package rerunfilecheck Info: File `ElastictyFEM.out' has not changed.
-(rerunfilecheck)             Checksum: 760A32028946B52F352A7DA77FCECA10;2300.
+(rerunfilecheck)             Checksum: BA6D78B19DF663EF0FF0D26FF88353B8;2340.
  ) 
 Here is how much of TeX's memory you used:
- 29825 strings out of 476179
- 639969 string characters out of 5809545
- 1424338 words of memory out of 5000000
- 50036 multiletter control sequences out of 15000+600000
+ 29826 strings out of 476179
+ 639979 string characters out of 5809545
+ 1424481 words of memory out of 5000000
+ 50037 multiletter control sequences out of 15000+600000
  519860 words of font info for 107 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,17n,97p,534b,2074s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,17n,97p,1075b,2074s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on ElastictyFEM.pdf (40 pages).
