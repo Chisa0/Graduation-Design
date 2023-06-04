@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  8 MAY 2023 11:16
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.8.2)  25 MAY 2023 12:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -193,9 +193,6 @@ cle (CTEX)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/ctex/config/ctex-name-utf8.cfg
 File: ctex-name-utf8.cfg 2021/12/12 v2.5.8 Caption with encoding UTF-8 (CTEX)
 ))
-(/usr/local/texlive/2022/texmf-dist/tex/latex/ctex/ctex-c5size.clo
-File: ctex-c5size.clo 2021/12/12 v2.5.8 c5size option (CTEX)
-)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-fandol.
 def
 File: ctex-fontset-fandol.def 2021/12/12 v2.5.8 Fandol fonts definition (CTEX)
@@ -931,94 +928,126 @@ Package: xeCJK-listings 2021/12/12 v3.8.8 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count371
 \l__xeCJK_listings_flag_int=\count372
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 51.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks41
+\AP@partial=\box76
+\AP@footins=\box77
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2022/01/29 v0.5u Insert pages of external PDF documents (AM)
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen327
+\ESO@tempdimb=\dimen328
+)
+\AM@pagewidth=\dimen329
+\AM@pageheight=\dimen330
+\AM@fboxrule=\dimen331
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/pdfpages/ppxetex.def
+File: ppxetex.def 2022/01/29 v0.5u Pdfpages driver for XeTeX (AM)
+)
+\pdfpages@includegraphics@status=\count373
+\AM@pagebox=\box78
+\AM@global@opts=\toks42
+\AM@pagecnt=\count374
+\AM@toc@title=\toks43
+\c@AM@survey=\count375
+\AM@templatesizebox=\box79
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 67.
 
 (./ElastictyFEM.aux)
 \openout1 = `ElastictyFEM.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 52.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 52.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 52.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 52.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 52.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 52.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 52.
-LaTeX Font Info:    Redeclaring math accent \check on input line 52.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 52.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 52.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 52.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 52.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 52.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 68.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 68.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 68.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 68.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 68.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 68.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 68.
+LaTeX Font Info:    Redeclaring math accent \check on input line 68.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 68.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 68.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 68.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 68.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 68.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 52.
+(Font)              `operators' in the math version `normal' on input line 68.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 52.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 68.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 52.
+(Font)              `operators' in the math version `bold' on input line 68.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 52.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 68.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 52.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 52.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 52.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 52.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 52.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 68.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 52.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 52.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 52.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 68.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 52.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 68.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 52.
+Package hyperref Info: Link coloring ON on input line 68.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1030,102 +1059,166 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count373
+\c@section@level=\count376
 )
-LaTeX Info: Redefining \ref on input line 52.
-LaTeX Info: Redefining \pageref on input line 52.
-LaTeX Info: Redefining \nameref on input line 52.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
  (./ElastictyFEM.out) (./ElastictyFEM.out)
 \@outlinefile=\write4
 \openout4 = `ElastictyFEM.out'.
 
-\c@lstlisting=\count374
-LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
+\c@lstlisting=\count377
 
+(/usr/local/texlive/2022/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
+
+)
+
+Package pdfpages Warning: Option `page' is unknow to \includepdf.
+(pdfpages)                Did you mean `pages'? (Note the `s'!)
+(pdfpages)                OK, I'll proceed as if it were `pages'.
+
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf, page 1>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf, page 1>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf, page 1>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf, page 1>
+File: ./push/终稿/匿名版/topdf.pdf Graphic file (type pdf)
+<use ./push/终稿/匿名版/topdf.pdf, page 1>
+[1
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
+ []
+
+[1
+
+
+]
+Overfull \hbox (7.51819pt too wide) in paragraph at lines 130--131
+[]\T1/lmr/m/n/10 This pa-per stud-ies the elas-tic prob-lem with dis-con-tin-u-
+ous co-ef-fi-cients. Firstly,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
+
+ []
+
+[1] (./ElastictyFEM.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: No \author given.
-
-[1
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-
- []
-
-[1]
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
-
- []
-
-[1] (./ElastictyFEM.toc)
+))
 \tf@toc=\write5
 \openout5 = `ElastictyFEM.toc'.
 
- [1]
-Overfull \hbox (18.63676pt too wide) in paragraph at lines 103--104
-[]\T1/lmr/m/n/10.53937 1943 \TU/FandolSong-Regular(0)/m/n/10.53937 年，| \T1/lmr/
-m/n/10.53937 R.W.Courant \TU/FandolSong-Regular(0)/m/n/10.53937 首 次 提 出 有 限 元 法
- 的 核 心 思 想。| \T1/lmr/m/n/10.53937 1956 \TU/FandolSong-Regular(0)/m/n/10.53937 年
-，| \T1/lmr/m/n/10.53937 R.W.Clough
+ [1] [1]
+[2] [3] [4] [5] [6] [7]
+Overfull \hbox (8.36456pt too wide) in paragraph at lines 599--600
+[]\TU/FandolSong-Regular(0)/m/n/10 如 图 $[][]\OT1/cmr/m/n/10 3[][]$\TU/FandolSon
+g-Regular(0)/m/n/10 ，|  设 三 角 形 $\OMS/cmsy/m/n/10 4\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 q[]; q[]; q[]\OT1/cmr/m/n/10 )$ \TU/FandolSong-Regular(0)/m/n/10 是 以 $\OM
+L/cmm/m/it/10 q[]; q[]; q[]$ \TU/FandolSong-Regular(0)/m/n/10 为 顶 点 的 任 意 三 角 形
+ 元，| $ \OML/cmm/m/it/10 p[]; p[]; p[]$
  []
 
-[2] [3] [4] [5]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] [7] [8] [9] [10] [11]
-Overfull \hbox (6.15952pt too wide) in paragraph at lines 826--827
- [][] 
- []
+[8] [9] [10] [11] [12] [13]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14
+
+]
 File: ../image/elaticity_uh_u/PDE1/uh_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE1/uh_lam=1.png>
 File: ../image/elaticity_uh_u/PDE1/u_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE1/u_lam=1.png>
-[12]
-Overfull \hbox (1.94374pt too wide) in paragraph at lines 875--876
- [][] 
- []
-
+ [15] [16]
 File: ../image/elaticity_uh_u/PDE2/uh_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE2/uh_lam=1.png>
 File: ../image/elaticity_uh_u/PDE2/u_lam=1.png Graphic file (type bmp)
 <../image/elaticity_uh_u/PDE2/u_lam=1.png>
-[13]
-Overfull \hbox (10.37527pt too wide) in paragraph at lines 924--925
- [][] 
+ [17] [18]
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+ [19
+
+]
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+ [20]
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
+<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
+ [21]
+Overfull \hbox (20.16658pt too wide) in paragraph at lines 1403--1411
+\OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1]\OML/cmm/m/it/10 ;  \OT1
+/cmr/m/n/10 
+[] = [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5]
+ \OMS/cmsy/m/n/10 ^^B \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OM
+L/cmm/m/it/10 :\OT1/cmr/m/n/10 5]\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 
+[] = [0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1]
+ \OMS/cmsy/m/n/10 ^^B \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OM
+L/cmm/m/it/10 :\OT1/cmr/m/n/10 5]\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 
+[] = [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5]
+ \OMS/cmsy/m/n/10 ^^B \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 5\OML
+/cmm/m/it/10 ; \OT1/cmr/m/n/10 1]\OML/cmm/m/it/10 ;  \OT1/cmr/m/n/10 
+[] =
  []
 
-File: ../image/elaticity_uh_u/PDE3/uh_lam=1.png Graphic file (type bmp)
-<../image/elaticity_uh_u/PDE3/uh_lam=1.png>
-File: ../image/elaticity_uh_u/PDE3/u_lam=1.png Graphic file (type bmp)
-<../image/elaticity_uh_u/PDE3/u_lam=1.png>
-[14] [15]
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
- [16]
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
- [17]
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
-File: ../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png Graphic file (type bmp)
-<../image/interface_uh_u/uh_lam=[1. 2. 3. 4.].png>
- [18]
+[22]
+File: ../image/interface_uh_u/interface2/uh_lam=[4. 3. 2. 1.].png Graphic file 
+(type bmp)
+<../image/interface_uh_u/interface2/uh_lam=[4. 3. 2. 1.].png>
+File: ../image/interface_uh_u/interface2/u_lam=[4. 3. 2. 1.].png Graphic file (
+type bmp)
+<../image/interface_uh_u/interface2/u_lam=[4. 3. 2. 1.].png>
+ [23
+
+]
+File: ../image/interface_uh_u/interface2/uh_lam=[40000. 30000. 20000. 10000.].p
+ng Graphic file (type bmp)
+<../image/interface_uh_u/interface2/uh_lam=[40000. 30000. 20000. 10000.].png>
+File: ../image/interface_uh_u/interface2/u_lam=[40000. 30000. 20000. 10000.].pn
+g Graphic file (type bmp)
+<../image/interface_uh_u/interface2/u_lam=[40000. 30000. 20000. 10000.].png>
+ [24]
+File: ../image/interface_uh_u/interface2/uh_lam=[4.e+08 3.e+08 2.e+08 1.e+08].p
+ng Graphic file (type bmp)
+<../image/interface_uh_u/interface2/uh_lam=[4.e+08 3.e+08 2.e+08 1.e+08].png>
+File: ../image/interface_uh_u/interface2/u_lam=[4.e+08 3.e+08 2.e+08 1.e+08].pn
+g Graphic file (type bmp)
+<../image/interface_uh_u/interface2/u_lam=[4.e+08 3.e+08 2.e+08 1.e+08].png>
+ [25] [26]
 
 Package ctex Warning: Command `\CTEXsetup' is deprecated.
 (ctex)                \ctexset { section = { format={\large \bfseries \songti
@@ -1154,20 +1247,20 @@ Package fontspec Info: Font family 'FandolSong-Regular(1)' created for font
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 Missing character: There is no ͂ ("342) in font ec-lmr10!
-) [19
+) [27
 
-] [20] (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+] [28] (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 1116.
+nput line 1593.
 
 
 Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
 (fontspec)                Script "CJK".
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-116.
+593.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1184,19 +1277,19 @@ Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 
-(../program/toPdf/elasticityCR.py [21]) (../program/toPdf/tool.py [22] [23]
-[24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]) [37]
+(../program/toPdf/interfaceCR.py [29] [30]) (../program/toPdf/tool.py [31]
+[32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44]) [45]
 (./ElastictyFEM.aux)
 Package rerunfilecheck Info: File `ElastictyFEM.out' has not changed.
-(rerunfilecheck)             Checksum: BA6D78B19DF663EF0FF0D26FF88353B8;2340.
+(rerunfilecheck)             Checksum: AC6CED1BFA6BC4502AE424842F05BA24;2491.
  ) 
 Here is how much of TeX's memory you used:
- 29826 strings out of 476179
- 639979 string characters out of 5809545
- 1424481 words of memory out of 5000000
- 50037 multiletter control sequences out of 15000+600000
- 519860 words of font info for 107 fonts, out of 8000000 for 9000
+ 30657 strings out of 476179
+ 656254 string characters out of 5809545
+ 1432779 words of memory out of 5000000
+ 50854 multiletter control sequences out of 15000+600000
+ 519532 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,17n,97p,1075b,2074s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,17n,97p,846b,2076s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on ElastictyFEM.pdf (40 pages).
+Output written on ElastictyFEM.pdf (49 pages).

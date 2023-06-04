@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{研究内容和研究方法}{3}{0}{1}
+\beamer@sectionintoc {2}{实验结果}{5}{0}{2}
+\beamer@sectionintoc {3}{总结}{10}{0}{3}
+\beamer@sectionintoc {4}{致谢}{11}{0}{4}

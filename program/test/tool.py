@@ -240,6 +240,88 @@ class interfaceData():
         #print("val= ", val)
 
         return val
+    
+    # interfaceData1
+
+# interfaceData2
+# u1 = u2 = sin(pi x) cos(pi x) sin(pi y) cos(pi y)
+# uh_dir = "../../image/tmp/interface_uh_u/PDE1/uh_lam={}.png".format(Lam[i])
+# u_dir = "../../image/tmp/interface_uh_u/PDE1/u_lam={}.png".format(Lam[i])
+class interfaceData2():
+    def __init__(self, mu=np.array([1,2,3,4]), lam=np.array([1,2,3,4])):
+        self.mu = mu
+        self.lam = lam
+        self.node = np.array([(0,0),
+                        (0.5,0),
+                        (1,0),
+                        (0,0.5),
+                        (0.5,0.5),
+                        (1,0.5),
+                        (0,1),
+                        (0.5,1),
+                        (1,1)], dtype=np.float64)
+        self.cell = np.array([[0,1,4],
+                [0,4,3],
+                [1,2,5],
+                [1,5,4],
+                [3,4,7],
+                [3,7,6],
+                [4,5,8],
+                [4,8,7]], dtype=np.int64)
+    
+    def source(self, p):
+        x   = p[..., 0]
+        y   = p[..., 1]
+        
+        mu  = 1
+        lam = 1
+        val = np.zeros(p.shape, dtype=np.float64)
+
+        pi  = np.pi
+        sin = np.sin
+        cos = np.cos
+
+        ux         = sin(pi*x) * cos(pi*x)
+        uy         = sin(pi*y) * cos(pi*y)
+        frac_ux_x  = pi * (1 - 2*(sin(pi*x))**2)
+        frac_ux_xx = -4*pi**2 * sin(pi*x) * cos(pi*x)
+        frac_uy_y  = pi * (1 - 2*(sin(pi*y))**2)
+        frac_uy_yy = -4*pi**2 * sin(pi*y) * cos(pi*y)
+
+        frac_u1_x   = frac_ux_xx * uy
+        frac_u1_y   = ux * frac_uy_yy
+        frac_u1_x_y = frac_ux_x * frac_uy_y
+        frac_u2_x   = frac_ux_xx * uy
+        frac_u2_y   = ux * frac_uy_yy
+        frac_u2_x_y = frac_ux_x * frac_uy_y
+
+        val[..., 0] = -((2*mu+lam) * frac_u1_x + (mu+lam) * frac_u2_x_y + mu*frac_u1_y)
+        val[..., 1] = -((2*mu+lam) * frac_u2_y + (mu+lam) * frac_u1_x_y + mu*frac_u2_x)
+
+        return val
+    
+    def solution(self, p, cr_node):
+        x = p[..., 0]
+        y = p[..., 1]
+        
+        pi  = np.pi
+        sin = np.sin
+        cos = np.cos
+        val = np.zeros(p.shape, dtype=np.float64)
+
+        ux = sin(pi*x) * cos(pi*x)
+        uy = sin(pi*y) * cos(pi*y)
+        
+        val[..., 0] = ux*uy
+        val[..., 1] = ux*uy
+
+        crCell = getWhichCell(cr_node)
+        #print("val= ", val)
+        for i in range(4):
+            val[crCell[i], :] /= self.lam[i]
+        #print("val= ", val)
+
+        return val
 
 def error(u, uh):
     e = u - uh

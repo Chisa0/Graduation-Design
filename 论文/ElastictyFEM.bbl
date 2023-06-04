@@ -1,17 +1,12 @@
-\begin{thebibliography}{10}
-
-\bibitem{邵文婷2017求解一类交界面问题的模态基函数谱元法数值实验}
-邵文婷.
-\newblock 求解一类交界面问题的模态基函数谱元法数值实验.
-\newblock {\em 上海第二工业大学学报}, 34(4):283--290, 2017.
+\begin{thebibliography}{1}
 
 \bibitem{王兆清2018不可压缩平面问题的位移}
-王兆清, 徐子康, and 李金.
+王兆清，徐子康，李金.
 \newblock 不可压缩平面问题的位移-压力混合重心插值配点法.
 \newblock {\em 应用力学学报}, 35(3):631--636, 2018.
 
 \bibitem{陈绍春2007平面弹性的一个新的}
-陈绍春 and 肖留超.
+陈绍春，肖留超.
 \newblock 平面弹性的一个新的 locking-free 非协调有限元.
 \newblock {\em 应用数学}, 20(4):739--747, 2007.
 
@@ -44,11 +39,11 @@ Peter Hansbo and Mats~G Larson.
   37(1):63--72, 2003.
 
 \bibitem{李荣华2007偏微分方程数值解}
-李荣华.
+李荣华，刘播.
 \newblock 偏微分方程数值解, 2007.
 
 \bibitem{陈纪修2004数学分析}
-陈纪修, 於崇华, and 金路.
+陈纪修，於崇华，金路.
 \newblock {\em 数学分析}.
 \newblock 高等教育出版社, 2004.
 
